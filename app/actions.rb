@@ -6,10 +6,18 @@ helpers do
     User.find_by(id: session[:user_id])
   end
 
+  def login
+    session[:user_id] = 1
+  end
+
+  def logout
+    session.clear
+  end 
+
 end
 
 before do 
-  #stuff
+  login
 end
 
 get '/' do
@@ -21,7 +29,15 @@ get '/users/:id' do
 end
 
 post '/' do 
+  @deed = Deed.new(
+    user_id: current_user.id
+    summary: params[:summary]
+    )
+  if @deed.save
 
+  else
+
+  end
 
 end
 
