@@ -9,5 +9,10 @@ namespace :db do
   task :version do
     puts "Current version: #{ActiveRecord::Migrator.current_version}"
   end
+
+  task :populate do
+    Rake::Task["db:load_config"].invoke
+    require_relative 'db/seed.rb'
+  end
 end
 
