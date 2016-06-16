@@ -5,12 +5,20 @@ jul = User.create!(username: "Julianaosoume", password: "julanapass", email: "ju
 
 # Create deeds
 matt_deed_1 = matt.deeds.create!(summary: "I drank a beer without paying")
+matt_deed_2 = matt.deeds.create!(summary: "I ate a fish")
+matt_deed_3 = matt.deeds.create!(summary: "I vommited a fish")
+matt_deed_4 = matt.deeds.create!(summary: "I hid a fish in David's bed")
 david_deed_1 = david.deeds.create!(summary: "I murdered a dog")
 jul_deed_1 = jul.deeds.create!(summary: "I helped some people study")
 
 # Create votes
 matt_deed_1.votes.create!(value: -1, user_id: david.id)
-matt_deed_1.votes.create!(value: -1, user_id: jul.id)
+matt_deed_1.votes.create!(value: 1, user_id: jul.id)
+matt_deed_2.votes.create!(value: 1, user_id: david.id)
+matt_deed_2.votes.create!(value: 1, user_id: jul.id)
+matt_deed_3.votes.create!(value: -1, user_id: david.id)
+matt_deed_3.votes.create!(value: -1, user_id: jul.id)
+matt_deed_4.votes.create!(value: 1, user_id: jul.id)
 
 david_deed_1.votes.create!(value: -1, user_id: matt.id)
 
