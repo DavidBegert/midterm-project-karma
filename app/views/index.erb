@@ -8,44 +8,37 @@
     <p>Share Confessions</p>
 </div>
 
-<div class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Feed Preview</a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right ">
-        <li><a href="#">Sort</a></li>
-        <li><a href="#">Number of Deeds</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
 
 <div class="container">
   <% Deed.all.limit(MAX_SHOW).order(id: :desc).each do |deed|  %>
     <div class="row">
-      <img src="<%= deed.user.image_url %>" width=20% /> 
-      <%= deed.summary %>
-      <br>
-      <%= deed.user.username  %>
-      <%= datetime_to_modern(deed.created_at) %>
-      <button class="btn btn-primary" type="button">
-        Praise <span class="badge">
-          <%= deed_praise_tally(deed) %>
-        </span>
-      </button>
-      <button class="btn btn-primary" type="button">
-        Shame <span class="badge">
-          <%= deed_shame_tally(deed) %>
-        </span>
-      </button>
-      <hr>
+      <div class="col-sm-6">
+        <div class="col-xs-2 col-md-2">
+        <!-- The buttons column -->
+          <div class="row">
+            <button class="width100 praisebtn" type="image"></button>
+            <span class="badge praisebadge">
+              <%= deed_praise_tally(deed) %>
+            </span>
+          </div>
+          <div class="row">
+            <button class="width100 shamebtn" type="image"></button>
+            <span class="badge shamebadge">
+              <%= deed_shame_tally(deed) %>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-xs-10   col-md-8">
+          <img src="<%= deed.user.image_url %>" class="profilePic"/> 
+          <%= deed.summary %>
+          <br>
+          <%= datetime_to_modern(deed.created_at) %> by <a href="/users/<%= deed.user.id %>"><%= deed.user.username  %></a>
+        </div>
+      </div>
     </div>
+    <br>
+    <hr>
+    <br>
   <% end %>
 </div>
