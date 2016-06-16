@@ -32,23 +32,26 @@ module MyHelpers
   end
 
   def datetime_to_modern(datetime)
-    if datetime > 1.minute.ago
+    datetime = datetime.utc
+    puts 1.minute.ago.utc
+    if datetime > 1.minute.ago.utc
       "just now"
-    elsif datetime >= 2.minutes.ago
+    elsif datetime >= 2.minutes.ago.utc
       "a minute ago"
-    elsif datetime >= 20.minutes.ago
+    elsif datetime >= 20.minutes.ago.utc
       "a few minutes ago"
-    elsif datetime >= 45.minutes.ago
+    elsif datetime >= 45.minutes.ago.utc
       "half hour ago"
-    elsif datetime >= 1.hour.ago
+    elsif datetime >= 1.hour.ago.utc
       "an hour ago"
-    elsif datetime.date == DateTime.now.date
+    elsif datetime.to_date == DateTime.now.utc.to_date
       "today"
-    elsif dateTime.date == (DateTime.now - 1.day).to_date
+    elsif datetime.to_date == (DateTime.now.utc - 1.day).to_date
       "yesterday"
     else
       "a few days ago"
     end      
+  end
 
   # Gives the total number of praises for a specific deed
   def deed_praise_tally(deed)

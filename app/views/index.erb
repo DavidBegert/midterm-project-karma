@@ -28,13 +28,13 @@
 </div>
 
 <div class="container">
-  <% Deed.all.limit(MAX_SHOW).each do |deed|  %>
+  <% Deed.all.limit(MAX_SHOW).order(id: :desc).each do |deed|  %>
     <div class="row">
       <img src="<%= deed.user.image_url %>" width=20% /> 
       <%= deed.summary %>
       <br>
       <%= deed.user.username  %>
-      <%= deed.created_at %>
+      <%= datetime_to_modern(deed.created_at) %>
       <button class="btn btn-primary" type="button">
         Praise <span class="badge">
           <%= deed_praise_tally(deed) %>
