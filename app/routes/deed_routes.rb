@@ -5,12 +5,12 @@ end
 
 
 post '/deeds' do 
-  @deed = Deed.new(
+  deed = Deed.new(
     user_id: current_user.id,
     summary: params[:summary]
     )
-  if @deed.save
-    redirect '/'
+  if deed.save
+    
   else
     redirect '/'
   end
