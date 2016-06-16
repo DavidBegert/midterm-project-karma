@@ -9,3 +9,9 @@ david_deed_1 = david.deeds.create!(summary: "I murdered a dog")
 jul_deed_1 = jul.deeds.create!(summary: "I helped some people study")
 
 # Create votes
+matt_deed_1.votes.create!(value: -1, user_id: david.id)
+matt_deed_1.votes.create!(value: -1, user_id: jul.id)
+
+david_deed_1.votes.create!(value: -1, user_id: matt.id)
+
+jul_deed_1.votes.create!(value: 1, user_id: david.id)
