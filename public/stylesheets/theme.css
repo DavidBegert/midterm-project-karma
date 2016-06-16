@@ -1,3 +1,7 @@
+body {
+  padding-top: 70px;
+}
+
 #confession_error {
   color: red;
   display: none;
@@ -47,4 +51,11 @@
   position:absolute;
   bottom:0;
   left:0;
+}
+
+.vertical-align{
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
 }

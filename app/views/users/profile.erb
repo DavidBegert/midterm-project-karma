@@ -1,0 +1,45 @@
+<div class="container">
+  <div>
+    <div class="jumbotron"><h1><%=@user.username %> </h1></div>
+    <img src="<%= @user.image_url %>" class="profilePic">
+    <h4><%=@user.email %> </h4>
+    <h4>Total Karma <%= user_karma_tally(@user) %> </h4>
+    <%= user_praise_tally(@user) %> <small>praises</small>
+    <br>
+    <%= user_shame_tally(@user) %> <small>shames</small>
+  </div>
+  <hr/>
+  <div>
+    <% if worst_deed = get_worst_deed(@user) %>
+      <h3><i> Worst Deed </i></h3>
+      <br>
+      <p> 
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="col-xs-2 col-md-2">
+            <!-- The buttons column -->
+              <div class="row">
+                <div class="width100 praisebtn" type="image"></div>
+                <span class="badge praisebadge">
+                  <%= deed_praise_tally(worst_deed) %>
+                </span>
+              </div>
+              <div class="row">
+                <div class="width100 shamebtn" type="image"></div>
+                <span class="badge shamebadge">
+                  <%= deed_shame_tally(worst_deed) %>
+                </span>
+              </div>
+            </div>
+
+            <div class="col-xs-10 col-md-8 vertical-align">
+              <%= worst_deed.summary %>
+              <br>
+              <%= datetime_to_modern(worst_deed.created_at) %> by <a href="/users/<%= worst_deed.user.id %>"><%= worst_deed.user.username  %></a>
+            </div>
+          </div>
+        </div>
+      </p>
+    <% end %>
+  </div>
+</div>
