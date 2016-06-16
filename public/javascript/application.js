@@ -1,13 +1,34 @@
 $(document).ready(function() {
 
+  $('input').keypress(function (e) {     //theres gotta be a way to connect this and the one below it
+    if (e.which == 13) {
+      var text_area = $("#confession_summary").val().length
+      var form_data = $("#confession_form").serialize()
+      $("#confession_summary").val(""); 
+      if (text_area == 0) {
+        $("#confession_error").css("display","block")
+      } else { 
+          $.post("/deeds", form_data, function(data) {
+            $("#confession_error").css("display", "none")
+            $("#deeds_container").prepend(data)
+          });
+      }
+      return false;
+    }
+  });
+
+
  $("#confession_submit").click(function(){ 
-    var text_area = $("#confession_summary")
-    if (text_area.val().length == 0) {
-      $("#confession_error").css("display","block")
-    } else {    
-      $.post("/deeds", $("#confession_form").serialize(), function(data) { //data is the thing redirected to
-          $("#deeds_container").prepend(data)
-      });
+    var text_area = $("#confession_summary").val().length
+    var form_data = $("#confession_form").serialize()
+    $("#confession_summary").val(""); 
+    if (text_area == 0) {
+        $("#confession_error").css("display","block")
+    } else { 
+          $.post("/deeds", form_data, function(data) {
+            $("#confession_error").css("display", "none")
+            $("#deeds_container").prepend(data)
+          });
     }
   });
 
@@ -40,9 +61,6 @@ $(document).ready(function() {
       }
 
     }); 
-
   }
-
-
 
 });
