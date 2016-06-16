@@ -30,7 +30,6 @@ module MyHelpers
     end
     html << "</form>"
   end
-end
 
   # Gives the total number of praises for a specific deed
   def deed_praise_tally(deed)
