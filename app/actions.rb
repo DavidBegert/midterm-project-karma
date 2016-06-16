@@ -5,11 +5,12 @@ helpers MyHelpers
 
 MAX_SHOW = 5
 
-before '/' do 
-  session[:pagination_spot] = 0
-end    
+# before '/' do 
+#   session[:pagination_spot] = 0
+# end    
 
 get '/' do
+  session[:pagination_spot] = 0
   erb :index
 end
 

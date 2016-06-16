@@ -17,5 +17,9 @@ post '/deeds' do
 end
 
 get '/deeds/next' do 
-  erb :'../views/deeds_pagination'
+  if session[:pagination_spot] == Deed.last.id
+    puts "ITS DONE"
+  else 
+    erb :'../views/deeds_pagination'
+  end
 end
