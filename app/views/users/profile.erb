@@ -1,0 +1,19 @@
+<div class="container">
+  <div>
+    <div class="jumbotron"><h1><%=@user.username %> </h1></div>
+    <img src="<%= @user.image_url %>" class="profilePic">
+    <h4><%=@user.email %> </h4>
+    <h4>Total Karma <%= user_karma_tally(@user) %> </h4>
+    
+  </div>
+  <hr/>
+  <div>
+    <h3><i> Worst Deed </i></h3>
+    <br>
+    <% worst_deed = @user.get_worst_deed %>
+    <% num_shames = deed_shame_tally(worst_deed) %>
+    <p> 
+      Forgive me father for <%= worst_deed.summary %>, which has <%= num_shames %> shame<%= 's' if num_shames > 0 %>
+    </p>
+  </div>
+</div>

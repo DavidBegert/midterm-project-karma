@@ -9,8 +9,12 @@ end
 post '/users/signup' do
   create_user_signup(params)
 end
-get '/users/:id' do
-  erb :'users/show'
+get '/users/:id' do |id|
+  if @user = User.find_by(id: id)
+    erb :'users/profile'
+  else
+    redirect '/404'
+  end
 end
 
 # User is signing in.
