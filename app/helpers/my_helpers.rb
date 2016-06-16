@@ -17,7 +17,7 @@ module MyHelpers
 
   # Gives the total karma for the specified user.
   def user_karma_tally(user)
-    user.deeds.inject(0) { |sum, deed| sum + deed.votes.sum(:value) }
+    user.deeds.joins(:votes).sum("votes.value")
   end
 
 end
