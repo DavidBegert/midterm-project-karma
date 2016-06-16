@@ -1,8 +1,9 @@
 # User is praising/shaming a deed.
-post '/deeds/:id/vote' do
-
+post '/deeds/:id/praise' do
 end
 
+post '/deeds/:id/shame' do
+end
 
 post '/deeds' do 
   @deed = Deed.new(
