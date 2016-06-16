@@ -19,4 +19,14 @@ module MyHelpers
   def user_karma_tally(user)
     user.deeds.joins(:votes).sum("votes.value")
   end
+
+  # Gives the total number of praises for a specific deed
+  def deed_praise_tally(deed)
+    deed.votes.where(value: 1).count
+  end
+
+  # Gives the total number of shames for a specific deed
+  def deed_shame_tally(deed)
+    deed.votes.where(value: -1).count
+  end
 end

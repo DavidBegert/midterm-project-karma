@@ -28,10 +28,24 @@
 </div>
 
 <div class="container">
-  <div class="row">
-    Confession
-  </div>
-  <div class="row">
-    Confession 2
-  </div>
+  <% Deed.all.limit(MAX_SHOW).each do |deed|  %>
+    <div class="row">
+      <img src="<%= deed.user.image_url %>" width=20% /> 
+      <%= deed.summary %>
+      <br>
+      <%= deed.user.username  %>
+      <%= deed.created_at %>
+      <button class="btn btn-primary" type="button">
+        Praise <span class="badge">
+          <%= deed_praise_tally(deed) %>
+        </span>
+      </button>
+      <button class="btn btn-primary" type="button">
+        Shame <span class="badge">
+          <%= deed_shame_tally(deed) %>
+        </span>
+      </button>
+      <hr>
+    </div>
+  <% end %>
 </div>
