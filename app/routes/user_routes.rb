@@ -3,7 +3,7 @@ get '/users/logout' do
 end
 
 get '/users/:id' do
-  erb :user
+  erb :'users/show'
 end
 
 # User is signing in.

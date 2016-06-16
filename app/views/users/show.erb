@@ -1,39 +1,26 @@
-<!-- CANT FIGURE OUT HOW TO REQUIRE RELATIVE NAVBAR SO I DONT HAVE TO TYPE THIS -->
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Home</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="/login">Login</a></li>
-          <li><button type="button" class="btn btn-default navbar-btn" onclick="location.href='/signup';" value="Go to Sign Up">Sign Up</button></li>
-    </ul>
-    </div>
-  </div>
-</nav>
 
-<img src="<%=current_user.image_url%>" alt="user's prof pic"> 
-<div>
-  <h4>Name: <%=current_user.username %> </h4>
-  <h4>Email: <%=current_user.email %> </h4>
-  <h4>Total Karma: <%=user_karma_tally(current_user)%> </h4>
-</div>
-<hr/>
-<div>
-  <img src="/img/icon.jpg">
-  <h3> Worst Deed: </h3> <br/>
-  <% worst_deed = current_user.get_worst_deed %>
-  <% puts worst_deed.inspect %>
-  <p> Forgive me father for I have <%= worst_deed.summary %>, which has <%= worst_deed.votes.count %></p>
+<!-- <img src="<%=current_user.image_url%>" alt="user's prof pic">  -->
+<%= erb :sidebar %>
+<div class="user_profile_page_outer_container">
+  <div>
+    <h4>Name: <%=current_user.username %> </h4>
+    <h4>Email: <%=current_user.email %> </h4>
+    <h4>Total Karma: <%=user_karma_tally(current_user)%> </h4>
+  </div>
+  <hr/>
+  <div>
+    <img src="/img/icon.jpg">
+    <h3> Worst Deed: </h3> <br/>
+    <% worst_deed = current_user.get_worst_deed %>
+    <% num_shames = deed_shame_tally(worst_deed) %>
+    <p> Forgive me father for <%= worst_deed.summary %>, which has <%= num_shames %>
+        <% if num_shames == 1 %>
+          shame
+        <% else %>
+          shames
+        <% end %>
+    </p>
+  </div>
 </div>
 
 

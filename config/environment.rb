@@ -8,6 +8,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/contrib/all' # Requires cookies, among other things
 require 'bcrypt'
+require 'rack-flash'
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s
@@ -19,6 +20,8 @@ configure do
 
   enable :sessions
   set :session_secret, ENV['SESSION_KEY'] || 'lighthouselabssecret'
+
+  use Rack::Flash
 
   set :views, File.join(Sinatra::Application.root, "app", "views")
 end

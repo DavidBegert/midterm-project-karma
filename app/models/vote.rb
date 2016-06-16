@@ -1,4 +1,4 @@
 class Vote < ActiveRecord::Base
-  has_many :users
-  has_many :deeds
+  belongs_to :users 
+  belongs_to :deeds
 end
