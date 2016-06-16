@@ -3,6 +3,8 @@ set sessions: true
 
 helpers MyHelpers
 
+MAX_SHOW = 50
+
 get '/' do
   erb :index
 end

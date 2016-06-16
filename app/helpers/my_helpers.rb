@@ -29,13 +29,16 @@ module MyHelpers
       html << "</li>"
     end
     html << "</form>"
+  end
+end
 
+  # Gives the total number of praises for a specific deed
+  def deed_praise_tally(deed)
+    deed.votes.where(value: 1).count
+  end
 
-
-    # <li><a href="#">Action</a></li>
-    #             <li><a href="#">Another action</a></li>
-    #             <li><a href="#">Something else here</a></li>
-    #             <li role="separator" class="divider"></li>
-    #             <li><a href="#">Separated link</a></li>
+  # Gives the total number of shames for a specific deed
+  def deed_shame_tally(deed)
+    deed.votes.where(value: -1).count
   end
 end
