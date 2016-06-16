@@ -79,6 +79,16 @@ module MyHelpers
     end      
   end
 
+  # Gives the total praises for the specified user.
+  def user_praise_tally(user)
+    user.deeds.joins(:votes).where("votes.value = 1").count
+  end
+
+  # Gives the total shames for the specified user.
+  def user_shame_tally(user)
+    user.deeds.joins(:votes).where("votes.value = -1").count
+  end
+
   # Gives the total number of praises for a specific deed
   def deed_praise_tally(deed)
     deed.votes.where(value: 1).count
@@ -108,4 +118,9 @@ module MyHelpers
     )
   end
 
+  def get_worst_deed(user)
+    if user_shame_tally(user) > 0
+      Deed.find_by_sql("SELECT deeds.* FROM deeds JOIN votes ON votes.deed_id = deeds.id WHERE deeds.user_id = #{user.id} GROUP BY deeds.id ORDER BY SUM(votes.value) ASC LIMIT 1;")[0]
+    end
+  end
 end
