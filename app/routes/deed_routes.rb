@@ -12,7 +12,10 @@ post '/deeds' do
   if @deed.save
     redirect '/'
   else
-    flash[:info] = "Your confession cannot be blank"
     redirect '/'
   end
+end
+
+get '/deeds/next' do 
+  erb :'../views/deeds_pagination'
 end

@@ -3,7 +3,11 @@ set sessions: true
 
 helpers MyHelpers
 
-MAX_SHOW = 50
+MAX_SHOW = 5
+
+before '/' do 
+  session[:pagination_spot] = 0
+end    
 
 get '/' do
   erb :index
