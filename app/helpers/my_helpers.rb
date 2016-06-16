@@ -25,7 +25,7 @@ module MyHelpers
   end
 
   # Creates a user
-  def create_user_signup(params)
+  def create_user_signup
     @user = User.new(
       username: params[:username],
       email: params[:email],
@@ -100,22 +100,22 @@ module MyHelpers
   end
  
   # Add a praise vote for the deed assigning the authorship to the current user
-  def create_praise(params)
-    if current_user
-      @praise = Vote.new(
-        deed_id: params[:deed_id],
+  def create_praise
+    # TODO delete if already exists
+    if current_user 
+      @praise = Vote.create!(
+        deed_id: params[:id],
         user_id: session[:user_id],
         value: 1
       )
     end
-    # TODO Already praise (dispraise, delete)
   end
 
  
   # Add a shame vote for the deed assigning the authorship to the current user
   def create_shame
-    @shame = Vote.new(
-      deed_id: params[:deed_id],
+    @shame = Vote.create!(
+      deed_id: params[:id],
       user_id: session[:user_id],
       value: -1
     )
