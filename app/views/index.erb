@@ -10,9 +10,10 @@
 
 <!-- START OF FORM, may need to move to another file -->
 <div class="container">
-  <% if flash[:info] %>
+ <!--  <% if flash[:info] %>
    <p style="color: red; padding-left: 1%;"><%=flash[:info]%> </p>
-  <%end%>
+  <%end%> -->
+  <p id="confession_error">something went wrong</p>
   <form class="form-horizontal" action="/deeds" method="post">
     <div class="form-group">
       <div class="col-sm-10">
