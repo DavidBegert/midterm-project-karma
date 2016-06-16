@@ -21,17 +21,19 @@
   </div>
 </nav>
 
-<img src="<%=@user.image_url%>" alt="user's prof pic"> 
+<img src="<%=current_user.image_url%>" alt="user's prof pic"> 
 <div>
-  <h4>Name: <%=@user.username %> </h4>
-  <h4>Email: <%=@user.email %> </h4>
-  <h4>Total Karma: <%=user_karma_tally(@user)%> </h4>
+  <h4>Name: <%=current_user.username %> </h4>
+  <h4>Email: <%=current_user.email %> </h4>
+  <h4>Total Karma: <%=user_karma_tally(current_user)%> </h4>
 </div>
 <hr/>
 <div>
   <img src="/img/icon.jpg">
   <h3> Worst Deed: </h3> <br/>
-  <p> Forgive me father for I have </p>
+  <% worst_deed = current_user.get_worst_deed %>
+  <% puts worst_deed.inspect %>
+  <p> Forgive me father for I have <%= worst_deed.summary %>, which has <%= worst_deed.votes.count %></p>
 </div>
 
 

@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  # def get_worst_deed 
-  #   Deed.find_by_sql("SELECT * FROM deeds JOIN votes ON votes.deed_id = deeds.id WHERE deeds.user_id = ? ORDER BY SUM()
-  # end
+  def get_worst_deed 
+    Deed.find_by_sql("SELECT deeds.* FROM deeds JOIN votes ON votes.deed_id = deeds.id WHERE deeds.user_id = #{id} GROUP BY deeds.id ORDER BY SUM(votes.value) ASC LIMIT 1;")[0]
+  end
 
 end

@@ -4,7 +4,7 @@ set sessions: true
 helpers MyHelpers
 
 before do 
-  #stuff
+  user_signin(User.first)
 end
 
 get '/' do
@@ -12,7 +12,6 @@ get '/' do
 end
 
 get '/users/:id' do
-  @user = User.find(params[:id])
   erb :'users/show'
 end
 
