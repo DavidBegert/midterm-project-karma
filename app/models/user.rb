@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include BCrypt
   has_many :deeds
 
+
   validates :email, uniqueness: true, presence: true, format: { with: /\A.+@.+\Z/, message: "invalid email"}
   validates :username, uniqueness: true, presence: true
   validates :image_url, presence: true, format: { with: /\Ahttp:\/\/.+\.(jpg|JPG|png|PNG)\Z/, message: "invalid url" }
