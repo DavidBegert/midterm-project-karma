@@ -7,7 +7,7 @@ get '/users/signup' do
 end
 
 post '/users/signup' do
-  create_user_signup(params)
+  create_user_signup
 end
 
 get '/users/:id' do |id|

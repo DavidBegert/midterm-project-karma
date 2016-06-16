@@ -1,8 +1,10 @@
 # User is praising/shaming a deed.
 post '/deeds/:id/praise' do
+  create_praise  
 end
 
 post '/deeds/:id/shame' do
+  create_shame
 end
 
 post '/deeds' do 
@@ -16,8 +18,6 @@ post '/deeds' do
     redirect '/'
   end
 end
-<<<<<<< HEAD
-=======
 
 get '/deeds/next' do 
   if session[:pagination_spot] == Deed.last.id
@@ -26,4 +26,3 @@ get '/deeds/next' do
     erb :'../views/deeds_pagination'
   end
 end
->>>>>>> 73841fbdb64284f55065294539fd6f50a394cf71
