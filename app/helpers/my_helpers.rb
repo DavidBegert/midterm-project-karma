@@ -29,13 +29,25 @@ module MyHelpers
       html << "</li>"
     end
     html << "</form>"
+  end
 
-
-
-    # <li><a href="#">Action</a></li>
-    #             <li><a href="#">Another action</a></li>
-    #             <li><a href="#">Something else here</a></li>
-    #             <li role="separator" class="divider"></li>
-    #             <li><a href="#">Separated link</a></li>
+  def datetime_to_modern(datetime)
+    if datetime > 1.minute.ago
+      "just now"
+    elsif datetime >= 2.minutes.ago
+      "a minute ago"
+    elsif datetime >= 20.minutes.ago
+      "a few minutes ago"
+    elsif datetime >= 45.minutes.ago
+      "half hour ago"
+    elsif datetime >= 1.hour.ago
+      "an hour ago"
+    elsif datetime.date == DateTime.now.date
+      "today"
+    elsif dateTime.date == (DateTime.now - 1.day).to_date
+      "yesterday"
+    else
+      "a few days ago"
+    end      
   end
 end
