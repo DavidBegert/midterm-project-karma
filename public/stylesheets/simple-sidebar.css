@@ -5,6 +5,9 @@
  */
 
 /* Toggle Styles */
+.user_profile_page_outer_container {
+    margin-left: 255px;
+}
 
 #wrapper {
     padding-left: 0;

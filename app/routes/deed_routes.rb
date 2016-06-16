@@ -3,7 +3,16 @@ post '/deeds/:id/vote' do
 
 end
 
-# New deed
-post '/deeds/new' do
 
+post '/deeds' do 
+  @deed = Deed.new(
+    user_id: current_user.id,
+    summary: params[:summary]
+    )
+  if @deed.save
+    redirect '/'
+  else
+    flash[:info] = "Your confession cannot be blank"
+    redirect '/'
+  end
 end

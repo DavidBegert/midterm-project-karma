@@ -9,6 +9,9 @@ end
 post '/users/signup' do
   create_user_signup(params)
 end
+get '/users/:id' do
+  erb :'users/show'
+end
 
 # User is signing in.
 post '/users/signin' do
