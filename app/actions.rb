@@ -25,21 +25,21 @@ get '/' do
 end
 
 get '/users/:id' do
-  erb :user
+  erb :'users/show'
 end
 
-post '/' do 
-  @deed = Deed.new(
-    user_id: current_user.id
-    summary: params[:summary]
-    )
-  if @deed.save
+# post '/' do 
+#   @deed = Deed.new(
+#     user_id: current_user.id
+#     summary: params[:summary]
+#     )
+#   if @deed.save
 
-  else
+#   else
 
-  end
+#   end
 
-end
+# end
 
 
 
