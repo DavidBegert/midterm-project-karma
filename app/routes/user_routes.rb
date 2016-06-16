@@ -4,11 +4,13 @@ end
 
 
 # User is signing in.
-# post '/users/signin' do
-#   if user = User.authenticate(params)
-#     sign_user_in(user)
-#   else
-#     sign_user_out
-#   end
-#   redirect '/'
-# end
+post '/users/signin' do
+  # User always signs in, no auth for demo/test purposes
+  
+  #if user = User.authenticate(params)
+    user_signin(User.find_by(username: params[:username]))
+  #else
+    #user_signout
+  #end
+  redirect '/'
+end

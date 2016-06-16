@@ -13,8 +13,20 @@
         <li class="active"><a href="/">Home</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="/login">Login</a></li>
-          <li><button type="button" class="btn btn-default navbar-btn" onclick="location.href='/signup';" value="Go to Sign Up">Sign Up</button></li>
+          <li>
+            <div class="dropdown navbar-btn">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Login
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <%= get_login_dropdown_user_list %>
+              </ul>
+            </div>
+          </li>
+          <li>
+          <button type="button" class="btn btn-default navbar-btn" onclick="location.href='/signup';" value="Go to Sign Up">Sign Up</button>
+          </li>
     </ul>
     </div>
   </div>
