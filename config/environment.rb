@@ -33,6 +33,11 @@ configure :production do
   # NOOP
 end
 
+# Load all the helpers
+Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each do |file|
+  require file
+end
+
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
 
