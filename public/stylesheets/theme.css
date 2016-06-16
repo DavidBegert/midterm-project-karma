@@ -1,3 +1,45 @@
 .width100 {
   width: 100%;
 }
+
+.profilePic {
+  object-fit: cover;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+}
+
+
+.praisebtn {
+  background:url(/img/praise.png);
+  margin-bottom: 6px;
+}
+
+.shamebtn {
+  background:url(/img/shame.png);
+  margin-top: 6px;
+}
+
+.praisebtn, .shamebtn {
+  outline : none;
+  margin-left:2em;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+}
+
+.praisebadge{
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+.shamebadge{
+  position:absolute;
+  bottom:0;
+  left:0;
+}
