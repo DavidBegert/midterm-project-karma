@@ -8,6 +8,7 @@ module MyHelpers
   # Clears the session, signs the user out.
   def user_signout
     session.clear
+    redirect '/'
   end
 
   # Signs an already-authenticated user in.
@@ -62,4 +63,7 @@ module MyHelpers
   def deed_shame_tally(deed)
     deed.votes.where(value: -1).count
   end
+
+  # Define what buttons are going to be shwon (signin or logout)
+
 end

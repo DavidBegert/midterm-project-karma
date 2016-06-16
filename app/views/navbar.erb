@@ -13,6 +13,10 @@
         <li class="active"><a href="/">Home</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+          <li class="active"><a href="#">Hello, <%= current_user.username %></a></li>
+          <li><a href="/users/logout">Logout<span class="sr-only">(current)</span></a></li>
+        <% else %>
           <li>
             <div class="dropdown navbar-btn">
               <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -25,9 +29,10 @@
             </div>
           </li>
           <li>
-          <button type="button" class="btn btn-default navbar-btn" onclick="location.href='/signup';" value="Go to Sign Up">Sign Up</button>
+            <button type="button" class="btn btn-default navbar-btn" onclick="location.href='/signup';" value="Go to Sign Up">Sign Up</button>
           </li>
-    </ul>
+        <% end %>
+      </ul>
     </div>
   </div>
 </nav>

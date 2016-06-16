@@ -1,7 +1,10 @@
+get '/users/logout' do
+  user_signout
+end
+
 get '/users/:id' do
   erb :user
 end
-
 
 # User is signing in.
 post '/users/signin' do
