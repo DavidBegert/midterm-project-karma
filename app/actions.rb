@@ -7,7 +7,7 @@ helpers do
   end
 
   def login
-    session[:user_id] = 1
+    session[:user_id] = "1"
   end
 
   def logout
@@ -25,6 +25,7 @@ get '/' do
 end
 
 get '/users/:id' do
+  @user = User.find(params[:id])
   erb :'users/show'
 end
 
