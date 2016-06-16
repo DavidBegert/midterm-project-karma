@@ -2,8 +2,12 @@ get '/users/logout' do
   user_signout
 end
 
-get '/users/:id' do
-  erb :user
+get '/users/signup' do
+  user_signup
+end
+
+post '/users/signup' do
+  create_user_signup(params)
 end
 
 # User is signing in.
@@ -16,4 +20,8 @@ post '/users/signin' do
     #user_signout
   #end
   redirect '/'
+end
+
+get '/users/:id' do
+  erb :user
 end

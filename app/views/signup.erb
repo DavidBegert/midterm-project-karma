@@ -1,0 +1,26 @@
+<header>
+  <%= erb :'navbar' %>
+</header>
+
+<% if @user.errors.any? %>
+  <div class="container">
+    <strong>Some issues with your message, please fix them:</strong>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<div class="container">
+  <form class="form-signup" method="POST" action="/users/signup">
+    <h2 class="form-signup-heading">Sign up and be ashamed of yourself</h2>
+    <input type="text" class="input-block-level" name="username" value="<%= @user.username %>" placeholder="Name">
+    <input type="text" class="input-block-level" name="email" value="<%= @user.email  %>" placeholder="Email address">
+    <input type="text" class="input-block-level" name="image_url" value="<%= @user.image_url  %>" placeholder="Image Address">
+    <input type="password" class="input-block-level" name="password" placeholder="Password">
+    <button class="btn btn-large btn-primary" type="submit">Sign Up</button>
+  </form>
+</div>

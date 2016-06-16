@@ -16,6 +16,31 @@ module MyHelpers
     session[:user_id] = user.id
   end
 
+  def user_signup
+    if current_user
+      redirect '/'
+    end
+    @user = User.new
+    erb :'signup'
+  end
+
+  # Creates a user
+  def create_user_signup(params)
+    @user = User.new(
+      username: params[:username],
+      email: params[:email],
+      image_url: params[:image_url],
+      password: params[:password]
+    )
+    if @user.save
+      user_signin(@user)
+      redirect '/'
+    else
+      erb :'signup'
+    end
+  end
+
+
   # Gives the total karma for the specified user.
   def user_karma_tally(user)
     user.deeds.joins(:votes).sum("votes.value")
@@ -23,7 +48,7 @@ module MyHelpers
 
   # Get a list of all users to login with the dropdown
   def get_login_dropdown_user_list
-    html = "<form method=\"post\" action=\"users/signin\">"
+    html = "<form method=\"post\" action=\"/users/signin\">"
     User.all.each do |user|
       html << "<li>"
       html << "<input type=\"submit\" class=\"width100 btn btn-default\" name=\"username\" value=\"#{user.username}\"/>"
@@ -63,7 +88,5 @@ module MyHelpers
   def deed_shame_tally(deed)
     deed.votes.where(value: -1).count
   end
-
-  # Define what buttons are going to be shwon (signin or logout)
 
 end
