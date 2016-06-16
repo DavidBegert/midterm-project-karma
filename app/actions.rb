@@ -4,7 +4,7 @@ set sessions: true
 helpers MyHelpers
 
 before do 
-  login
+  #stuff
 end
 
 get '/' do
@@ -22,11 +22,10 @@ end
 #     summary: params[:summary]
 #     )
 #   if @deed.save
-
+#
 #   else
-
+#
 #   end
-
 # end
 
 # User is signing in.

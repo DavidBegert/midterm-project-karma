@@ -22,7 +22,16 @@
 </nav>
 
 <img src="<%=@user.image_url%>" alt="user's prof pic"> 
-<h4>Name: <%=@user.username %> </h4>
-<h4>Email: <%=@user.email %> </h4>
-<h4>Total Karma: <%=user_karma_tally(@user)%> </h4>
+<div>
+  <h4>Name: <%=@user.username %> </h4>
+  <h4>Email: <%=@user.email %> </h4>
+  <h4>Total Karma: <%=user_karma_tally(@user)%> </h4>
+</div>
+<hr/>
+<div>
+  <img src="/img/icon.jpg">
+  <h3> Worst Deed: </h3> <br/>
+  <p> Forgive me father for I have </p>
+</div>
+
 

@@ -19,4 +19,5 @@ module MyHelpers
   def user_karma_tally(user)
     user.deeds.inject(0) { |sum, deed| sum + deed.votes.sum(:value) }
   end
+
 end
