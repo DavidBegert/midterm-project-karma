@@ -10,24 +10,23 @@ $(document).ready(function() {
       });
     }
   });
-<<<<<<< HEAD
+
   // Create a vote (praise)
   $('.praisebtn').click(function () {
-      $.post("/deeds/<%= deed.id %>/praise" );
+      var deed_id = this.dataset.deedId
+      $.post("/deeds/" + deed_id + "/praise" );
   }); 
  
-  $('.praisebtn').click(function () {
-      $.post("/deeds//praise" );
+  $('.shamebtn').click(function () {
+      var deed_id = this.dataset.deedId
+      $.post("/deeds/" + deed_id + "/shame" );
   }); 
-});
-=======
 
  var ajax;
  var load_more = true;
 
 
  function ajaxLoadActivity(one, two) {
-
     return $.get("/deeds/next", function(data) {
       console.log(data)
       if (data.length == 1) {
@@ -49,12 +48,6 @@ $(document).ready(function() {
         }
         ajax = ajaxLoadActivity('bottom', true);
       }
-
     }); 
-
   }
-
-
-
 });
->>>>>>> 73841fbdb64284f55065294539fd6f50a394cf71
