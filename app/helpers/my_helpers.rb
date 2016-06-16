@@ -88,5 +88,24 @@ module MyHelpers
   def deed_shame_tally(deed)
     deed.votes.where(value: -1).count
   end
+ 
+  # Add a praise vote for the deed assigning the authorship to the current user
+  def create_praise(params)
+    @praise = Vote.new(
+      deed_id: params[:deed_id],
+      user_id: session[:user_id],
+      value: 1
+    )
+  end
+
+ 
+  # Add a shame vote for the deed assigning the authorship to the current user
+  def create_shame
+    @shame = Vote.new(
+      deed_id: params[:deed_id],
+      user_id: session[:user_id],
+      value: -1
+    )
+  end
 
 end
