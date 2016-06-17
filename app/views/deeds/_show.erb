@@ -31,6 +31,8 @@
         <%= deed.summary %>
         <br><br>
         <i><%= datetime_to_modern(deed.created_at) %></i> by <a href="/users/<%= deed.user.id %>"><%= deed.user.username  %></a>
+        <br>
+        <a><%= deed_comment_tally(deed) %> Comments </a>
       </div>
     </div>
   </div>
