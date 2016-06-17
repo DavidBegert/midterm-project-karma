@@ -1,9 +1,20 @@
-<% if !current_user %>
+<% if true %> <!-- used to be if !current_user.. page seems flawed with # of divs (break div at the end)--> 
   <div class="container">
     <div class="jumbotron">
+    <img id="unella" src="/img/unella.jpg" />
+    <div id="unella-quote">
+      <% if user_karma_tally(current_user) < 0 %>
+        "<%= DO_GOOD_UNELLA_QUOTES.sample %>" 
+      <% elsif user_karma_tally(current_user) > 0 %>
+        "<%= DO_BAD_UNELLA_QUOTES.sample %>"
+      <% else %>
+        "Could you be more average?"
+      <% end %>
+      <br/> <em> - Septum Unella </em>
+    </div>
       <h1>Atonr</h1>
       <p>Share Confessions</p>
-  </div>
+    </div>
 <% end %>
 
 <!-- START OF FORM, may need to move to another file -->

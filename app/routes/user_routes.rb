@@ -32,7 +32,7 @@ get '/users/:id' do |id|
   end
 end
 
-post '/login' do 
+post '/users/signin' do 
   # User is signing in.
   #if user = User.authenticate(params)
   @user = user_signin(User.find_by(username: params[:username]))
