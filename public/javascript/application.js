@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  var im_not_ready;
+  var load_more = true;
+  var user_paginate = false;
 
   $('input').keypress(function (e) {     //theres gotta be a way to connect this and the one below it
     if (e.which == 13) {
@@ -34,8 +37,15 @@ $(document).ready(function() {
       });
   }); 
 
- var ajax;
- var load_more = true;
+  $("#users-profile-show-all").click(function() {
+    var user_id = this.dataset.userId
+    $(this).css("display", "none")
+    return $.get("/users/next-deeds", {"id":user_id}, function(data) {
+        $("#user-deed-container").css("display", "block")
+        $("#user-deed-container").append(data);
+        user_paginate = true;
+      });
+  });
 
  $("#confession_submit").click(function(){ 
     var text_area = $("#confession_summary").val().length
@@ -50,9 +60,6 @@ $(document).ready(function() {
           });
     }
   });
-
- var im_not_ready;
- var load_more = true;
 
  function ajaxLoadActivity() {
       $.get("/deeds/next", function(data) {

@@ -2,6 +2,10 @@ body {
   padding-top: 70px;
 }
 
+#user-deed-container{
+  display:none;
+}
+
 #confession_error {
   color: red;
   display: none;
