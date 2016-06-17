@@ -142,4 +142,16 @@ module MyHelpers
       Deed.find_by_sql("SELECT deeds.* FROM deeds JOIN votes ON votes.deed_id = deeds.id WHERE deeds.user_id = #{user.id} GROUP BY deeds.id ORDER BY SUM(votes.value) ASC LIMIT 1;")[0]
     end
   end
+
+  def praise_style_if_current_user_voted_for(deed)
+    unless deed.votes.joins(:user).where("votes.user_id=? AND votes.value=1", current_user.id).empty?
+      "style=\"content:url(/img/praise-color.png)\""
+    end
+  end
+
+  def shame_style_if_current_user_voted_for(deed)
+    unless deed.votes.joins(:user).where("votes.user_id=? AND votes.value=-1", current_user.id).empty?
+      "style=\"content:url(/img/shame-color.png)\""
+    end
+  end
 end
