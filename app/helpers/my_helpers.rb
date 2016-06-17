@@ -117,6 +117,8 @@ module MyHelpers
       "#{num_votes},Deed already evaluated"
     when 5
       "#{num_votes},Remove praise to put a shame on this deed"
+    when 6
+      "#{num_votes},Cannot evaluate your own deed"
     end
   end
 
@@ -134,6 +136,10 @@ module MyHelpers
     Vote.where(deed_id: params[:id]).where(user_id: session[:user_id]).any?
   end
 
+  def my_deed?
+    Deed.find_by_id(params[:id]).try(:user_id) == session[:user_id]
+  end
+
   def praised?
     Vote.where(deed_id: params[:id]).where(user_id: session[:user_id]).where(value: 1).any?
   end
@@ -148,7 +154,10 @@ module MyHelpers
 
   # Add a praise vote for the deed assigning the authorship to the current user
   def create_praise
-    if shamed? 
+    if my_deed?
+      num_votes = deed_praise_tally(Deed.find(params[:id]))
+      state_return(num_votes, 6)
+    elsif shamed? 
       num_votes = deed_praise_tally(Deed.find(params[:id]))
       state_return(num_votes, 4)
     elsif praised?
@@ -165,13 +174,18 @@ module MyHelpers
  
   # Add a shame vote for the deed assigning the authorship to the current user
   def create_shame
-    @vote = create_vote(-1) 
-    num_votes = deed_shame_tally(Deed.find(params[:id]))
-    if praised?
+    if my_deed?
+      num_votes = deed_shame_tally(Deed.find(params[:id]))
+      state_return(num_votes, 6) 
+    elsif praised?
+      num_votes = deed_shame_tally(Deed.find(params[:id]))
       state_return(num_votes, 5) 
     elsif !current_user
+      num_votes = deed_shame_tally(Deed.find(params[:id]))
       state_return(num_votes, 3) 
     else
+      @vote = create_vote(-1) 
+      num_votes = deed_shame_tally(Deed.find(params[:id]))
       @vote.errors.count == 0 ? state_return(num_votes, 1) : state_return(num_votes, 0)
     end
   end
