@@ -24,6 +24,7 @@ $(document).ready(function() {
   $('#deeds_container').on("click", ".praisebtn", function () {
       var deedId = this.dataset.deedId
       var praisebtn = $(this)
+      
       $.post("/deeds/" + deedId + "/praise", function(data) {
         data = data.split(",")
         var numPraises = data[0]
@@ -66,12 +67,14 @@ $(document).ready(function() {
 
   $("#users-profile-show-all").click(function() {
     var user_id = this.dataset.userId
+    $("#user-loader-gif").removeClass("hidden")
     $(this).css("display", "none")
-    return $.get("/users/next-deeds", {"id":user_id}, function(data) {
-        $("#user-deed-container").css("display", "block")
-        $("#user-deed-container").append(data);
-        user_paginate = true;
-      });
+    $.get("/users/next-deeds", {"id":user_id}, function(data) {
+      $("#user-loader-gif").addClass("hidden")
+      $("#user-deed-container").css("display", "block")
+      $("#user-deed-container").append(data);
+      user_paginate = true;
+    });
   });
 
  $("#confession_submit").click(function(){ 
@@ -90,7 +93,6 @@ $(document).ready(function() {
 
  function ajaxLoadActivity() {
       $.get("/deeds/next", function(data) {
-      console.log(data)
       if (data.length == 1) {
         load_more = false;
       }

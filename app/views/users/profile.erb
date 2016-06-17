@@ -11,7 +11,7 @@
   <hr/>
   <div>
     <% if worst_deed = get_worst_deed(@user) %>
-      <h3><i> Worst Deed </i></h3>
+      <h3><i> Most Shameful Deed </i></h3>
       <br>
       <%= erb :'./deeds/_show', layout: false, locals: {all_details: false, deed: worst_deed} %>
     <% end %>
@@ -23,8 +23,10 @@
     <span class="glyphicon glyphicon-triangle-bottom"></span>
   </button>
 
+  <img src="/img/loader.gif" class="center-block hidden" id="user-loader-gif"/>
+
   <div id="user-deed-container">
-  <br>
+    <br>
     <h3><i> Previous Deeds </i></h3>
     <br>
   </div>
