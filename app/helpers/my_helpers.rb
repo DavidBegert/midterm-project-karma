@@ -198,7 +198,7 @@ module MyHelpers
 
   # Returns which class to use for the image depending if the user has voted.
   def praise_class(deed)
-    return "praiseimg" unless current_user
+    return "praisebtn" unless current_user
     unless deed.votes.where("votes.user_id=? AND votes.value=1", current_user.id).empty?
       "praisebtn praisebtn-color"
     else
@@ -208,7 +208,7 @@ module MyHelpers
 
   # Returns which class to use for the image depending if the user has voted.
   def shame_class(deed)
-    return "shameimg" unless current_user
+    return "shamebtn" unless current_user
     unless deed.votes.where("votes.user_id=? AND votes.value=-1", current_user.id).empty?
       "shamebtn shamebtn-color"
     else
