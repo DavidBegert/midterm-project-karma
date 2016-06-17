@@ -101,14 +101,12 @@ module MyHelpers
  
   # Add a praise vote for the deed assigning the authorship to the current user
   def create_praise
-    # TODO delete if already exists
-    if current_user 
-      @praise = Vote.create!(
-        deed_id: params[:id],
-        user_id: session[:user_id],
-        value: 1
-      )
-    end
+    @praise = Vote.create!(
+      deed_id: params[:id],
+      user_id: session[:user_id],
+      value: 1
+    )
+    deed_praise_tally(Deed.find(params[:id]))
   end
 
  
@@ -119,6 +117,7 @@ module MyHelpers
       user_id: session[:user_id],
       value: -1
     )
+    deed_shame_tally(Deed.find(params[:id]))
   end
 
   def get_worst_deed(user)
