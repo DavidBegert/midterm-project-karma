@@ -24,10 +24,11 @@ $(document).ready(function() {
   });
 
   // Show error messages accordingly to status of vote
-  function showFlashMessage(message, color) {
-    var messageBox = $("#vote-" + color);
+  function showFlashMessage(message) {
+    var messageBox = $("#vote-modal");
     messageBox.append("<p class=\"vote-message-log\">" + message + "</p>");
-    messageBox.show();
+    console.log(messageBox.parents(".modal"));
+    messageBox.parents(".modal").modal("show");
   }
 
   // Create a vote (praise)
@@ -38,15 +39,13 @@ $(document).ready(function() {
         data = data.split(",");
         var numPraises = data[0];
         var warning = data[1];
-        var typeWarning = data[2];
         if (warning == "Success") {
           praisebtn.siblings(".praisebadge").text(numPraises);
           praisebtn.addClass("praisebtn-color");
         } else {
           var warningBox = $('#vote-error');
-          console.log(data[3]);
-          if (data[3] == "remove") praisebtn.removeClass("praisebtn-color");
-          showFlashMessage(warning, typeWarning);
+          if (data[2] == "remove") praisebtn.removeClass("praisebtn-color");
+          showFlashMessage(warning);
           praisebtn.siblings(".praisebadge").text(numPraises);
         }
       });
@@ -60,20 +59,19 @@ $(document).ready(function() {
         data = data.split(",");
         var numShames = data[0];
         var warning = data[1];
-        var typeWarning = data[2];
         if (warning == "Success") {
           shamebtn.siblings(".shamebadge").text(numShames);
           shamebtn.addClass("shamebtn-color");
         } else {
-          showFlashMessage(warning, typeWarning);
+          showFlashMessage(warning);
         }
       });
   }); 
 
   // Hide warning block after clicking in the close button
   $(function(){
-    $("[data-hide]").on("click", function(){
-      $(this).closest("." + $(this).attr("data-hide")).hide();
+    $("[data-dismiss]").on("click", function(){
+      $(this).closest("." + $(this).attr("data-dismiss")).hide();
       $(".vote-message-log").remove();
     });
   });
