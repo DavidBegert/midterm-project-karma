@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
       false
     end
   end
+
+  def total_deeds
+    deeds.count
+  end
 end

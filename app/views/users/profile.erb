@@ -1,12 +1,14 @@
 <div class="container">
   <div>
     <div class="jumbotron"><h1><%=@user.username %> </h1></div>
-    <img src="<%= @user.image_url %>" class="profilePic">
+    <img src="<%= @user.image_url %>" class="profilePic profilePicLarge">
     <h4><%=@user.email %> </h4>
     <h4>Total Karma <%= user_karma_tally(@user) %> </h4>
     <%= user_praise_tally(@user) %> <small>praises</small>
     <br>
     <%= user_shame_tally(@user) %> <small>shames</small>
+    <br>
+    <%= @user.total_deeds %> <small>total deeds</small>
   </div>
   <hr/>
   <div>

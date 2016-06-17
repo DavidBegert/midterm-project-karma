@@ -18,6 +18,11 @@ body {
   height: 50px;
 }
 
+.profilePicLarge {
+  width:100px;
+  height:100px;
+}
+
 .loading {
   width:40px
 }

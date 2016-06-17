@@ -44,7 +44,7 @@ module MyHelpers
 
   # Gives the total karma for the specified user.
   def user_karma_tally(user)
-    user.deeds.joins(:votes).sum("votes.value")
+    user.deeds.joins(:votes).sum("votes.value") * 7
   end
 
   # Get a list of all users to login with the dropdown
