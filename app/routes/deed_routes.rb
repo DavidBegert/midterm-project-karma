@@ -21,6 +21,6 @@ end
 
 get '/deeds/next' do 
   unless session[:pagination_spot] == Deed.last.id
-    erb :'../views/deeds/_pagination', layout: false, locals: {list: Deed.all.limit(MAX_SHOW).offset(session[:pagination_spot]).order(id: :desc)}
+    erb :'../views/deeds/_pagination', layout: false, locals: {all_details: true, list: Deed.all.limit(MAX_SHOW).offset(session[:pagination_spot]).order(id: :desc)}
   end
 end

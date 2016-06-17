@@ -21,6 +21,6 @@
   <br><br><br>
   <!-- END OF FORM -->
   <div id = deeds_container class="container">
-    <%= erb :'deeds/_pagination', locals: {list: Deed.all.limit(MAX_SHOW).offset(session[:pagination_spot]).order(id: :desc)} %>
+    <%= erb :'deeds/_pagination', locals: {all_details: true, list: Deed.all.limit(MAX_SHOW).offset(session[:pagination_spot]).order(id: :desc)} %>
   </div>
 </div>

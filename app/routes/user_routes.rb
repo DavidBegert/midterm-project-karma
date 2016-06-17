@@ -14,7 +14,7 @@ get '/users/next-deeds' do
   puts "PARAMS ARE --> " << params.to_s
   list = User.find_by(id: params[:id]).deeds.limit(MAX_SHOW).order(id: :DESC)
   unless session[:pagination_spot] == list.last.id
-    erb :'../views/deeds/_pagination', layout:false, locals: {list: list}
+    erb :'../views/deeds/_pagination', layout:false, locals: {list: list, all_details: false}
   end
 end
 
