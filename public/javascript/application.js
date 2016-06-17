@@ -22,8 +22,9 @@ $(document).ready(function() {
  
   $('.shamebtn').click(function () {
       var deed_id = this.dataset.deedId
+      var shamebtn = $(this)
       $.post("/deeds/" + deed_id + "/shame", function(data) {
-        $(this).siblings(".shamebadge").text(data);
+        shamebtn.siblings(".shamebadge").text(data);
       });
   }); 
 
