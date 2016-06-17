@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  var im_not_ready;
-  var load_more = true;
+  var pagination_ready;
+  var pagination_load_more = true;
   var user_paginate = false;
 
   $('input').keypress(function (e) {     //theres gotta be a way to connect this and the one below it
@@ -70,9 +70,10 @@ $(document).ready(function() {
     $("#user-loader-gif").removeClass("hidden")
     $(this).css("display", "none")
     $.get("/users/next-deeds", {"id":user_id}, function(data) {
+      $("#deeds-container").removeClass("hidden")
       $("#user-loader-gif").addClass("hidden")
-      $("#user-deed-container").css("display", "block")
-      $("#user-deed-container").append(data);
+      $("#deeds-container").css("display", "block")
+      $("#deeds-container").append(data);
       user_paginate = true;
     });
   });
@@ -91,26 +92,28 @@ $(document).ready(function() {
     }
   });
 
- function ajaxLoadActivity() {
-      $.get("/deeds/next", function(data) {
+  function ajaxLoadActivity() {
+    var server_path = user_paginate ? "/users/next-deeds" : "/deeds/next"
+    $.get(server_path, function(data) {
       if (data.length == 1) {
-        load_more = false;
+        pagination_load_more = false;
       }
       $("#deeds_container").append(data);
-      im_not_ready = false;
+      pagination_ready = false;
     });
   }
-  if (load_more) {
+
+  if (pagination_load_more) {
     $(window).scroll(function () { 
      if ($(window).scrollTop() >= $(document).height() - $(window).height() - 500) {
 
         if ( $('ol.astream > .loadCount:last > li').attr('id') == "noMoreActivities" ) {
           return false;
         }
-        if (im_not_ready) {
+        if (pagination_ready) {
           return false;
         }
-        im_not_ready = true
+        pagination_ready = true
         ajaxLoadActivity();
       }
     }); 
