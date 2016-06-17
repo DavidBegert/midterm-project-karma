@@ -49,6 +49,6 @@
   <div id = deeds_container class="container">
     <%= erb :'deeds/_pagination', locals: {all_details: true, list: Deed.all.limit(MAX_SHOW).offset(session[:pagination_spot]).order(id: :desc)} %>
   </div>
-  <img class="center-block hidden" id="deeds-loading-gif" src="/img/loader.gif"/>
+  <img class="loading center-block hidden" id="deeds-loading-gif" src="/img/loader.gif"/>
   <br><br><br><br><br><br>
 </div>

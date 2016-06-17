@@ -18,6 +18,10 @@ body {
   height: 50px;
 }
 
+.loading {
+  width:40px
+}
+
 
 .praisebtn, .shamebtn, .praisebtn-color, .shamebtn-color {
   outline: none;
