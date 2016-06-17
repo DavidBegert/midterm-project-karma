@@ -103,16 +103,20 @@ module MyHelpers
   end
  
   # Check if errors and make a return to javascript
-  def state_return(num_votes, creation_success)
-    if creation_success 
-      "#{num_votes},success"
-    elsif current_user
+  def state_return(num_votes, creation_stat)
+    case creation_stat
+    when 0
       "#{num_votes},Cannot undo this action"
-    else
+    when 1 
+      "#{num_votes},success"
+    when 2
+      "#{num_votes},Praise revoked"
+    when 3
       "#{num_votes},Please Login"
     end
   end
 
+  # Create a new vote, praise or shame, depending on value
   def create_vote(value_vote)
     Vote.create(
       deed_id: params[:id],
@@ -121,20 +125,42 @@ module MyHelpers
     )
   end
 
+  # Check if the deed was already voted by the current user
+  def voted?
+    Vote.where(deed_id: params[:id]).where(user_id: session[:user_id]).any?
+  end
+
+  def praised?
+    Vote.where(deed_id: params[:id]).where(user_id: session[:user_id]).where(value: 1).any?
+  end
+
+  def get_praise
+    Vote.where(deed_id: params[:id]).where(user_id: session[:user_id]).where(value: 1).take
+  end
+
+  def shamed?
+    Vote.where(deed_id: params[:id]).where(user_id: session[:user_id]).where(value: -1).any?
+  end
 
   # Add a praise vote for the deed assigning the authorship to the current user
   def create_praise
+    if praised?
+      get_praise.destroy
+      num_votes = deed_praise_tally(Deed.find(params[:id]))
+      return state_return(num_votes, 2)
+    end
     @vote = create_vote(1) 
     num_votes = deed_praise_tally(Deed.find(params[:id]))
-    @vote.errors.count == 0 ? state_return(num_votes, true) : state_return(num_votes, false)
+    @vote.errors.count == 0 ? state_return(num_votes, 1) : state_return(num_votes, 3)
   end
 
  
   # Add a shame vote for the deed assigning the authorship to the current user
   def create_shame
     @vote = create_vote(-1) 
-    num_votes = deed_praise_tally(Deed.find(params[:id]))
-    @vote.errors.count == 0 ? state_return(num_votes, true) : state_return(num_votes, false)
+    num_votes = deed_shame_tally(Deed.find(params[:id]))
+    state_return(num_votes, 3) unless current_user
+    @vote.errors.count == 0 ? state_return(num_votes, 1) : state_return(num_votes, 0)
   end
 
   def get_worst_deed(user)
