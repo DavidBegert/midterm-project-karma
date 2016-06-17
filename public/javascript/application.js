@@ -1,6 +1,9 @@
 $(document).ready(function() {
+  browser_path = window.location.pathname
   var pagination_ready;
   var pagination_load_more = true;
+
+  // Only after the user has asked for more posts does pagination work
   var user_paginate = false;
 
   $('input').keypress(function (e) {     //theres gotta be a way to connect this and the one below it
@@ -92,6 +95,15 @@ $(document).ready(function() {
     }
   });
 
+ function userPath() {
+  if (browser_path.startsWith("/users/")) {
+    if (!isNaN(browser_path.split('/').pop())) {
+      return true
+    }
+  }
+  return false
+ }
+
   function ajaxLoadActivity() {
     var server_path = user_paginate ? "/users/next-deeds" : "/deeds/next"
     $.get(server_path, function(data) {
@@ -104,7 +116,7 @@ $(document).ready(function() {
   }
 
   if (pagination_load_more) {
-    $(window).scroll(function () { 
+    $(window).scroll(function () {
      if ($(window).scrollTop() >= $(document).height() - $(window).height() - 500) {
 
         if ( $('ol.astream > .loadCount:last > li').attr('id') == "noMoreActivities" ) {
@@ -113,6 +125,10 @@ $(document).ready(function() {
         if (pagination_ready) {
           return false;
         }
+        if (userPath() && !user_paginate) {
+          return false
+        }
+
         pagination_ready = true
         ajaxLoadActivity();
       }

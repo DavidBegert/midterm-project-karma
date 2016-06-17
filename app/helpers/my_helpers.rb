@@ -147,7 +147,7 @@ module MyHelpers
   def praise_class(deed)
     return "praiseimg" unless current_user
     unless deed.votes.where("votes.user_id=? AND votes.value=1", current_user.id).empty?
-      "praisebtn-color"
+      "praisebtn praisebtn-color"
     else
       "praisebtn"
     end
@@ -157,7 +157,7 @@ module MyHelpers
   def shame_class(deed)
     return "shameimg" unless current_user
     unless deed.votes.where("votes.user_id=? AND votes.value=-1", current_user.id).empty?
-      "shamebtn-color"
+      "shamebtn shamebtn-color"
     else
       "shamebtn"
     end
