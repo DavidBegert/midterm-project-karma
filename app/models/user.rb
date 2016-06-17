@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include BCrypt
   has_many :deeds
   has_many :votes
+  has_many :comments
 
   validates :email, uniqueness: true, presence: true, format: { with: /\A.+@.+\Z/, message: "invalid email"}
   validates :username, uniqueness: true, presence: true
