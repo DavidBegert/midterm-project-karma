@@ -26,7 +26,7 @@ module MyHelpers
   end
 
   # Creates a user
-  def create_user_signup(params)
+  def create_user_signup
     @user = User.new(
       username: params[:username],
       email: params[:email],
@@ -101,22 +101,24 @@ module MyHelpers
   end
  
   # Add a praise vote for the deed assigning the authorship to the current user
-  def create_praise(params)
-    @praise = Vote.new(
-      deed_id: params[:deed_id],
+  def create_praise
+    @praise = Vote.create!(
+      deed_id: params[:id],
       user_id: session[:user_id],
       value: 1
     )
+    deed_praise_tally(Deed.find(params[:id]))
   end
 
  
   # Add a shame vote for the deed assigning the authorship to the current user
   def create_shame
-    @shame = Vote.new(
-      deed_id: params[:deed_id],
+    @shame = Vote.create!(
+      deed_id: params[:id],
       user_id: session[:user_id],
       value: -1
     )
+    deed_shame_tally(Deed.find(params[:id]))
   end
 
   def get_worst_deed(user)

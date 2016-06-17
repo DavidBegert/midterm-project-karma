@@ -15,6 +15,23 @@ get '/login' do
   erb :'sessions/new'
 end
 
+get '/users/next-deeds' do
+  puts "PARAMS ARE --> " << params.to_s
+  list = User.find_by(id: params[:id]).deeds.limit(MAX_SHOW)
+  unless session[:pagination_spot] == list.last.id
+    erb :'../views/deeds/_pagination', layout:false, locals: {list: list}
+  end
+end
+
+get '/users/:id' do |id|
+  session[:pagination_spot] = 0
+  if @user = User.find_by(id: id)
+    erb :'users/profile'
+  else
+    redirect '/404'
+  end
+end
+
 post '/login' do 
   # User is signing in.
   #if user = User.authenticate(params)
