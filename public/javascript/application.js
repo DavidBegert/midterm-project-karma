@@ -32,7 +32,7 @@ $(document).ready(function() {
           praisebtn.siblings(".praisebadge").text(numPraises);
         } else {
           var warningBox = $('#vote-error')
-          warningBox.append("<p>" + warning + "</p>")
+          warningBox.append("<p class=\"vote-error-log\">" + warning + "</p>")
           warningBox.show();
         }
       });
@@ -50,11 +50,19 @@ $(document).ready(function() {
           shamebtn.siblings(".shamebadge").text(numShames);
         } else {
           var warningBox = $('#vote-error')
-          warningBox.text(warning)
+          warningBox.append("<p class=\"vote-error-log\">" + warning + "</p>")
           warningBox.show();
         }
       });
   }); 
+
+  // Hide warning block after clicking in the close button
+  $(function(){
+    $("[data-hide]").on("click", function(){
+      $(this).closest("." + $(this).attr("data-hide")).hide();
+      $(".vote-error-log").remove();
+    });
+  });
 
   $("#users-profile-show-all").click(function() {
     var user_id = this.dataset.userId
