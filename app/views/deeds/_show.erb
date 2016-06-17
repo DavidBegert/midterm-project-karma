@@ -18,10 +18,14 @@
     </div>
 
     <div class="col-xs-10   col-md-8">
-      <img src="<%= deed.user.image_url %>" class="profilePic"/> 
-      <%= deed.summary %>
-      <br>
-      <%= datetime_to_modern(deed.created_at) %> by <a href="/users/<%= deed.user.id %>"><%= deed.user.username  %></a>
+      <div class="col-md-3">
+        <img src="<%= deed.user.image_url %>" class="profilePic"/>
+      </div>
+      <div class="col-md-9">
+        <%= deed.summary %>
+        <br>
+        <%= datetime_to_modern(deed.created_at) %> by <a href="/users/<%= deed.user.id %>"><%= deed.user.username  %></a>
+      </div>
     </div>
   </div>
 </div>
