@@ -106,19 +106,19 @@ module MyHelpers
   def state_return(num_votes, creation_stat)
     case creation_stat
     when 0
-      "#{num_votes},Cannot undo this action,red"
+      "#{num_votes},Cannot undo this action,red,not"
     when 1 
-      "#{num_votes},success,green"
+      "#{num_votes},Success,green"
     when 2
-      "#{num_votes},Praise revoked,blue"
+      "#{num_votes},Praise revoked,blue,remove"
     when 3
-      "#{num_votes},Please Login,red"
+      "#{num_votes},Please Login,red,not"
     when 4
-      "#{num_votes},Deed already evaluated,red"
+      "#{num_votes},Deed already evaluated,red,not"
     when 5
-      "#{num_votes},Remove praise to put a shame on this deed,blue"
+      "#{num_votes},Remove praise to put a shame on this deed,blue,not"
     when 6
-      "#{num_votes},Cannot evaluate your own deed,red"
+      "#{num_votes},Cannot evaluate your own deed,red,not"
     end
   end
 

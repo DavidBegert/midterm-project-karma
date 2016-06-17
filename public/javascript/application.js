@@ -25,46 +25,47 @@ $(document).ready(function() {
 
   // Show error messages accordingly to status of vote
   function showFlashMessage(message, color) {
-    var messageBox = $("#vote-" + color)
-    messageBox.append("<p class=\"vote-message-log\">" + message + "</p>")
+    var messageBox = $("#vote-" + color);
+    messageBox.append("<p class=\"vote-message-log\">" + message + "</p>");
     messageBox.show();
   }
 
   // Create a vote (praise)
   $('#deeds_container').on("click", ".praisebtn", function () {
-      var deedId = this.dataset.deedId
-      var praisebtn = $(this)
-      
+      var deedId = this.dataset.deedId;
+      var praisebtn = $(this);
       $.post("/deeds/" + deedId + "/praise", function(data) {
-        data = data.split(",")
-        var numPraises = data[0]
-        var warning = data[1]
-        var typeWarning = data[2]
-        if (warning == "success") {
+        data = data.split(",");
+        var numPraises = data[0];
+        var warning = data[1];
+        var typeWarning = data[2];
+        if (warning == "Success") {
           praisebtn.siblings(".praisebadge").text(numPraises);
+          praisebtn.addClass("praisebtn-color");
         } else {
-          var warningBox = $('#vote-error')
+          var warningBox = $('#vote-error');
+          console.log(data[3]);
+          if (data[3] == "remove") praisebtn.removeClass("praisebtn-color");
+          showFlashMessage(warning, typeWarning);
           praisebtn.siblings(".praisebadge").text(numPraises);
-          warningBox.append("<p class=\"vote-error-log\">" + warning + "</p>")
-          warningBox.show();
         }
       });
   }); 
  
   // Create a vote (shame)
   $('#deeds_container').on("click", ".shamebtn", function () {
-      var deed_id = this.dataset.deedId
-      var shamebtn = $(this)
+      var deed_id = this.dataset.deedId;
+      var shamebtn = $(this);
       $.post("/deeds/" + deed_id + "/shame", function(data) {
-        data = data.split(",")
-        var numShames = data[0]
-        var warning = data[1]
-        if (warning == "success") {
+        data = data.split(",");
+        var numShames = data[0];
+        var warning = data[1];
+        var typeWarning = data[2];
+        if (warning == "Success") {
           shamebtn.siblings(".shamebadge").text(numShames);
+          shamebtn.addClass("shamebtn-color");
         } else {
-          var warningBox = $('#vote-error')
-          warningBox.append("<p class=\"vote-error-log\">" + warning + "</p>")
-          warningBox.show();
+          showFlashMessage(warning, typeWarning);
         }
       });
   }); 
@@ -73,7 +74,7 @@ $(document).ready(function() {
   $(function(){
     $("[data-hide]").on("click", function(){
       $(this).closest("." + $(this).attr("data-hide")).hide();
-      $(".vote-error-log").remove();
+      $(".vote-message-log").remove();
     });
   });
 
