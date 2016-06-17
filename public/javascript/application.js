@@ -1,7 +1,17 @@
 $(document).ready(function() {
- //$("#confession_error").css("display","block")
+  var ajax;
+  var load_more = true;
 
- $("#confession_submit").click(function(){ 
+  $("#users-profile-show-all").click(function() {
+    var user_id = this.dataset.userId
+    $(this).css("display", "none")
+    return $.get("/users/next-deeds", {"id":user_id}, function(data) {
+      console.log(data);
+        $("#user-deed-container").append(data);
+      });
+  });
+
+  $("#confession_submit").click(function(){ 
     var text_area = $("#confession_summary")
     if (text_area.val().length == 0) {
       $("#confession_error").css("display","block")
@@ -12,14 +22,11 @@ $(document).ready(function() {
     }
   });
 
- var ajax;
- var load_more = true;
 
 
- function ajaxLoadActivity(one, two) {
 
+  function ajaxLoadActivity() {
     return $.get("/deeds/next", function(data) {
-      console.log(data)
       if (data.length == 1) {
         load_more = false;
       }
@@ -37,13 +44,9 @@ $(document).ready(function() {
         if (ajax) {
           return false;
         }
-        ajax = ajaxLoadActivity('bottom', true);
+        ajax = ajaxLoadActivity();
       }
 
-    }); 
-
+    });
   }
-
-
-
 });
