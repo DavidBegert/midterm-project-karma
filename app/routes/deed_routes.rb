@@ -13,7 +13,7 @@ post '/deeds' do
     summary: params[:summary]
     )
   if deed.save
-    erb :'../views/deeds/_show', layout: false, locals: {deed: deed}
+    erb :'../views/deeds/_show', layout: false, locals: {all_details: true, deed: deed}
   else
     redirect '/'
   end
