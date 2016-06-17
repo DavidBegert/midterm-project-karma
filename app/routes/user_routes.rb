@@ -16,10 +16,11 @@ get '/login' do
 end
 
 get '/users/next-deeds' do
-  puts "PARAMS ARE --> " << params.to_s
   list = User.find_by(id: params[:id]).deeds.limit(MAX_SHOW).offset(session[:pagination_spot]).order(id: :DESC)
-  unless session[:pagination_spot] == list.last.id
+  if list.size > 0
     erb :'../views/deeds/_pagination', layout:false, locals: {list: list, all_details: false}
+  else
+    "end-pagination"
   end
 end
 

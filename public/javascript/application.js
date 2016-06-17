@@ -1,10 +1,10 @@
 $(document).ready(function() {
   browser_path = window.location.pathname
-  var pagination_ready;
+  var pagination_ready = true;
   var pagination_load_more = true;
 
-  // Only after the user has asked for more posts does pagination work
-  var user_paginate = false;
+  // Only after the user has asked for posts does pagination work
+  var user_pagination_ready = false;
 
   $('input').keypress(function (e) {     //theres gotta be a way to connect this and the one below it
     if (e.which == 13) {
@@ -79,18 +79,29 @@ $(document).ready(function() {
   });
 
   $("#users-profile-show-all").click(function() {
-    var user_id = this.dataset.userId
-    console.log("user id = " + user_id)
+    user_pagination_ready = true;
+    var server_path = "/users/next-deeds"
+    var params = {"id":document.querySelector("#users-profile-show-all").dataset.userId}
+    $(this).addClass("hidden")
     $("#user-loader-gif").removeClass("hidden")
-    $(this).css("display", "none")
-    $.get("/users/next-deeds", {"id":user_id}, function(data) {
-      $("#deeds_container").removeClass("hidden")
-      $("#user-loader-gif").addClass("hidden")
-      $("#deeds_container").css("display", "block")
-      $("#deeds_container").append(data);
-      user_paginate = true;
-    });
+    ajaxRequestPaginate(server_path, params, user_pagination_received)
   });
+
+  function user_pagination_received(type, data) {
+    // Upon successful user pagination
+    if (type == "success") {
+      var container = $("#user-deeds-container")
+      container.removeClass("hidden")
+      container.css("display", "block")
+      container.append(data)
+    }
+    else {
+      alert("Failed to load from server")
+    }
+
+    $("#user-loader-gif").addClass("hidden")
+  }
+
 
  $("#confession_submit").click(function(){ 
     var text_area = $("#confession_summary").val().length
@@ -106,7 +117,7 @@ $(document).ready(function() {
     }
   });
 
- function userPath() {
+ function isUserPath() {
   if (browser_path.startsWith("/users/")) {
     if (!isNaN(browser_path.split('/').pop())) {
       return true
@@ -115,19 +126,25 @@ $(document).ready(function() {
   return false
  }
 
-  function ajaxLoadActivity() {
-    var server_path = "/deeds/next"
-    var user_id = 0
-    if (userPath()) {
-      server_path = "/users/next-deeds"
-      user_id = document.querySelector("#users-profile-show-all").dataset.userId
-    }
-    $.get(server_path, {"id":user_id}, function(data) {
-      if (data.length == 1) {
+ function index_pagination_received(type, data) {
+  if (type == "success") {
+    container = $("#deeds_container")
+    container.append(data)
+  }
+ }
+
+  function ajaxRequestPaginate(server_path, params, received_func) {
+    pagination_ready = false
+    $.get(server_path, params, function(data) {
+      if (data == "end-pagination") {
         pagination_load_more = false;
+      } else {
+        received_func("success", data)
+        pagination_ready = true;
       }
-      $("#deeds_container").append(data);
-      pagination_ready = false;
+    }).fail(function() {
+      received_func("fail", null)
+      pagination_ready = true;
     });
   }
 
@@ -137,14 +154,16 @@ $(document).ready(function() {
         if ( $('ol.astream > .loadCount:last > li').attr('id') == "noMoreActivities" ) {
           return false;
         }
-        if (pagination_ready) {
-          return false;
+        console.log("Pag Ready: " + pagination_ready + "userpath: "+ isUserPath() + "userpagready: " + user_pagination_ready)
+        if (pagination_ready && browser_path == '/') {
+          var server_path = "/deeds/next"
+          ajaxRequestPaginate(server_path, {}, index_pagination_received);
         }
-        if (userPath() && !user_paginate) {
-          return false
+        else if (pagination_ready && isUserPath() && user_pagination_ready) {
+          var server_path = "/users/next-deeds"
+          var params = {"id":document.querySelector("#users-profile-show-all").dataset.userId}
+          ajaxRequestPaginate(server_path, params, user_pagination_received)
         }
-        pagination_ready = true
-        ajaxLoadActivity();
       }
     }); 
   }
