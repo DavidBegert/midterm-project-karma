@@ -7,7 +7,6 @@
 <% end %>
 
 <!-- START OF FORM, may need to move to another file -->
-<div class="container">
   <p id="confession_error">Your confession cannot be blank</p>
   <form class="form-horizontal" id="confession_form">
     <div class="form-group">
@@ -16,14 +15,14 @@
       </div>
     </div>
   </form>
-</div>
-<div class="form-group">
-  <div class="col-sm-offset-2 col-sm-10">
-    <button id="confession_submit" class="btn btn-default">Submit</button>  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="confession_submit" class="btn btn-default">Submit</button>  
+    </div>
   </div>
-</div>
         
-<!-- END OF FORM -->
-<div id = deeds_container class="container">
-  <%= erb :'deeds_pagination' %>
+  <!-- END OF FORM -->
+  <div id = deeds_container class="container">
+    <%= erb :'deeds/_pagination', locals: {list: Deed.all.limit(MAX_SHOW).offset(session[:pagination_spot]).order(id: :desc)} %>
+  </div>
 </div>
