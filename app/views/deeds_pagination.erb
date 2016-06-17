@@ -6,13 +6,13 @@
           <div class="col-xs-2 col-md-2">
           <!-- The buttons column -->
             <div class="row">
-              <button class="width100 praisebtn" type="image" data-deed-id = "<%=deed.id%>"></button>
+              <button class="width100 praisebtn" type="image" data-deed-id="<%= deed.id %>"></button>
               <span class="badge praisebadge">
                 <%= deed_praise_tally(deed) %>
               </span>
             </div>
             <div class="row">
-              <button class="width100 shamebtn" type="image" data-deed-id = "<%=deed.id%>"></button>
+              <button class="width100 shamebtn" type="image" data-deed-id="<%= deed.id %>"></button>
               <span class="badge shamebadge">
                 <%= deed_shame_tally(deed) %>
               </span>
@@ -32,4 +32,4 @@
     <hr>
     <br>
     <% session[:pagination_spot] = session[:pagination_spot].to_i + 1 %>
-  <% end %>
+<% end %>

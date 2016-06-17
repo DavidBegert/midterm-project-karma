@@ -14,12 +14,17 @@ $(document).ready(function() {
   // Create a vote (praise)
   $('.praisebtn').click(function () {
       var deed_id = this.dataset.deedId
-      $.post("/deeds/" + deed_id + "/praise" );
+      var praisebtn = $(this)
+      $.post("/deeds/" + deed_id + "/praise", function(data) {
+        praisebtn.siblings(".praisebadge").text(data);
+      });
   }); 
  
   $('.shamebtn').click(function () {
       var deed_id = this.dataset.deedId
-      $.post("/deeds/" + deed_id + "/shame" );
+      $.post("/deeds/" + deed_id + "/shame", function(data) {
+        $(this).siblings(".shamebadge").text(data);
+      });
   }); 
 
  var ajax;
