@@ -106,8 +106,12 @@ $(document).ready(function() {
  }
 
   function ajaxLoadActivity() {
-    var server_path = user_paginate ? "/users/next-deeds" : "/deeds/next"
-    user_id = document.querySelector("#users-profile-show-all").dataset.userId
+    var server_path = "/deeds/next"
+    var user_id = 0
+    if (userPath()) {
+      server_path = "/users/next-deeds"
+      user_id = document.querySelector("#users-profile-show-all").dataset.userId
+    }
     $.get(server_path, {"id":user_id}, function(data) {
       if (data.length == 1) {
         pagination_load_more = false;
@@ -129,8 +133,6 @@ $(document).ready(function() {
         if (userPath() && !user_paginate) {
           return false
         }
-
-
         pagination_ready = true
         ajaxLoadActivity();
       }
