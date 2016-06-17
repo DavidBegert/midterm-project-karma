@@ -70,13 +70,14 @@ $(document).ready(function() {
 
   $("#users-profile-show-all").click(function() {
     var user_id = this.dataset.userId
+    console.log("user id = " + user_id)
     $("#user-loader-gif").removeClass("hidden")
     $(this).css("display", "none")
     $.get("/users/next-deeds", {"id":user_id}, function(data) {
-      $("#deeds-container").removeClass("hidden")
+      $("#deeds_container").removeClass("hidden")
       $("#user-loader-gif").addClass("hidden")
-      $("#deeds-container").css("display", "block")
-      $("#deeds-container").append(data);
+      $("#deeds_container").css("display", "block")
+      $("#deeds_container").append(data);
       user_paginate = true;
     });
   });
@@ -106,7 +107,8 @@ $(document).ready(function() {
 
   function ajaxLoadActivity() {
     var server_path = user_paginate ? "/users/next-deeds" : "/deeds/next"
-    $.get(server_path, function(data) {
+    user_id = document.querySelector("#users-profile-show-all").dataset.userId
+    $.get(server_path, {"id":user_id}, function(data) {
       if (data.length == 1) {
         pagination_load_more = false;
       }
@@ -118,7 +120,6 @@ $(document).ready(function() {
   if (pagination_load_more) {
     $(window).scroll(function () {
      if ($(window).scrollTop() >= $(document).height() - $(window).height() - 500) {
-
         if ( $('ol.astream > .loadCount:last > li').attr('id') == "noMoreActivities" ) {
           return false;
         }
@@ -128,6 +129,7 @@ $(document).ready(function() {
         if (userPath() && !user_paginate) {
           return false
         }
+
 
         pagination_ready = true
         ajaxLoadActivity();
