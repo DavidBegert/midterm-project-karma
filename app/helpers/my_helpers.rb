@@ -58,21 +58,23 @@ module MyHelpers
   end
 
   def datetime_to_modern(datetime)
-    datetime = datetime.utc
+    zone = ActiveSupport::TimeZone.new("Pacific Time (US & Canada)")
+    date_time = datetime.in_time_zone(zone)
+    now_time = DateTime.now.in_time_zone(zone)
     puts 1.minute.ago.utc
-    if datetime > 1.minute.ago.utc
+    if date_time > 1.minute.ago.utc
       "just now"
-    elsif datetime >= 2.minutes.ago.utc
+    elsif date_time >= 2.minutes.ago.utc
       "a minute ago"
-    elsif datetime >= 20.minutes.ago.utc
+    elsif date_time >= 20.minutes.ago.utc
       "a few minutes ago"
-    elsif datetime >= 45.minutes.ago.utc
+    elsif date_time >= 45.minutes.ago.utc
       "half hour ago"
-    elsif datetime >= 1.hour.ago.utc
+    elsif date_time >= 1.hour.ago.utc
       "an hour ago"
-    elsif datetime.to_date == DateTime.now.utc.to_date
+    elsif date_time.to_date == now_time.to_date
       "today"
-    elsif datetime.to_date == (DateTime.now.utc - 1.day).to_date
+    elsif date_time.to_date == (now_time - 1.day).to_date
       "yesterday"
     else
       "a few days ago"
