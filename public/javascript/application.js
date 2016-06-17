@@ -1,13 +1,15 @@
 $(document).ready(function() {
   var ajax;
   var load_more = true;
+  var user_paginate = false;
 
   $("#users-profile-show-all").click(function() {
     var user_id = this.dataset.userId
     $(this).css("display", "none")
     return $.get("/users/next-deeds", {"id":user_id}, function(data) {
-      console.log(data);
+        $("#user-deed-container").css("display", "block")
         $("#user-deed-container").append(data);
+        user_paginate = true;
       });
   });
 
