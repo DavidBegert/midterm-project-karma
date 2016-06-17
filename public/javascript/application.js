@@ -32,6 +32,7 @@ $(document).ready(function() {
           praisebtn.siblings(".praisebadge").text(numPraises);
         } else {
           var warningBox = $('#vote-error')
+          praisebtn.siblings(".praisebadge").text(numPraises);
           warningBox.append("<p class=\"vote-error-log\">" + warning + "</p>")
           warningBox.show();
         }

@@ -8,12 +8,17 @@
       </div>
 
       <div id="unella-quote" class="col-md-6">
-        <% if user_karma_tally(current_user) < 0 %>
-        "<%= DO_GOOD_UNELLA_QUOTES.sample %>" 
-        <% elsif user_karma_tally(current_user) > 0 %>
-          "<%= DO_BAD_UNELLA_QUOTES.sample %>"
+        <% if current_user %>
+          <% if user_karma_tally(current_user) < 0 %>
+          "<%= DO_GOOD_UNELLA_QUOTES.sample %>" 
+          <% elsif user_karma_tally(current_user) > 0 %>
+            "<%= DO_BAD_UNELLA_QUOTES.sample %>"
+          <% else %>
+            "Could you be more average?"
+          <% end %>
         <% else %>
-          "Could you be more average?"
+          "Log in, my child"
+
         <% end %>
         <br/> <em> - Septa Unella </em>
       </div>
