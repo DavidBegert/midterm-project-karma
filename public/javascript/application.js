@@ -20,6 +20,13 @@ $(document).ready(function() {
     }
   });
 
+  // Show error messages accordingly to status of vote
+  function showFlashMessage(message, color) {
+    var messageBox = $("#vote-" + color)
+    messageBox.append("<p class=\"vote-message-log\">" + message + "</p>")
+    messageBox.show();
+  }
+
   // Create a vote (praise)
   $('#deeds_container').on("click", ".praisebtn", function () {
       var deedId = this.dataset.deedId
@@ -28,6 +35,7 @@ $(document).ready(function() {
         data = data.split(",")
         var numPraises = data[0]
         var warning = data[1]
+        var typeWarning = data[2]
         if (warning == "success") {
           praisebtn.siblings(".praisebadge").text(numPraises);
         } else {
