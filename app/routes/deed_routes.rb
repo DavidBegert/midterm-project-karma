@@ -1,10 +1,10 @@
 # User is praising/shaming a deed.
 post '/deeds/:id/praise' do
-  create_praise  
+  create_praise.to_s
 end
 
 post '/deeds/:id/shame' do
-  create_shame
+  create_shame.to_s
 end
 
 post '/deeds' do 
