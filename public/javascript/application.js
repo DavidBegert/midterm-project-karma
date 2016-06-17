@@ -28,8 +28,13 @@ $(document).ready(function() {
         data = data.split(",")
         var numPraises = data[0]
         var warning = data[1]
-        alert(warning);
-        praisebtn.siblings(".praisebadge").text(numPraises);
+        if (warning == "success") {
+          praisebtn.siblings(".praisebadge").text(numPraises);
+        } else {
+          var warningBox = $('#vote-error')
+          warningBox.text(warning)
+          warningBox.show();
+        }
       });
   }); 
  
@@ -38,7 +43,16 @@ $(document).ready(function() {
       var deed_id = this.dataset.deedId
       var shamebtn = $(this)
       $.post("/deeds/" + deed_id + "/shame", function(data) {
-        shamebtn.siblings(".shamebadge").text(data);
+        data = data.split(",")
+        var numShames = data[0]
+        var warning = data[1]
+        if (warning == "success") {
+          shamebtn.siblings(".shamebadge").text(numShames);
+        } else {
+          var warningBox = $('#vote-error')
+          warningBox.text(warning)
+          warningBox.show();
+        }
       });
   }); 
 
