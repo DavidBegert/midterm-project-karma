@@ -70,26 +70,27 @@ $(document).ready(function() {
   });
 
   $("#users-profile-show-all").click(function() {
-    user_paginate = true;
+    user_pagination_ready = true;
     var server_path = "/users/next-deeds"
     var params = {"id":document.querySelector("#users-profile-show-all").dataset.userId}
-    var container = $("#user-deeds-container")
     $(this).addClass("hidden")
     $("#user-loader-gif").removeClass("hidden")
-    ajaxRequestPaginate(server_path, params, container, 'user_pagination_success', user_pagination_fail)
+    ajaxRequestPaginate(server_path, params, user_pagination_received)
   });
 
-  function user_pagination_success() {
+  function user_pagination_received(type, data) {
     // Upon successful user pagination
-    container.removeClass("hidden")
-    $("#user-loader-gif").addClass("hidden")
-    container.css("display", "block")
-  }
+    if (type == "success") {
+      var container = $("#user-deeds-container")
+      container.removeClass("hidden")
+      container.css("display", "block")
+      container.append(data)
+    }
+    else {
+      alert("Failed to load from server")
+    }
 
-  function user_pagination_fail() {
-    alert("Failed to load comments")
     $("#user-loader-gif").addClass("hidden")
-    container.css("display", "block")
   }
 
 
@@ -116,17 +117,24 @@ $(document).ready(function() {
   return false
  }
 
-  function ajaxRequestPaginate(server_path, params, div_container, success_func, fail_func) {
+ function index_pagination_received(type, data) {
+  if (type == "success") {
+    container = $("#deeds_container")
+    container.append(data)
+  }
+ }
+
+  function ajaxRequestPaginate(server_path, params, received_func) {
     pagination_ready = false
     $.get(server_path, params, function(data) {
       if (data.length == 1) {
         pagination_load_more = false;
       }
-      div_container.append(data);
+      received_func("success", data)
       pagination_ready = true;
-      window["user_pagination_success"]()
     }).fail(function() {
-      fail_func
+      received_func("fail", null)
+      pagination_ready = true;
     });
   }
 
@@ -136,16 +144,15 @@ $(document).ready(function() {
         if ( $('ol.astream > .loadCount:last > li').attr('id') == "noMoreActivities" ) {
           return false;
         }
+        console.log("Pag Ready: " + pagination_ready + "userpath: "+ isUserPath() + "userpagready: " + user_pagination_ready)
         if (pagination_ready && browser_path == '/') {
           var server_path = "/deeds/next"
-          var container = $("#deeds_container")
-          ajaxRequestPaginate(server_path, {}, container);
+          ajaxRequestPaginate(server_path, {}, index_pagination_received);
         }
         else if (pagination_ready && isUserPath() && user_pagination_ready) {
           var server_path = "/users/next-deeds"
           var params = {"id":document.querySelector("#users-profile-show-all").dataset.userId}
-          var container = $("#user-deeds-container")
-          ajaxRequestPaginate(server_path, params, container)
+          ajaxRequestPaginate(server_path, params, user_pagination_received)
         }
       }
     }); 
