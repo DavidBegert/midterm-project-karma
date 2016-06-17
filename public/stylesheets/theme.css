@@ -23,46 +23,38 @@ body {
 }
 
 
-.praisebtn, .shamebtn{
+.praisebtn, .shamebtn, .praisebtn-color, .shamebtn-color {
   outline: none;
   margin-left:2em;
-  border-radius: 50%;
   width: 45px;
   height: 45px;
-  background:white;
+  border-radius: 50%;
 }
 
 .praisebtn {
   margin-bottom: 6px;
+  background: url('/img/praise.png') no-repeat;
+  background-size: contain;
+}
+
+.praisebtn-color {
+  margin-bottom: 6px;
+  background: url('/img/praise-color.png') no-repeat;
+  background-size: contain;
 }
 
 .shamebtn {
   margin-top: 6px;
+  background: url('/img/shame.png') no-repeat;
+  background-size: contain;
 }
 
-.praiseimg {
-  content:url(/img/praise.png);
-  width: 35px;
-  height: 35px;
+.shamebtn-color {
+  margin-top: 6px;
+  background: url('/img/shame-color.png') no-repeat;
+  background-size: contain;
 }
 
-.praiseimg-color {
-  content:url(/img/praise-color.png);
-  width: 35px;
-  height: 35px;
-}
-
-.shameimg {
-  content:url(/img/shame.png);
-  width: 35px;
-  height: 35px;
-}
-
-.shameimg-color {
-  content:url(/img/shame-color.png);
-  width: 35px;
-  height: 35px;
-}
 
 .praisebadge{
   position:absolute;
