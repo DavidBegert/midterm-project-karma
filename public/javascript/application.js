@@ -94,6 +94,8 @@ $(document).ready(function() {
       container.removeClass("hidden")
       container.css("display", "block")
       container.append(data)
+    } else {
+      $("#footer").removeClass("hidden")
     }
 
     $("#user-loader-gif").addClass("hidden")
@@ -127,6 +129,9 @@ $(document).ready(function() {
   if (type == "success") {
     container = $("#deeds_container")
     container.append(data)
+  } 
+  else {
+    $("#footer").removeClass("hidden")
   }
   $("#deeds-loading-gif").addClass("hidden")
  }

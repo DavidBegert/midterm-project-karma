@@ -49,5 +49,6 @@
     <%= erb :'deeds/_pagination', locals: {all_details: true, list: Deed.all.limit(MAX_SHOW).offset(session[:pagination_spot]).order(id: :desc)} %>
   </div>
   <img class="loading center-block hidden" id="deeds-loading-gif" src="/img/loader.gif"/>
-  <div class="jumbotron"></div>
+  <br>
+  <div id="footer" class="jumbotron hidden"><i><h2 class="text-center">-no more deeds-</h2></i></div>
 </div>
