@@ -163,17 +163,10 @@ body {
   text-align: center;
 }
 #unella {
-  width: 14%;
-  position:absolute;
-  top:12%;
-  left:77%;
+  max-width: 90%;
 }
 #unella-quote {
   font-family: 'Handlee', cursive;
-  position:absolute;
-  top:12%;
-  left:30%;
   font-size: 200%;
-  width: 40%;
 
 }

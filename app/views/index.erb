@@ -1,21 +1,28 @@
-<% if true %> <!-- used to be if !current_user.. page seems flawed with # of divs (break div at the end)--> 
-  <div class="container">
-    <div class="jumbotron">
-    <img id="unella" src="/img/unella.jpg" />
-    <div id="unella-quote">
+
+<div class="container">
+  <div class="jumbotron">
+    <div class="row">
+    <div class="col-md-3">
+      <h1>Atonr</h1>
+      <p>Share Confessions</p>
+    </div>
+
+    <div id="unella-quote" class="col-md-6">
       <% if user_karma_tally(current_user) < 0 %>
-        "<%= DO_GOOD_UNELLA_QUOTES.sample %>" 
+      "<%= DO_GOOD_UNELLA_QUOTES.sample %>" 
       <% elsif user_karma_tally(current_user) > 0 %>
         "<%= DO_BAD_UNELLA_QUOTES.sample %>"
       <% else %>
         "Could you be more average?"
       <% end %>
-      <br/> <em> - Septum Unella </em>
+      <br/> <em> - Septa Unella </em>
     </div>
-      <h1>Atonr</h1>
-      <p>Share Confessions</p>
+
+    <div class="col-md-3">
+      <img class="img-fluid" id="unella" src="/img/unella.jpg" />
     </div>
-<% end %>
+    </div>
+  </div>
 
 <!-- START OF FORM, may need to move to another file -->
   <p id="confession_error">Your confession cannot be blank</p>
