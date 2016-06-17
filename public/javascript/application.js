@@ -127,11 +127,12 @@ $(document).ready(function() {
   function ajaxRequestPaginate(server_path, params, received_func) {
     pagination_ready = false
     $.get(server_path, params, function(data) {
-      if (data.length == 1) {
+      if (data == "end-pagination") {
         pagination_load_more = false;
+      } else {
+        received_func("success", data)
+        pagination_ready = true;
       }
-      received_func("success", data)
-      pagination_ready = true;
     }).fail(function() {
       received_func("fail", null)
       pagination_ready = true;
