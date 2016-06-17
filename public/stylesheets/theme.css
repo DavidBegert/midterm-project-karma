@@ -175,6 +175,8 @@ body {
 }
 #unella {
   max-width: 90%;
+  border-radius: 10px;
+  box-shadow: 10px 10px 52px #888888;
 }
 #unella-quote {
   font-family: 'Handlee', cursive;
