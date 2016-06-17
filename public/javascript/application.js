@@ -49,7 +49,7 @@ $(document).ready(function() {
   }
   // if (load_more) {
     $(window).scroll(function () { 
-     if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+     if ($(window).scrollTop() >= $(document).height() - $(window).height() - 500) {
 
         if ( $('ol.astream > .loadCount:last > li').attr('id') == "noMoreActivities" ) {
           return false;
