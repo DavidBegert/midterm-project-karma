@@ -21,7 +21,8 @@ module MyHelpers
       redirect '/'
     end
     @user = User.new
-    erb :'signup'
+    erb :'/users/new'  
+    # not sure what this function is doing
   end
 
   # Creates a user
@@ -36,7 +37,7 @@ module MyHelpers
       user_signin(@user)
       redirect '/'
     else
-      erb :'signup'
+      erb :'/users/new'
     end
   end
 

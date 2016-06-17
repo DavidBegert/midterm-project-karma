@@ -2,12 +2,28 @@ get '/users/logout' do
   user_signout
 end
 
-get '/users/signup' do
-  user_signup
+get '/users/new' do
+  erb :'users/new'
+end
+# User is signing in.
+post '/users/new' do
+  create_user_signup(params)
+
 end
 
-post '/users/signup' do
-  create_user_signup(params)
+get '/login' do
+  erb :'sessions/new'
+end
+
+post '/login' do 
+  # User is signing in.
+  #if user = User.authenticate(params)
+  @user = user_signin(User.find_by(username: params[:username]))
+
+  #else
+    #user_signout
+  #end
+  redirect '/' 
 end
 
 get '/users/:id' do |id|
@@ -18,18 +34,3 @@ get '/users/:id' do |id|
   end
 end
 
-# User is signing in.
-post '/users/signin' do
-  # User always signs in, no auth for demo/test purposes
-  
-  #if user = User.authenticate(params)
-    user_signin(User.find_by(username: params[:username]))
-  #else
-    #user_signout
-  #end
-  redirect '/'
-end
-
-get '/users/:id' do
-  erb :user
-end

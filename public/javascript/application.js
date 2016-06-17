@@ -47,7 +47,7 @@ $(document).ready(function() {
       im_not_ready = false;
     });
   }
-  // if (load_more) {
+  if (load_more) {
     $(window).scroll(function () { 
      if ($(window).scrollTop() >= $(document).height() - $(window).height() - 500) {
 
@@ -62,6 +62,6 @@ $(document).ready(function() {
       }
 
     }); 
-  // }
+  }
 
 });
