@@ -95,9 +95,6 @@ $(document).ready(function() {
       container.css("display", "block")
       container.append(data)
     }
-    else {
-      alert("Failed to load from server")
-    }
 
     $("#user-loader-gif").addClass("hidden")
   }
@@ -131,6 +128,7 @@ $(document).ready(function() {
     container = $("#deeds_container")
     container.append(data)
   }
+  $("#deeds-loading-gif").addClass("hidden")
  }
 
   function ajaxRequestPaginate(server_path, params, received_func) {
@@ -138,6 +136,7 @@ $(document).ready(function() {
     $.get(server_path, params, function(data) {
       if (data == "end-pagination") {
         pagination_load_more = false;
+        received_func("end", null)
       } else {
         received_func("success", data)
         pagination_ready = true;
@@ -154,14 +153,15 @@ $(document).ready(function() {
         if ( $('ol.astream > .loadCount:last > li').attr('id') == "noMoreActivities" ) {
           return false;
         }
-        console.log("Pag Ready: " + pagination_ready + "userpath: "+ isUserPath() + "userpagready: " + user_pagination_ready)
         if (pagination_ready && browser_path == '/') {
           var server_path = "/deeds/next"
+          $("#deeds-loading-gif").removeClass("hidden")
           ajaxRequestPaginate(server_path, {}, index_pagination_received);
         }
         else if (pagination_ready && isUserPath() && user_pagination_ready) {
           var server_path = "/users/next-deeds"
           var params = {"id":document.querySelector("#users-profile-show-all").dataset.userId}
+          $("#user-loader-gif").removeClass("hidden")
           ajaxRequestPaginate(server_path, params, user_pagination_received)
         }
       }
