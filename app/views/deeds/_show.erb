@@ -7,7 +7,7 @@
     <!-- The buttons column -->
       <div class="row">
         <<%= vote_button_type %> class="praisebtn" data-deed-id = "<%=deed.id%>">
-          <div class="praiseimg center-block" <%= praise_style_if_current_user_voted_for(deed) %>></div>
+          <div class="<%=praise_class(deed)%> center-block"></div>
         </<%= vote_button_type %>>
         <span class="badge praisebadge">
           <%= deed_praise_tally(deed) %>
@@ -15,7 +15,7 @@
       </div>
       <div class="row">
         <<%= vote_button_type %> class="shamebtn" data-deed-id = "<%=deed.id%>">
-          <div class="shameimg center-block" <%= shame_style_if_current_user_voted_for(deed) %>></div>
+          <div class="<%=shame_class(deed)%> center-block"></div>
         </<%= vote_button_type %>>
         <span class="badge shamebadge">
           <%= deed_shame_tally(deed) %>

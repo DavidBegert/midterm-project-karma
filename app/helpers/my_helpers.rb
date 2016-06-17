@@ -143,15 +143,21 @@ module MyHelpers
     end
   end
 
-  def praise_style_if_current_user_voted_for(deed)
-    unless deed.votes.joins(:user).where("votes.user_id=? AND votes.value=1", current_user.id).empty?
-      "style=\"content:url(/img/praise-color.png)\""
+  # Returns which class to use for the image depending if the user has voted.
+  def praise_class(deed)
+    unless deed.votes.where("votes.user_id=? AND votes.value=1", current_user.id).empty?
+      "praiseimg-color"
+    else
+      "praiseimg"
     end
   end
 
-  def shame_style_if_current_user_voted_for(deed)
-    unless deed.votes.joins(:user).where("votes.user_id=? AND votes.value=-1", current_user.id).empty?
-      "style=\"content:url(/img/shame-color.png)\""
+  # Returns which class to use for the image depending if the user has voted.
+  def shame_class(deed)
+    unless deed.votes.where("votes.user_id=? AND votes.value=-1", current_user.id).empty?
+      "shameimg-color"
+    else
+      "shameimg"
     end
   end
 end

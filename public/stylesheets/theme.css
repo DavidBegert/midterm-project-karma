@@ -46,8 +46,20 @@ body {
   height: 35px;
 }
 
+.praiseimg-color {
+  content:url(/img/praise-color.png);
+  width: 35px;
+  height: 35px;
+}
+
 .shameimg {
   content:url(/img/shame.png);
+  width: 35px;
+  height: 35px;
+}
+
+.shameimg-color {
+  content:url(/img/shame-color.png);
   width: 35px;
   height: 35px;
 }
