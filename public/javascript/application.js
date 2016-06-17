@@ -32,35 +32,36 @@ $(document).ready(function() {
     }
   });
 
- var ajax;
+
+ var im_not_ready;
  var load_more = true;
 
+ function ajaxLoadActivity() {
 
- function ajaxLoadActivity(one, two) {
-
-    return $.get("/deeds/next", function(data) {
+      $.get("/deeds/next", function(data) {
       console.log(data)
       if (data.length == 1) {
         load_more = false;
       }
       $("#deeds_container").append(data);
+      im_not_ready = false;
     });
   }
-
-  if (load_more) {
+  // if (load_more) {
     $(window).scroll(function () { 
      if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
 
         if ( $('ol.astream > .loadCount:last > li').attr('id') == "noMoreActivities" ) {
           return false;
         }
-        if (ajax) {
+        if (im_not_ready) {
           return false;
         }
-        ajax = ajaxLoadActivity('bottom', true);
+        im_not_ready = true
+        ajaxLoadActivity();
       }
 
     }); 
-  }
+  // }
 
 });
