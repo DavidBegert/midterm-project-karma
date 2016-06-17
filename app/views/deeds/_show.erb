@@ -1,16 +1,18 @@
 <% deed = locals[:deed] %>
+<% all_details = locals[:all_details] %>
+<% vote_button_type = all_details ? "button" : "div" %>
 <div class="row">
-  <div class="col-sm-6">
-    <div class="col-xs-2 col-md-2">
+  <div class="col-sm-8">
+    <div class="col-xs-2 col-md-1">
     <!-- The buttons column -->
       <div class="row">
-        <button class="width100 praisebtn" type="image" data-deed-id = "<%=deed.id%>"></button>
+        <<%= vote_button_type%> button class="width100 praisebtn" type="image" data-deed-id = "<%=deed.id%>"></<%= vote_button_type%>>
         <span class="badge praisebadge">
           <%= deed_praise_tally(deed) %>
         </span>
       </div>
       <div class="row">
-        <button class="width100 shamebtn" type="image" data-deed-id = "<%=deed.id%>"></button>
+        <<%= vote_button_type%> class="width100 shamebtn" type="image" data-deed-id = "<%=deed.id%>"></<%= vote_button_type%>>
         <span class="badge shamebadge">
           <%= deed_shame_tally(deed) %>
         </span>
@@ -18,10 +20,16 @@
     </div>
 
     <div class="col-xs-10   col-md-8">
-      <img src="<%= deed.user.image_url %>" class="profilePic"/> 
-      <%= deed.summary %>
-      <br>
-      <%= datetime_to_modern(deed.created_at) %> by <a href="/users/<%= deed.user.id %>"><%= deed.user.username  %></a>
+      <% if all_details %>
+        <div class="col-md-2">
+        <img src="<%= deed.user.image_url %>" class="profilePic"/>
+        </div>
+      <% end %>
+      <div class="col-md-9">
+        <%= deed.summary %>
+        <br><br>
+        <i><%= datetime_to_modern(deed.created_at) %></i> by <a href="/users/<%= deed.user.id %>"><%= deed.user.username  %></a>
+      </div>
     </div>
   </div>
 </div>
