@@ -1,13 +1,25 @@
+
 <div class="container">
   <div class="jumbotron">
-    <h1>aTonr</h1>
+  <img id="unella" src="/img/unella.jpg" />
+  <% if current_user %>
+  <div id="unella-quote">
+    <% if user_karma_tally(current_user) < 0 %>
+      "<%= DO_GOOD_UNELLA_QUOTES.sample %>" 
+    <% elsif user_karma_tally(current_user) > 0 %>
+      "<%= DO_BAD_UNELLA_QUOTES.sample %>"
+    <% else %>
+      "Could you be more average?"
+    <% end %>
+    <br/> <em> - Septum Unella </em>
+  </div>
+  <% end %>
+    <h1>Atonr</h1>
     <p>Share Confessions</p>
   </div>
-
-<div class="alert alert-danger fade in" id="vote-error" style="display:none">
+  <div class="alert alert-danger fade in" id="vote-error" style="display:none">
   <a class="close" data-hide="alert" aria-label="close">&times;</a>
-</div>
-
+  </div>
 
 <!-- START OF FORM, may need to move to another file -->
 
