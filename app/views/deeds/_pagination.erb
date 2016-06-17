@@ -1,5 +1,5 @@
 <% list = locals[:list] %>
 <% list.each do |deed|  %>
   <%= erb :'deeds/_show', layout: false, locals: {all_details: locals[:all_details], deed: deed} %>
-  <% session[:pagination_spot] = session[:pagination_spot].to_i + 1 %>
+  <% session[:pagination_spot] += 1 %>
 <% end %>
