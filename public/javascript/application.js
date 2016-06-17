@@ -32,7 +32,7 @@ $(document).ready(function() {
           praisebtn.siblings(".praisebadge").text(numPraises);
         } else {
           var warningBox = $('#vote-error')
-          warningBox.text(warning)
+          warningBox.append("<p>" + warning + "</p>")
           warningBox.show();
         }
       });
