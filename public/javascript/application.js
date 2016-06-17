@@ -18,19 +18,15 @@ $(document).ready(function() {
   });
 
   // Create a vote (praise)
-  $('.praisebtn').on("click", function () {
-    alert("hi there");
+  $('#deeds_container').on("click", ".praisebtn", function () {
       var deed_id = this.dataset.deedId
       var praisebtn = $(this)
       $.post("/deeds/" + deed_id + "/praise", function(data) {
-        console.log(praisebtn)
-        console.log(praisebtn.siblings(".praisebadge"))
-        console.log(data)
         praisebtn.siblings(".praisebadge").text(data);
       });
   }); 
  
-  $('.shamebtn').click(function () {
+  $('#deeds_container').on("click", ".shamebtn", function () {
       var deed_id = this.dataset.deedId
       var shamebtn = $(this)
       $.post("/deeds/" + deed_id + "/shame", function(data) {
@@ -42,29 +38,16 @@ $(document).ready(function() {
  var load_more = true;
 
  $("#confession_submit").click(function(){ 
-    var text_area = $("#confession_summary").val().length;
+    var text_area = $("#confession_summary").val().length
     var form_data = $("#confession_form").serialize()
     $("#confession_summary").val(""); 
     if (text_area == 0) {
         $("#confession_error").css("display","block")
     } else { 
-          alert("in the submit button");
           $.post("/deeds", form_data, function(data) {
             $("#confession_error").css("display", "none")
             $("#deeds_container").prepend(data)
           });
-      //register the event on that button
-  //      $('.praisebtn').on("click", function () {
-  //     var deed_id = this.dataset.deedId
-  //     var praisebtn = $(this)
-  //     $.post("/deeds/" + deed_id + "/praise", function(data) {
-  //       console.log(praisebtn)
-  //       console.log(praisebtn.siblings(".praisebadge"))
-  //       console.log(data)
-  //       praisebtn.siblings(".praisebadge").text(data);
-  //     });
-  // }); 
-  
     }
   });
 
