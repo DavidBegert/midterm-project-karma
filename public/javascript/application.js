@@ -17,6 +17,25 @@ $(document).ready(function() {
     }
   });
 
+  // Create a vote (praise)
+  $('#deeds_container').on("click", ".praisebtn", function () {
+      var deed_id = this.dataset.deedId
+      var praisebtn = $(this)
+      $.post("/deeds/" + deed_id + "/praise", function(data) {
+        praisebtn.siblings(".praisebadge").text(data);
+      });
+  }); 
+ 
+  $('#deeds_container').on("click", ".shamebtn", function () {
+      var deed_id = this.dataset.deedId
+      var shamebtn = $(this)
+      $.post("/deeds/" + deed_id + "/shame", function(data) {
+        shamebtn.siblings(".shamebadge").text(data);
+      });
+  }); 
+
+ var ajax;
+ var load_more = true;
 
  $("#confession_submit").click(function(){ 
     var text_area = $("#confession_summary").val().length
@@ -32,12 +51,10 @@ $(document).ready(function() {
     }
   });
 
-
  var im_not_ready;
  var load_more = true;
 
  function ajaxLoadActivity() {
-
       $.get("/deeds/next", function(data) {
       console.log(data)
       if (data.length == 1) {
@@ -60,8 +77,6 @@ $(document).ready(function() {
         im_not_ready = true
         ajaxLoadActivity();
       }
-
     }); 
   // }
-
 });
