@@ -21,9 +21,12 @@ post '/deeds' do
 end
 
 get '/deeds/next' do 
-  puts session[:pagination_spot]
-  puts "list.last.id is: #{Deed.last.id}"
   unless session[:pagination_spot] == Deed.last.id
     erb :'../views/deeds/_pagination', layout: false, locals: {all_details: true, list: Deed.all.limit(MAX_SHOW).offset(session[:pagination_spot]).order(id: :desc)}
   end
+end
+
+get '/deeds/:id/comments' do |id|
+  @comments = Deed.find(id).comments
+  erb :'../views/deeds/_comments', layout: false, locals: {deed_id: id}
 end

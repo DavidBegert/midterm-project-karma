@@ -102,7 +102,7 @@ module MyHelpers
     deed.votes.where(value: -1).count
   end
 
-  def deed_comment_tally(deed)
+  def deed_comments_tally(deed)
     deed.comments.count
   end
  

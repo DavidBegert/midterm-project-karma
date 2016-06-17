@@ -31,13 +31,15 @@
         <%= deed.summary %>
         <br><br>
         <i><%= datetime_to_modern(deed.created_at) %></i> by <a href="/users/<%= deed.user.id %>"><%= deed.user.username  %></a>
-        <br>
-        <a><%= deed_comment_tally(deed) %> Comments </a>
+        <br><br>
+        <a href="#" data-deed-id= <%=deed.id%> class="show-comments"><%= deed_comments_tally(deed) %> Comments </a>
       </div>
     </div>
   </div>
 </div>
 
 <br>
+<div class="comment-holder" id="comments-<%=deed.id%>" >
+</div>
 <hr>
 <br>

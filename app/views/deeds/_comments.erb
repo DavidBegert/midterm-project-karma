@@ -1,0 +1,5 @@
+<ul>
+<% @comments.each do |comment|%>
+  <li> <%= comment.user.username %>: <%=comment.content%>  </li>
+<% end %>
+</ul>
