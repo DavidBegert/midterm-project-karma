@@ -22,18 +22,37 @@ $(document).ready(function() {
 
   // Create a vote (praise)
   $('#deeds_container').on("click", ".praisebtn", function () {
-      var deed_id = this.dataset.deedId
+      var deedId = this.dataset.deedId
       var praisebtn = $(this)
-      $.post("/deeds/" + deed_id + "/praise", function(data) {
-        praisebtn.siblings(".praisebadge").text(data);
+      $.post("/deeds/" + deedId + "/praise", function(data) {
+        data = data.split(",")
+        var numPraises = data[0]
+        var warning = data[1]
+        if (warning == "success") {
+          praisebtn.siblings(".praisebadge").text(numPraises);
+        } else {
+          var warningBox = $('#vote-error')
+          warningBox.text(warning)
+          warningBox.show();
+        }
       });
   }); 
  
+  // Create a vote (shame)
   $('#deeds_container').on("click", ".shamebtn", function () {
       var deed_id = this.dataset.deedId
       var shamebtn = $(this)
       $.post("/deeds/" + deed_id + "/shame", function(data) {
-        shamebtn.siblings(".shamebadge").text(data);
+        data = data.split(",")
+        var numShames = data[0]
+        var warning = data[1]
+        if (warning == "success") {
+          shamebtn.siblings(".shamebadge").text(numShames);
+        } else {
+          var warningBox = $('#vote-error')
+          warningBox.text(warning)
+          warningBox.show();
+        }
       });
   }); 
 
@@ -86,5 +105,4 @@ $(document).ready(function() {
       }
     }); 
   }
-
 });

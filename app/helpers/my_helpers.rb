@@ -102,25 +102,39 @@ module MyHelpers
     deed.votes.where(value: -1).count
   end
  
-  # Add a praise vote for the deed assigning the authorship to the current user
-  def create_praise
-    @praise = Vote.create!(
+  # Check if errors and make a return to javascript
+  def state_return(num_votes, creation_success)
+    if creation_success 
+      "#{num_votes},success"
+    elsif current_user
+      "#{num_votes},Cannot undo this action"
+    else
+      "#{num_votes},Please Login"
+    end
+  end
+
+  def create_vote(value_vote)
+    Vote.create(
       deed_id: params[:id],
       user_id: session[:user_id],
-      value: 1
+      value: value_vote
     )
-    deed_praise_tally(Deed.find(params[:id]))
+  end
+
+
+  # Add a praise vote for the deed assigning the authorship to the current user
+  def create_praise
+    @vote = create_vote(1) 
+    num_votes = deed_praise_tally(Deed.find(params[:id]))
+    @vote.errors.count == 0 ? state_return(num_votes, true) : state_return(num_votes, false)
   end
 
  
   # Add a shame vote for the deed assigning the authorship to the current user
   def create_shame
-    @shame = Vote.create!(
-      deed_id: params[:id],
-      user_id: session[:user_id],
-      value: -1
-    )
-    deed_shame_tally(Deed.find(params[:id]))
+    @vote = create_vote(-1) 
+    num_votes = deed_praise_tally(Deed.find(params[:id]))
+    @vote.errors.count == 0 ? state_return(num_votes, true) : state_return(num_votes, false)
   end
 
   def get_worst_deed(user)
