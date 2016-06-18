@@ -1,6 +1,7 @@
 <div class="container">
   <div>
     <div class="jumbotron"><h1><%=@user.username %> </h1></div>
+    <br><br><br>
     <img src="<%= @user.image_url %>" class="profilePic profilePicLarge">
     <h4><%=@user.email %> </h4>
     <h4>Total Karma <%= user_karma_tally(@user) %> </h4>
