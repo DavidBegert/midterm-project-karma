@@ -14,9 +14,15 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="post.html">Login</a>
-                </li>
+                
+                  <button class="btn btn-link dropdown-toggle" style="color:white" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Login
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <%= get_login_dropdown_user_list %>
+                  </ul>
+                
                 <li>
                     <a href="contact.html">Signup</a>
                 </li>

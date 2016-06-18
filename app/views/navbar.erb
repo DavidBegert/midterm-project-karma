@@ -1,4 +1,4 @@
-<nav id="header-navbar" class="navbar navbar-default navbar-fixed-top">
+<nav id="header-navbar" class="navbar navbar-inverse navbar-fixed-top" style="background: rgba(0,0,0,0.8)">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -10,18 +10,22 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li <%= "class=\"active\"" if request.path_info == "/" %>><a href="/">Home</a></li>
+        <li <%= "class=\"active\"" if request.path_info == "/" %>>
+          <button type="button" class="btn btn-link navbar-btn" onclick="location.href='/';" value="Home">Home</button>
+        </li>
         <% if current_user %>
-          <li <%= "class=\"active\"" if request.path_info == "/users/#{current_user.id}" %>><a href="/users/<%= current_user.id %>"><%= current_user.username %> (<%= user_karma_tally(current_user) %>)</a></li>   
+          <li <%= "class=\"active\"" if request.path_info == "/users/#{current_user.id}" %>>
+            <button type="button" class="btn btn-link navbar-btn" onclick="location.href='/users/<%= current_user.id %>';" value="Go to Profile"><%= current_user.username %> (<%= user_karma_tally(current_user) %>)</button>
+          </li>   
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-          <li><a href="/users/logout">Logout<span class="sr-only">(current)</span></a></li>
+          <button type="button" class="btn btn-link navbar-btn" onclick="location.href='/users/logout';" value="Logout">Logout</button>
         <% else %>
           <li>
             <div class="dropdown navbar-btn">
-              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Login
                 <span class="caret"></span>
               </button>
@@ -31,7 +35,7 @@
             </div>
           </li>
           <li>
-            <button type="button" class="btn btn-default navbar-btn" onclick="location.href='/users/new';" value="Go to Sign Up">Sign Up</button>
+            <button type="button" class="btn btn-link navbar-btn" onclick="location.href='/users/new';" value="Go to Sign Up">Sign Up</button>
           </li>
         <% end %>
       </ul>
