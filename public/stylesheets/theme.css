@@ -1,12 +1,7 @@
-
 .jumbotron {
-  background-image: url(/img/background.jpeg);
   background-position: 0% 25%;
   background-size: cover;
   background-repeat: no-repeat;
-  color: white;
-  text-shadow: black 0.3em 0.3em 0.3em;
-  height: 650px;
 }
 
 #confession_error {
@@ -25,13 +20,8 @@
 .profilePic {
   object-fit: cover;
   border-radius: 50px;
-<<<<<<< HEAD
   width: 100px;
   height: 100px;
-=======
-  width: 65px;
-  height: 65px;
->>>>>>> change-navbar
 }
 
 .profilePicLarge {
@@ -230,4 +220,9 @@
 
 .navbar-up {
     top: -80px;
+}
+
+.intro-header {
+   background-image: url('/img/background.jpeg');
+   overflow: hidden;
 }
