@@ -101,6 +101,10 @@ module MyHelpers
   def deed_shame_tally(deed)
     deed.votes.where(value: -1).count
   end
+
+  def deed_comments_tally(deed)
+    deed.comments.count
+  end
  
   # Check if errors and make a return to javascript
   def state_return(num_votes, creation_stat)
@@ -215,6 +219,7 @@ module MyHelpers
       "shamebtn"
     end
   end
+
 
   DO_GOOD_UNELLA_QUOTES = ["SHAME.", "Only through confession and true repentance may your immortal soul be saved.", 
     "You're a horrible human beign.", 
