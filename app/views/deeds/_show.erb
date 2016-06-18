@@ -45,7 +45,7 @@
 <form  class="comment-holder" id="form-comment-<%=deed.id%>">
   <input type="text" data-deed-id= <%=deed.id%> id="input-<%=deed.id%>" name="content" class="form-control comment" rows="4" placeholder="Post a comment..."/>
 </form>
-<span class="comment_error">Your comment cannot be blank</span>
+<span id="comment_error-<%=deed.id%>">Your comment cannot be blank</span>
 <div class="comment-holder" id="comments-<%=deed.id%>" ></div>
 <hr>
 <br>

@@ -175,7 +175,9 @@ $(document).ready(function() {
   $("body").on("click", ".show-comments", function(event) {
     var deed_id = this.dataset.deedId;
     var comments_div = "#comments-"+String(deed_id)
+    var form = "#form-comment-"+String(deed_id);
       if ($(comments_div).html() == "") {
+        $(form).css("display", "block")
         $(comments_div).css("display", "block");
         $.get("/deeds/" + deed_id + "/comments", function(data) {
           $(comments_div).append(data);
@@ -183,42 +185,47 @@ $(document).ready(function() {
       } else { //if it has comments loaded
           if ($(comments_div).css('display') == 'block' ){
             $(comments_div).css('display', 'none');
+            $(form).css('display', 'none')
           } else {
+            $(form).css('display', 'block')
             $(comments_div).css('display', 'block');
           }
       } 
       event.preventDefault();
     });
-
-  //make comment form showup when button pressed
+ 
+  //make comment form showup when button pressed //ALSO SHOW THE COMMENTS
   $("body").on("click", ".btn-link", function(event) {
     var deed_id = this.dataset.deedId;
-    var selector = "#form-comment-"+String(deed_id)
-    if ($(selector).css('display') == 'block' ){
-      $(selector).css('display', 'none');
+    var comments_div = "#comments-"+String(deed_id);
+    var form = "#form-comment-"+String(deed_id);
+    if ($(form).css('display') == 'block' ){
+      $(form).css('display', 'none');
+      $(comments_div).css('display', 'none')
     } else {
-      $(selector).css('display', 'block');
+      $(form).css('display', 'block');
+      //need to load comments as well
+      $(comments_div).css('display', 'block');
+        if ($(comments_div).html() == "") {
+          $.get("/deeds/" + deed_id + "/comments", function(data) {
+            $(comments_div).append(data);
+          });
+        }
     }
   });
 
   //allow user to press enter to submit comment
   $('#deeds_container').on("keypress", ".form-control.comment", function (e) {     
     if (e.which == 13) {
-      console.log("WE IN BOY");
       deed_id = event.target.dataset.deedId;
-      console.log(deed_id);
       var text_area = $("#input-"+String(deed_id)).val().length
       var form_data = $("#form-comment-"+String(deed_id)).serialize()
       $("#input-"+String(deed_id)).val(""); 
       if (text_area == 0) {
-        $(".comment_error").css("display","block");
+        $("comment_error-"+String(deed_id)).css("display","block");
       } else { 
-          console.log(deed_id);
-          console.log(form_data);
           $.post("/deeds/"+String(deed_id)+"/comments", form_data, function(data) {
             $(".comment_error").css("display", "none");
-            console.log("WE MADE IT HAHAH")
-            console.log(data);
             $("#comments-"+String(deed_id)).prepend(data);
           });
       }
