@@ -1,40 +1,41 @@
-<div id="main-content" class="container">
-  <div class="jumbotron">
-    <div class="row">
-      <div class="col-md-3">
-        <h1>aTonr</h1>
-        <p>Share Confessions</p>
+<header class="intro-header" style="background-image: url('img/background.jpeg')">
+  <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="site-heading">
+              <h1>aTonr</h1>
+              <hr class="small">
+              <span class="subheading">Share Confessions and Repent</span>
+          </div>
       </div>
+  </div>
+</header>
+
+
+<div class="container" id="main-content">
+  <div class="row">
+    <div id="unella-quote" class="col-md-8">
+      <% if current_user %>
+        <% if user_karma_tally(current_user) < 0 %>
+        "<%= DO_GOOD_UNELLA_QUOTES.sample %>" 
+        <% elsif user_karma_tally(current_user) > 0 %>
+          "<%= DO_BAD_UNELLA_QUOTES.sample %>"
+        <% else %>
+          "Could you be more average?"
+        <% end %>
+      <% else %>
+        "Log in, my child"
+
+      <% end %>
+      <br/> <em> - Septa Unella </em>
+    </div>
+    <div class="col-md-3">
+      <img class="img-fluid" id="unella" src="/img/unella.jpg" />
     </div>
   </div>
-</div>
-  <%= erb :'modal' %>
+  <br>
 
-<br><br>
-<div class="container">
-<div class="row">
-  <div class="col-md-2">
-  </div>
-  <div id="unella-quote" class="col-md-5">
-    <% if current_user %>
-      <% if user_karma_tally(current_user) < 0 %>
-      "<%= DO_GOOD_UNELLA_QUOTES.sample %>"
-      <% elsif user_karma_tally(current_user) > 0 %>
-        "<%= DO_BAD_UNELLA_QUOTES.sample %>"
-      <% else %>
-        "Could you be more average?"
-      <% end %>
-    <% else %>
-      "Log in, my child"
+<%= erb :'modal' %>
 
-    <% end %>
-    <br/> <em> - Septa Unella </em>
-  </div>
-  <div class="col-md-3">
-    <img class="img-fluid" id="unella" src="/img/unella.jpg" />
-  </div>
-</div>
-</div>
 
 <% if current_user && user_karma_tally(current_user) <= -50 %>
 <div class="alert alert-danger">
@@ -52,28 +53,24 @@
 </div>
 <% end %>
 
-<br><br><br>
-<div class="container">
-<div class="row">
-  <div class="col-sm-1">
-    <button id="confession_submit" class="btn btn-default">Submit</button>  
+  <div class="row">
+    <div class="col-sm-1">
+      <button id="confession_submit" class="btn-sm btn-primary">Submit</button>  
+    </div>
+    <div class="col-sm-9">
+      <form class="form-horizontal" id="confession_form">
+        <input type="text" id="confession_summary" name="summary" class="form-control" rows="4" placeholder="What have you done, child?"/>
+        <span id="confession_error">Your confession cannot be blank</span>
+      </form>
+    </div>
   </div>
-  <div class="col-sm-10">
-    <form class="form-horizontal" id="confession_form">
-      <input type="text" id="confession_summary" name="summary" class="form-control" rows="4" placeholder="What have you done, child?"/>
-      <span id="confession_error">Your confession cannot be blank</span>
-    </form> <br>
-    <img src="/img/loader.gif" class="loading center-block hidden" id="loader-gif-confession"/>
-  </div>
-  </div>
-</div>
 
   <br><br><br>
   <!-- END OF FORM -->
-  <div id = deeds_container class="container">
+<div id = "deeds_container">
     <%= erb :'deeds/_pagination', locals: {all_details: true, list: Deed.all.limit(MAX_SHOW).offset(session[:pagination_spot]).order(id: :desc)} %>
-  </div>
+</div>
   <img class="loading center-block hidden" id="deeds-loading-gif" src="/img/loader.gif"/>
   <br>
-  <div id="footer" class="jumbotron hidden"><i><h2 class="text-center">-no more deeds-</h2></i></div>
+<div id="footer" class="jumbotron hidden"><i><h2 class="text-center">-no more deeds-</h2></i></div>
 </div>
