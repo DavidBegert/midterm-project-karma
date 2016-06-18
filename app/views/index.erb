@@ -10,12 +10,12 @@
 </div>
   <%= erb :'modal' %>
 
-<br><br><br><br>
+<br><br>
 <div class="container">
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-2">
   </div>
-  <div id="unella-quote" class="col-md-6">
+  <div id="unella-quote" class="col-md-5">
     <% if current_user %>
       <% if user_karma_tally(current_user) < 0 %>
       "<%= DO_GOOD_UNELLA_QUOTES.sample %>"
@@ -58,7 +58,7 @@
   <div class="col-sm-1">
     <button id="confession_submit" class="btn btn-default">Submit</button>  
   </div>
-  <div class="col-sm-8">
+  <div class="col-sm-10">
     <form class="form-horizontal" id="confession_form">
       <input type="text" id="confession_summary" name="summary" class="form-control" rows="4" placeholder="What have you done, child?"/>
       <span id="confession_error">Your confession cannot be blank</span>
