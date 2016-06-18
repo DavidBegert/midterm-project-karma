@@ -16,14 +16,13 @@
 }
 
 .profilePicLarge {
-  width:100px;
-  height:100px;
+  width:250px;
+  height:250px;
 }
 
 .loading {
   width:40px
 }
-
 
 .praisebtn, .shamebtn, .praisebtn-color, .shamebtn-color {
   outline: none;
@@ -187,4 +186,30 @@
 }
 .comment-holder {
   display: none;
+}
+
+.karma-status-text {
+  text-align: center;
+}
+
+.karma-status-text > h4 {
+  font-size: 180%;
+}
+
+.karma-num {
+  font-size: 380%;
+  font-weight: bold;
+}
+
+#total-karma-red {
+  color: #B82601;
+}
+
+#total-karma-blue {
+  color: #0B3C5D;
+}
+
+#num-votes {
+  font-size: 200%;
+  font-weight: bold;
 }
