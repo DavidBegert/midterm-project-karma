@@ -121,16 +121,20 @@ $(document).ready(function() {
 
   $("body").on("click", ".show-comments", function(event) {
     deed_id = this.dataset.deedId;
-    $.get("/deeds/" + deed_id + "/comments", function(data) {
-      if ($("#comments-"+String(deed_id)).css('display') == 'block' ){
-        $("#comments-"+String(deed_id)).css('display', 'none');
-      }
-      else {
-        $("#comments-"+String(deed_id)).css("display", "block");
-        $("#comments-"+String(deed_id)).append(data);
-      }
+    comments_div = "#comments-"+String(deed_id)
+      if ($(comments_div).html() == "") {
+        $(comments_div).css("display", "block");
+        $.get("/deeds/" + deed_id + "/comments", function(data) {
+          $(comments_div).append(data);
+        });
+      } else { //if it has comments loaded
+          if ($(comments_div).css('display') == 'block' ){
+            $(comments_div).css('display', 'none');
+          } else {
+            $(comments_div).css('display', 'block');
+          }
+      } 
+      event.preventDefault();
     });
-    event.preventDefault();
-  });
 
 });
