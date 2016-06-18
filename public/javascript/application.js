@@ -2,6 +2,8 @@ $(document).ready(function() {
   browser_path = window.location.pathname
   var pagination_ready = true;
   var pagination_load_more = true;
+  var lastScrollTop = $(this).scrollTop();
+  var navBarScrollDelta = 20
 
   // Only after the user has asked for posts does pagination work
   var user_pagination_ready = false;
@@ -151,8 +153,23 @@ $(document).ready(function() {
     });
   }
 
-  if (pagination_load_more) {
-    $(window).scroll(function () {
+  $(window).scroll(function () {
+    // Navbar
+    st = $(this).scrollTop();
+    // Make sure they scroll more than delta
+    if(Math.abs(lastScrollTop - st) > navBarScrollDelta) {
+      if (st < lastScrollTop) {
+        $("#header-navbar").removeClass("navbar-up")
+      } 
+      else {
+        $("#header-navbar").addClass("navbar-up")
+      }
+    }
+
+    lastScrollTop = st;
+
+    // Pagination
+    if (pagination_load_more) {
      if ($(window).scrollTop() >= $(document).height() - $(window).height() - 500) {
         if ( $('ol.astream > .loadCount:last > li').attr('id') == "noMoreActivities" ) {
           return false;
@@ -169,8 +186,8 @@ $(document).ready(function() {
           ajaxRequestPaginate(server_path, params, user_pagination_received)
         }
       }
-    }); 
-  }
+    }
+  }); 
 
   $("body").on("click", ".show-comments", function(event) {
     deed_id = this.dataset.deedId;

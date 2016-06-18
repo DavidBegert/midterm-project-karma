@@ -189,6 +189,10 @@
   display: none;
 }
 
+#header-navbar {
+  transition: top 0.4s ease-in-out;
+}
+
 .navbar-active {
   color:white !important;
 }
@@ -199,4 +203,8 @@
 
 .navbar-transparent {
   background: rgba(0,0,0,0.8);
+}
+
+.navbar-up {
+    top: -80px;
 }
