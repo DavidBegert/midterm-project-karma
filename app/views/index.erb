@@ -2,32 +2,42 @@
   <div class="jumbotron">
     <div class="row">
       <div class="col-md-3">
-        <h1>Atonr</h1>
+        <h1>aTonr</h1>
         <p>Share Confessions</p>
-      </div>
-
-      <div id="unella-quote" class="col-md-6">
-        <% if current_user %>
-          <% if user_karma_tally(current_user) < 0 %>
-          "<%= DO_GOOD_UNELLA_QUOTES.sample %>" 
-          <% elsif user_karma_tally(current_user) > 0 %>
-            "<%= DO_BAD_UNELLA_QUOTES.sample %>"
-          <% else %>
-            "Could you be more average?"
-          <% end %>
-        <% else %>
-          "Log in, my child"
-
-        <% end %>
-        <br/> <em> - Septa Unella </em>
-      </div>
-
-      <div class="col-md-3">
-        <img class="img-fluid" id="unella" src="/img/unella.jpg" />
       </div>
     </div>
   </div>
+</div>
   <%= erb :'modal' %>
+
+<br><br><br><br>
+<div class="container">
+<div class="row">
+  <div class="col-md-3">
+  </div>
+  <div id="unella-quote" class="col-md-6">
+    <% if current_user %>
+      <% if user_karma_tally(current_user) < 0 %>
+      "<%= DO_GOOD_UNELLA_QUOTES.sample %>"
+      <% elsif user_karma_tally(current_user) > 0 %>
+        "<%= DO_BAD_UNELLA_QUOTES.sample %>"
+      <% else %>
+        "Could you be more average?"
+      <% end %>
+    <% else %>
+      "Log in, my child"
+
+    <% end %>
+    <br/> <em> - Septa Unella </em>
+  </div>
+  <div class="col-md-3">
+    <img class="img-fluid" id="unella" src="/img/unella.jpg" />
+  </div>
+</div>
+</div>
+
+
+
 
 <% if current_user && user_karma_tally(current_user) <= -7 %>
 <div class="alert alert-danger">
@@ -45,6 +55,8 @@
 </div>
 <% end %>
 
+<br><br><br>
+<div class="container">
 <div class="row">
   <div class="col-sm-1">
     <button id="confession_submit" class="btn btn-default">Submit</button>  
@@ -56,6 +68,7 @@
     </form>
   </div>
   </div>
+</div>
 
   <br><br><br>
   <!-- END OF FORM -->
