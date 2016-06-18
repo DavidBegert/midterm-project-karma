@@ -222,8 +222,9 @@ $(document).ready(function() {
       var form_data = $("#form-comment-"+String(deed_id)).serialize()
       $("#input-"+String(deed_id)).val(""); 
       if (text_area == 0) {
-        $("comment_error-"+String(deed_id)).css("display","block");
+        $("#comment_error-"+String(deed_id)).css("display","block");
       } else { 
+          $("#comment_error-"+String(deed_id)).css("display","none");
           $.post("/deeds/"+String(deed_id)+"/comments", form_data, function(data) {
             $(".comment_error").css("display", "none");
             $("#comments-"+String(deed_id)).prepend(data);
