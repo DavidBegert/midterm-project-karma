@@ -17,8 +17,10 @@ $(document).ready(function() {
       if (text_area == 0) {
         $("#confession_error").css("display","block")
       } else { 
+          $("#loader-gif-confession").removeClass("hidden")
           $.post("/deeds", form_data, function(data) {
             $("#confession_error").css("display", "none")
+            $("#loader-gif-confession").addClass("hidden")
             $("#deeds_container").prepend(data)
           });
       }
@@ -235,7 +237,7 @@ $(document).ready(function() {
     }
   });
 
-  //allow user to press enter to submit comment
+  //allow user to press enter to submit comment //TO DO... increase the comment # by 1
   $('#deeds_container').on("keypress", ".form-control.comment", function (e) {     
     if (e.which == 13) {
       deed_id = event.target.dataset.deedId;

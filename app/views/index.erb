@@ -37,7 +37,7 @@
 <%= erb :'modal' %>
 
 
-<% if current_user && user_karma_tally(current_user) <= 50 %>
+<% if current_user && user_karma_tally(current_user) <= -50 %>
 <div class="alert alert-danger">
  <a href="#" id="karma-alert-closer" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <div class="row">
