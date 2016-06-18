@@ -220,16 +220,23 @@ $(document).ready(function() {
     }
   });
 
-  //allow user to press enter to submit comment //TO DO... increase the comment # by 1
+  //allow user to press enter to submit comment //TO DO... increase the comment # by 1 as soon as enter is pressed
   $('#deeds_container').on("keypress", ".form-control.comment", function (e) {     
     if (e.which == 13) {
-      deed_id = event.target.dataset.deedId;
+      var deed_id = event.target.dataset.deedId;
       var text_area = $("#input-"+String(deed_id)).val().length
       var form_data = $("#form-comment-"+String(deed_id)).serialize()
       $("#input-"+String(deed_id)).val(""); 
       if (text_area == 0) {
         $("#comment_error-"+String(deed_id)).css("display","block");
       } else { 
+          //update comment #
+          var comment_tally_selector = "#comment-tally-" + String(deed_id);
+          var num_comments = $(comment_tally_selector).data("num-comments");
+          console.log(num_comments)
+          num_comments += 1;
+          console.log("HEY THERE DAVE LOL")
+          $(comment_tally_selector).html(num_comments);
           $("#comment_error-"+String(deed_id)).css("display","none");
           $("#loader-gif-"+String(deed_id)).removeClass('hidden')
           $.post("/deeds/"+String(deed_id)+"/comments", form_data, function(data) {
