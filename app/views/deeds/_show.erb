@@ -33,12 +33,17 @@
         <i><%= datetime_to_modern(deed.created_at) %></i> by <a href="/users/<%= deed.user.id %>"><%= deed.user.username  %></a>
         <br><br>
         <a href="#" data-deed-id= <%=deed.id%> class="show-comments"><%= deed_comments_tally(deed) %> Comments </a>
+        <button type="button" id="post-comment-<%=deed.id%>" data-deed-id = <%=deed.id%> class="btn-link"> Post a Comment </button>
       </div>
     </div>
   </div>
 </div>
 
 <br>
+<form  class="comment-holder" id="form-comment-<%=deed.id%>">
+  <input type="text" data-deed-id= <%=deed.id%> id="input-<%=deed.id%>" name="content" class="form-control comment" rows="4" placeholder="Post a comment..."/>
+</form>
+<span class="comment_error">Your comment cannot be blank</span>
 <div class="comment-holder" id="comments-<%=deed.id%>" ></div>
 <hr>
 <br>

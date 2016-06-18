@@ -33,3 +33,16 @@ get '/deeds/:id/comments' do |id|
   @comments = Deed.find(id).comments
   erb :'../views/deeds/_comments', layout: false, locals: {deed_id: id}
 end
+
+post '/deeds/:id/comments' do |id|
+  comment = Comment.new(
+    deed_id: id,
+    user_id: current_user.id,
+    content: params[:content]
+    )
+  if comment.save
+    erb :'../views/deeds/_new_comment', layout: false, locals: {comment: comment}
+  else
+    redirect '/'
+  end
+end

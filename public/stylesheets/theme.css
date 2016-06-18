@@ -6,6 +6,10 @@ body {
   color: red;
   display: none;
 }
+.comment_error {
+  color: red;
+  display: none;
+}
 
 .width100 {
   width: 100%;

@@ -7,7 +7,7 @@ $(document).ready(function() {
   var user_pagination_ready = false;
 
 //allow user to press enter to submit new deed
-  $('input').keypress(function (e) {     
+  $('#confession_summary').keypress(function (e) {     
     if (e.which == 13) {
       var text_area = $("#confession_summary").val().length
       var form_data = $("#confession_form").serialize()
@@ -170,8 +170,8 @@ $(document).ready(function() {
 
 
   $("body").on("click", ".show-comments", function(event) {
-    deed_id = this.dataset.deedId;
-    comments_div = "#comments-"+String(deed_id)
+    var deed_id = this.dataset.deedId;
+    var comments_div = "#comments-"+String(deed_id)
       if ($(comments_div).html() == "") {
         $(comments_div).css("display", "block");
         $.get("/deeds/" + deed_id + "/comments", function(data) {
@@ -186,5 +186,41 @@ $(document).ready(function() {
       } 
       event.preventDefault();
     });
+
+  //make comment form showup when button pressed
+  $("body").on("click", ".btn-link", function(event) {
+    var deed_id = this.dataset.deedId;
+    var selector = "#form-comment-"+String(deed_id)
+    if ($(selector).css('display') == 'block' ){
+      $(selector).css('display', 'none');
+    } else {
+      $(selector).css('display', 'block');
+    }
+  });
+
+  //allow user to press enter to submit comment
+  $('#deeds_container').on("keypress", ".form-control.comment", function (e) {     
+    if (e.which == 13) {
+      console.log("WE IN BOY");
+      deed_id = event.target.dataset.deedId;
+      console.log(deed_id);
+      var text_area = $("#input-"+String(deed_id)).val().length
+      var form_data = $("#form-comment-"+String(deed_id)).serialize()
+      $("#input-"+String(deed_id)).val(""); 
+      if (text_area == 0) {
+        $(".comment_error").css("display","block");
+      } else { 
+          console.log(deed_id);
+          console.log(form_data);
+          $.post("/deeds/"+String(deed_id)+"/comments", form_data, function(data) {
+            $(".comment_error").css("display", "none");
+            console.log("WE MADE IT HAHAH")
+            console.log(data);
+            $("#comments-"+String(deed_id)).prepend(data);
+          });
+      }
+      return false;
+    }
+  });
 
 });
