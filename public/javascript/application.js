@@ -58,9 +58,9 @@ $(document).ready(function() {
  
   // Create a vote (shame)
   $('#deeds_container').on("click", ".shamebtn", function () {
-      var deed_id = this.dataset.deedId;
+      var deedId = this.dataset.deedId;
       var shamebtn = $(this);
-      $.post("/deeds/" + deed_id + "/shame", function(data) {
+      $.post("/deeds/" + deedId + "/shame", function(data) {
         data = data.split(",");
         var numShames = data[0];
         var warning = data[1];
@@ -68,7 +68,15 @@ $(document).ready(function() {
           shamebtn.siblings(".shamebadge").text(numShames);
           shamebtn.addClass("shamebtn-color");
         } else {
+          if (warning == "Remove praise") {
+          var praisebtn = $('.praisebtn[data-deed-id="' + deedId + '"]');
+          praisebtn.removeClass("praisebtn-color");
+          praisebtn.siblings(".praisebadge").text(data[3]);
+          shamebtn.siblings(".shamebadge").text(numShames);
+          shamebtn.addClass("shamebtn-color");
+          } else {
           showFlashMessage(warning);
+          }
         }
       });
   }); 

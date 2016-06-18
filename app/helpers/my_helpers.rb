@@ -107,7 +107,7 @@ module MyHelpers
   end
  
   # Check if errors and make a return to javascript
-  def state_return(num_votes, creation_stat)
+  def state_return(num_votes, creation_stat, extra = 0)
     case creation_stat
     when 0
       "#{num_votes},Cannot undo this action,not"
@@ -120,7 +120,7 @@ module MyHelpers
     when 4
       "#{num_votes},Deed already evaluated,not"
     when 5
-      "#{num_votes},Remove praise to put a shame on this deed,not"
+      "#{num_votes},Remove praise,not,#{extra}"
     when 6
       "#{num_votes},Cannot evaluate your own deed,not"
     end
@@ -178,18 +178,22 @@ module MyHelpers
  
   # Add a shame vote for the deed assigning the authorship to the current user
   def create_shame
+    deed = Deed.find(params[:id])
     if my_deed?
-      num_votes = deed_shame_tally(Deed.find(params[:id]))
+      num_votes = deed_shame_tally(deed)
       state_return(num_votes, 6) 
     elsif praised?
-      num_votes = deed_shame_tally(Deed.find(params[:id]))
-      state_return(num_votes, 5) 
+      get_praise.destroy
+      num_praise = deed_praise_tally(deed)
+      @vote = create_vote(-1) 
+      num_shame = deed_shame_tally(deed)
+      @vote.errors.count == 0 ? state_return(num_shame, 5, num_praise) : state_return(num_shame, 0)
     elsif !current_user
-      num_votes = deed_shame_tally(Deed.find(params[:id]))
+      num_votes = deed_shame_tally(deed)
       state_return(num_votes, 3) 
     else
       @vote = create_vote(-1) 
-      num_votes = deed_shame_tally(Deed.find(params[:id]))
+      num_votes = deed_shame_tally(deed)
       @vote.errors.count == 0 ? state_return(num_votes, 1) : state_return(num_votes, 0)
     end
   end
