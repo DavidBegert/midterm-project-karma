@@ -23,3 +23,10 @@ matt_deed_4.votes.create!(value: 1, user_id: jul.id)
 david_deed_1.votes.create!(value: -1, user_id: matt.id)
 
 jul_deed_1.votes.create!(value: 1, user_id: david.id)
+
+# Add comments 
+
+matt_deed_1.comments.create!(content: "Really special post, Matt", user_id: david.id)
+matt_deed_1.comments.create!(content: "Super good bro", user_id: jul.id)
+matt_deed_1.comments.create!(content: "You suck, reply to me", user_id: david.id)
+matt_deed_2.comments.create!(content: "EWWWWWWW matt come on", user_id: jul.id)

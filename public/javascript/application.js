@@ -6,7 +6,8 @@ $(document).ready(function() {
   // Only after the user has asked for posts does pagination work
   var user_pagination_ready = false;
 
-  $('input').keypress(function (e) {     //theres gotta be a way to connect this and the one below it
+//allow user to press enter to submit new deed
+  $('input').keypress(function (e) {     
     if (e.which == 13) {
       var text_area = $("#confession_summary").val().length
       var form_data = $("#confession_form").serialize()
@@ -165,4 +166,25 @@ $(document).ready(function() {
       }
     }); 
   }
+
+
+
+  $("body").on("click", ".show-comments", function(event) {
+    deed_id = this.dataset.deedId;
+    comments_div = "#comments-"+String(deed_id)
+      if ($(comments_div).html() == "") {
+        $(comments_div).css("display", "block");
+        $.get("/deeds/" + deed_id + "/comments", function(data) {
+          $(comments_div).append(data);
+        });
+      } else { //if it has comments loaded
+          if ($(comments_div).css('display') == 'block' ){
+            $(comments_div).css('display', 'none');
+          } else {
+            $(comments_div).css('display', 'block');
+          }
+      } 
+      event.preventDefault();
+    });
+
 });
