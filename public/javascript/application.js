@@ -214,7 +214,6 @@ $(document).ready(function() {
             $(comments_div).css('display', 'block');
           }
       } 
-      event.preventDefault();
     });
  
   //make comment form showup when button pressed //ALSO SHOW THE COMMENTS

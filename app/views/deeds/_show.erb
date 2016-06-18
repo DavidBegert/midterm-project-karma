@@ -35,7 +35,7 @@
         <br><br>
         <i><%= datetime_to_modern(deed.created_at) %></i> by <a href="/users/<%= deed.user.id %>"><%= deed.user.username  %></a>
         <br><br>
-        <a href="#" data-deed-id= <%=deed.id%> class="show-comments"> <span id="comment-tally-<%=deed.id%>"><%=num_comments%></span> Comments </a>
+        <button type="button" class="btn-link" data-deed-id= <%=deed.id%> class="show-comments"> <span id="comment-tally-<%=deed.id%>"><%=num_comments%></span> Comments </button>
         <button type="button" id="post-comment-<%=deed.id%>" data-deed-id = <%=deed.id%> class="btn-link"> Post a Comment </button>
       </div>
     </div>
