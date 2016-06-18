@@ -248,12 +248,10 @@ $(document).ready(function() {
         $("#comment_error-"+String(deed_id)).css("display","block");
       } else { 
           //update comment #
-          var comment_tally_selector = "#comment-tally-" + String(deed_id);
-          var num_comments = $(comment_tally_selector).data("num-comments");
-          console.log(num_comments)
+          var comment_tally_element = document.getElementById("comment-tally-"+String(deed_id));
+          var num_comments = parseInt(comment_tally_element.innerHTML);
           num_comments += 1;
-          console.log("HEY THERE DAVE LOL")
-          $(comment_tally_selector).html(num_comments);
+          comment_tally_element.innerHTML = num_comments;
           $("#comment_error-"+String(deed_id)).css("display","none");
           $("#loader-gif-"+String(deed_id)).removeClass('hidden')
           $.post("/deeds/"+String(deed_id)+"/comments", form_data, function(data) {
