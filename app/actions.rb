@@ -14,6 +14,10 @@ get '/' do
   erb :index
 end
 
+get '/donate' do
+  erb :donate
+end
+
 require_relative './routes/deed_routes'
 require_relative './routes/user_routes'
 
