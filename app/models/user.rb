@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true, presence: true, format: { with: /\A.+@.+\Z/, message: "invalid email"}
   validates :username, uniqueness: true, presence: true
-  validates :image_url, presence: true, format: { with: /\Ahttp:\/\/.+\.(jpg|JPG|png|PNG)\Z/, message: "invalid url" }
+  validates :image_url, presence: true, format: { with: /\A.+\.(jpg|JPG|png|PNG|jpeg|JPEG)\Z/, message: "invalid url" }
   validates :password_hash, presence: true
 
   def password

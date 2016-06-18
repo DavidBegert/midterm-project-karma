@@ -7,8 +7,7 @@ get '/users/new' do
 end
 # User is signing in.
 post '/users/new' do
-  create_user_signup(params)
-
+  create_user_signup
 end
 
 get '/login' do
