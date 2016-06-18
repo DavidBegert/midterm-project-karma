@@ -1,4 +1,4 @@
-<div class="container">
+<div id="main-content" class="container">
   <div class="jumbotron">
     <div class="row">
       <div class="col-md-3">
@@ -29,7 +29,21 @@
   </div>
   <%= erb :'warnings' %>
 
-<!-- START OF FORM, may need to move to another file -->
+<% if user_karma_tally(current_user) <= -7 %>
+<div class="alert alert-danger">
+ <a href="#" id="karma-alert-closer" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 id="unella-quote" class="center-block text-center">Your karma seems awfully low, sinner. You my atone by donating to us in this convenient link.</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-offset-5 col-md-2">
+      <button class="btn-lg btn-primary">ATONE</button>
+    </div>
+  </div>
+</div>
+<% end %>
 
 <div class="row">
   <div class="col-sm-1">
