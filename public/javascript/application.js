@@ -177,9 +177,11 @@ $(document).ready(function() {
     var comments_div = "#comments-"+String(deed_id)
     var form = "#form-comment-"+String(deed_id);
       if ($(comments_div).html() == "") {
+        $("#loader-gif-"+String(deed_id)).removeClass('hidden')
         $(form).css("display", "block")
         $(comments_div).css("display", "block");
         $.get("/deeds/" + deed_id + "/comments", function(data) {
+           $("#loader-gif-"+String(deed_id)).addClass('hidden')
           $(comments_div).append(data);
         });
       } else { //if it has comments loaded
@@ -207,7 +209,9 @@ $(document).ready(function() {
       //need to load comments as well
       $(comments_div).css('display', 'block');
         if ($(comments_div).html() == "") {
+           $("#loader-gif-"+String(deed_id)).removeClass('hidden')
           $.get("/deeds/" + deed_id + "/comments", function(data) {
+             $("#loader-gif-"+String(deed_id)).addClass('hidden')
             $(comments_div).append(data);
           });
         }
@@ -225,8 +229,10 @@ $(document).ready(function() {
         $("#comment_error-"+String(deed_id)).css("display","block");
       } else { 
           $("#comment_error-"+String(deed_id)).css("display","none");
+          $("#loader-gif-"+String(deed_id)).removeClass('hidden')
           $.post("/deeds/"+String(deed_id)+"/comments", form_data, function(data) {
             $(".comment_error").css("display", "none");
+            $("#loader-gif-"+String(deed_id)).addClass('hidden');
             $("#comments-"+String(deed_id)).prepend(data);
           });
       }
