@@ -188,3 +188,11 @@
 .comment-holder {
   display: none;
 }
+
+.navbar-active {
+  color:white !important;
+}
+
+.navbar-transparent {
+  background: rgba(0,0,0,0.8);
+}

@@ -1,4 +1,4 @@
-<nav id="header-navbar" class="navbar navbar-inverse navbar-fixed-top" style="background: rgba(0,0,0,0.8)">
+<nav id="header-navbar" class="navbar navbar-inverse navbar-fixed-top navbar-transparent">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -10,18 +10,15 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li <%= "class=\"active\"" if request.path_info == "/" %>>
-          <button type="button" class="btn btn-link navbar-btn" onclick="location.href='/';" value="Home">Home</button>
-        </li>
+        <button class="btn btn-link navbar-btn <%= 'navbar-active' if " onclick="location.href='/';">Home</button>
         <% if current_user %>
-          <li <%= "class=\"active\"" if request.path_info == "/users/#{current_user.id}" %>>
-            <button type="button" class="btn btn-link navbar-btn" onclick="location.href='/users/<%= current_user.id %>';" value="Go to Profile"><%= current_user.username %> (<%= user_karma_tally(current_user) %>)</button>
-          </li>   
+          <button class="btn btn-link" onclick="location.href='/users/<%= current_user.id %>';"><%= current_user.username %> (<%= user_karma_tally(current_user) %>)
+          </button>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-          <button type="button" class="btn btn-link navbar-btn" onclick="location.href='/users/logout';" value="Logout">Logout</button>
+          <button class="btn btn-link navbar-btn" onclick="location.href='/users/logout';">Logout</button>
         <% else %>
           <li>
             <div class="dropdown navbar-btn">
@@ -29,14 +26,12 @@
                 Login
                 <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <ul class="dropdown-menu navbar-inverse navbar-transparent" aria-labelledby="dropdownMenu1">
                 <%= get_login_dropdown_user_list %>
               </ul>
             </div>
           </li>
-          <li>
-            <button type="button" class="btn btn-link navbar-btn" onclick="location.href='/users/new';" value="Go to Sign Up">Sign Up</button>
-          </li>
+          <button class="btn btn-link navbar-btn" onclick="location.href='/users/new';">Sign Up</button>
         <% end %>
       </ul>
     </div>
