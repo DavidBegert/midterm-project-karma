@@ -25,24 +25,18 @@
 .profilePic {
   object-fit: cover;
   border-radius: 50px;
-<<<<<<< HEAD
   width: 100px;
   height: 100px;
-=======
-  width: 65px;
-  height: 65px;
->>>>>>> change-navbar
 }
 
 .profilePicLarge {
-  width:100px;
-  height:100px;
+  width:250px;
+  height:250px;
 }
 
 .loading {
   width:40px
 }
-
 
 .praisebtn, .shamebtn, .praisebtn-color, .shamebtn-color {
   outline: none;
@@ -230,4 +224,30 @@
 
 .navbar-up {
     top: -80px;
+}
+
+.karma-status-text {
+  text-align: center;
+}
+
+.karma-status-text > h4 {
+  font-size: 180%;
+}
+
+.karma-num {
+  font-size: 380%;
+  font-weight: bold;
+}
+
+#total-karma-red {
+  color: #B82601;
+}
+
+#total-karma-blue {
+  color: #0B3C5D;
+}
+
+#num-votes {
+  font-size: 200%;
+  font-weight: bold;
 }
