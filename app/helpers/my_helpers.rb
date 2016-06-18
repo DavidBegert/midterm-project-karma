@@ -52,7 +52,7 @@ module MyHelpers
     html = "<form method=\"post\" action=\"/users/signin\">"
     User.all.each do |user|
       html << "<li>"
-      html << "<input type=\"submit\" class=\"width100 btn btn-default\" name=\"username\" value=\"#{user.username}\"/>"
+      html << "<input type=\"submit\" class=\"width100 btn btn-link\" name=\"username\" value=\"#{user.username}\"/>"
       html << "</li>"
     end
     html << "</form>"
