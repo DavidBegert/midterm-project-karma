@@ -1,8 +1,8 @@
-<header class="intro-header" style="background-image: url('/img/knife.jpg')">
+<header class="intro-header profile-img"> 
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
+                <div class="site-heading header-text-blur">
                     <h1><%= @user.username %></h1>
                 </div>
             </div>
@@ -13,9 +13,9 @@
 
 <div class="container">
   <div class="row" >
-    <div class="col-md-3">
+    <div class="col-md-3 text-center">
       <img src="<%= @user.image_url %>" class="profilePic profilePicLarge">
-    <h4><%=@user.email %> </h4>
+      <h4><%=@user.email %> </h4>
     </div>
     <div class="col-md-8"> 
       <div class="row">
@@ -58,7 +58,7 @@
     <% end %>
   </div>
 
-  <button class="btn btn-default center-block" id="users-profile-show-all" data-user-id="<%= @user.id %>">
+  <button class="btn btn-primary center-block" id="users-profile-show-all" data-user-id="<%= @user.id %>">
     Show all of <%= @user.username %>'s posts
     <br>
     <span class="glyphicon glyphicon-triangle-bottom"></span>

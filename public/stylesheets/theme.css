@@ -65,7 +65,6 @@
   background-size: contain;
 }
 
-
 .praisebadge{
   position:absolute;
   top:0;
@@ -218,7 +217,7 @@
 }
 
 .navbar-up {
-    top: -80px;
+  top: -80px;
 }
 
 .karma-status-text {
@@ -249,10 +248,18 @@
 }
 
 .intro-header {
-   background-image: url('/img/background.jpeg');
-   overflow: hidden;
+ background-image: url('/img/background.jpeg');
+ overflow: hidden;
+}
+
+.profile-img {
+ background-image: url('/img/knife.jpg');
 }
 
 .header-text-blur {
   text-shadow: 0.1em 0.1em 0.4em black;
+}
+
+#email-profile {
+  text-align: center;
 }
