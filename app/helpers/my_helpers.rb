@@ -220,6 +220,11 @@ module MyHelpers
     end
   end
 
+  # Choose id (color) of the display of the number accordingly to the total karma
+  def total_karma_id(user)
+    user_karma_tally(user) >= 0 ? "total-karma-blue" : "total-karma-red"
+  end
+
 
   DO_GOOD_UNELLA_QUOTES = ["SHAME.", "Only through confession and true repentance may your immortal soul be saved.", 
     "You're a horrible human beign.", 
