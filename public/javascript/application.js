@@ -112,8 +112,10 @@ $(document).ready(function() {
     if (text_area == 0) {
         $("#confession_error").css("display","block")
     } else { 
+          $("#loader-gif-confession").removeClass("hidden")
           $.post("/deeds", form_data, function(data) {
             $("#confession_error").css("display", "none")
+            $("#loader-gif-confession").addClass("hidden")
             $("#deeds_container").prepend(data)
           });
     }
