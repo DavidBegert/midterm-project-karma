@@ -157,14 +157,16 @@ $(document).ready(function() {
 
   $(window).scroll(function () {
     // Navbar
-    st = $(this).scrollTop();
+    var st = $(this).scrollTop();
+    var navbar = $("#header-navbar")
+
     // Make sure they scroll more than delta
-    if(Math.abs(lastScrollTop - st) > navBarScrollDelta) {
-      if (st < lastScrollTop) {
-        $("#header-navbar").removeClass("navbar-up")
+    if(st <= navbar.height() || Math.abs(lastScrollTop - st) > navBarScrollDelta) {
+      if (st <= navbar.height() || st < lastScrollTop) {
+        navbar.removeClass("navbar-up")
       } 
       else {
-        $("#header-navbar").addClass("navbar-up")
+        navbar.addClass("navbar-up")
       }
     }
 
