@@ -56,7 +56,7 @@ deed = dv.deeds.create!(summary: "I baked a pie in the kitchen and did not clean
   deed.votes.create!(value: -1, user: david)
   deed.votes.create!(value: -1, user: don)
 
-deed = don.deeds.create!(summary: "I promise free beer on Fridays but never deliver.")
+deed = don.deeds.create!(summary: "I promise free beer on Fridays but never actually deliver.")
   deed.votes.create!(value: -1, user: matt)
   deed.votes.create!(value: -1, user: monica)
   deed.votes.create!(value: -1, user: david)
@@ -64,7 +64,7 @@ deed = don.deeds.create!(summary: "I promise free beer on Fridays but never deli
   deed.votes.create!(value: -1, user: ju)
   deed.votes.create!(value: -1, user: james)
 
-deed = james.deeds.create!(summary: "I made a free candy machine for LHL using my 3D printer!")
+deed = james.deeds.create!(summary: "I made a free candy machine for lighthouse labs using my 3D printer!")
   deed.votes.create!(value: 1, user: matt)
   deed.votes.create!(value: 1, user: ju)
   deed.votes.create!(value: 1, user: don)
@@ -78,12 +78,41 @@ deed = matt.deeds.create!(summary: "I purposely make horrible merge conflicts wi
   deed.votes.create!(value: -1, user: don)
   deed.votes.create!(value: -1, user: dv)
 
-deed = dv.deeds.create!(summary: "When students ask me questions I sometimes gives answers that are ginormous lies and it's hilarious because they believe me.")
+deed = dv.deeds.create!(summary: "Sometimes when students ask me questions, I make a bunch of shit up and it's hilarious because they believe me.")
   deed.votes.create!(value: 1, user: james)
   deed.votes.create!(value: -1, user: monica)
   deed.votes.create!(value: 1, user: don)
   deed.votes.create!(value: -1, user: david)
   deed.votes.create!(value: -1, user: ju)
+
+deed = monica.deeds.create!(summary: "I killed a man!")
+  deed.votes.create!(value: -1, user: matt)
+  deed.votes.create!(value: -1, user: don)
+  deed.votes.create!(value: -1, user: david)
+  deed.votes.create!(value: -1, user: dv)
+  deed.votes.create!(value: -1, user: ju)
+  deed.votes.create!(value: -1, user: james)
+
+deed = david.deeds.create!(summary: "I leave the toilet seat down when I pee.")
+  deed.votes.create!(value: -1, user: matt)
+  deed.votes.create!(value: -1, user: don)
+  deed.votes.create!(value: -1, user: monica)
+  deed.votes.create!(value: -1, user: dv)
+  deed.votes.create!(value: -1, user: ju)
+  deed.votes.create!(value: -1, user: james)
+
+deed = matt.deeds.create!(summary: "Pretty much none of my code is my own, I actually just steal 99% of it from stackoverflow")
+  deed.votes.create!(value: 1, user: james)
+  deed.votes.create!(value: 1, user: monica)
+
+deed = matt.deeds.create!(summary: "I set up a wifi hotspot next to a Starbucks with the name 'Free Starbucks Wifi' but set a password")
+  deed.votes.create!(value: 1, user: james)
+  deed.votes.create!(value: 1, user: monica)
+  deed.votes.create!(value: 1, user: dv)
+  deed.votes.create!(value: -1, user: don)
+
+  
+
 
 
 # Add comments 
