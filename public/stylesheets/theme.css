@@ -252,3 +252,7 @@
    background-image: url('/img/background.jpeg');
    overflow: hidden;
 }
+
+.header-text-blur {
+  text-shadow: 0.1em 0.1em 0.4em black;
+}
