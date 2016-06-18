@@ -232,6 +232,7 @@
 .karma-num {
   font-size: 380%;
   font-weight: bold;
+  text-align: center;
 }
 
 #total-karma-red {

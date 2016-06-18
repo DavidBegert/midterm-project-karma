@@ -17,32 +17,34 @@
       <img src="<%= @user.image_url %>" class="profilePic profilePicLarge">
     <h4><%=@user.email %> </h4>
     </div>
-    <div class="row">
-      <div class="col-md-2 karma-status-text"> 
-        <h4> Total Karma </h4> 
+    <div class="col-md-8"> 
+      <div class="row">
+        <div class="col-md-3 karma-status-text"> 
+          <h4> Total Karma </h4> 
+        </div>
+        <div class="col-md-3 karma-status-text"> 
+          <h4> Praises </h4> 
+        </div>
+        <div class="col-md-3 karma-status-text"> 
+          <h4> Shames </h4> 
+        </div>
+        <div class="col-md-3 karma-status-text"> 
+          <h4> Total Deeds</h4> 
+        </div>
       </div>
-      <div class="col-md-2 karma-status-text"> 
-        <h4> Praises </h4> 
-      </div>
-      <div class="col-md-2 karma-status-text"> 
-        <h4> Shames </h4> 
-      </div>
-      <div class="col-md-2 karma-status-text"> 
-        <h4> Total Deeds</h4> 
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 karma-status-text"> 
-        <p class="karma-num"><%= user_karma_tally(@user) %> </p>
-      </div>
-      <div class="col-md-2 karma-status-text"> 
-        <p class="karma-num"><%= user_praise_tally(@user) %></p>
-      </div>
-      <div class="col-md-2 karma-status-text"> 
-        <p class="karma-num"><%= user_shame_tally(@user) %> </p>
-      </div>
-      <div class="col-md-2 karma-status-text"> 
-        <p class="karma-num"><%= @user.total_deeds %> </p>
+      <div class="row">
+        <div class="col-md-3"> 
+          <p class="karma-num"><%= user_karma_tally(@user) %> </p>
+        </div>
+        <div class="col-md-3"> 
+          <p class="karma-num"><%= user_praise_tally(@user) %></p>
+        </div>
+        <div class="col-md-3"> 
+          <p class="karma-num"><%= user_shame_tally(@user) %> </p>
+        </div>
+        <div class="col-md-3"> 
+          <p class="karma-num"><%= @user.total_deeds %> </p>
+        </div>
       </div>
     </div>
   </div>
