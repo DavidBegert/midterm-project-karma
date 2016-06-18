@@ -28,3 +28,8 @@ get '/deeds/next' do
     "end-pagination"
   end
 end
+
+get '/deeds/:id/comments' do |id|
+  @comments = Deed.find(id).comments
+  erb :'../views/deeds/_comments', layout: false, locals: {deed_id: id}
+end
