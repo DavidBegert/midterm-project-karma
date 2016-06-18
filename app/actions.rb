@@ -18,6 +18,10 @@ get '/donate' do
   erb :donate
 end
 
+post '/donate' do
+  puts params.to_s
+end
+
 require_relative './routes/deed_routes'
 require_relative './routes/user_routes'
 
