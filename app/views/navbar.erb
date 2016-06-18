@@ -10,19 +10,19 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <button class="btn btn-link navbar-btn <%= 'navbar-active' if " onclick="location.href='/';">Home</button>
+        <button class="btn btn-link navbar-btn navbar-theme <%= ' navbar-active' if request.path_info == "/" %>" onclick="location.href='/';">Home</button>
         <% if current_user %>
-          <button class="btn btn-link" onclick="location.href='/users/<%= current_user.id %>';"><%= current_user.username %> (<%= user_karma_tally(current_user) %>)
+          <button class="btn btn-link navbar-btn navbar-theme <%= ' navbar-active' if current_user && request.path_info == "/users/#{current_user.id}" %>" onclick="location.href='/users/<%= current_user.id %>';"><%= current_user.username %> (<%= user_karma_tally(current_user) %>)
           </button>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-          <button class="btn btn-link navbar-btn" onclick="location.href='/users/logout';">Logout</button>
+          <button class="btn btn-link navbar-btn navbar-theme" onclick="location.href='/users/logout';">Logout</button>
         <% else %>
           <li>
-            <div class="dropdown navbar-btn">
-              <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <div class="dropdown navbar-btn navbar-theme">
+              <button class="btn btn-link dropdown-toggle navbar-theme" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Login
                 <span class="caret"></span>
               </button>
@@ -31,7 +31,7 @@
               </ul>
             </div>
           </li>
-          <button class="btn btn-link navbar-btn" onclick="location.href='/users/new';">Sign Up</button>
+          <button class="btn btn-link navbar-btn navbar-theme <%= ' navbar-active' if request.path_info == "/users/new" %>" onclick="location.href='/users/new';">Sign Up</button>
         <% end %>
       </ul>
     </div>

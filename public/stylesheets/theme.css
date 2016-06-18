@@ -193,6 +193,10 @@
   color:white !important;
 }
 
+.navbar-theme {
+  outline: none !important;
+}
+
 .navbar-transparent {
   background: rgba(0,0,0,0.8);
 }
