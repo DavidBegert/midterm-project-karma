@@ -1,12 +1,15 @@
 <div class="container">
   <div>
     <div class="jumbotron"><h1><%=@user.username %> </h1></div>
-    <img src="<%= @user.image_url %>" class="profilePic">
+    <br><br><br>
+    <img src="<%= @user.image_url %>" class="profilePic profilePicLarge">
     <h4><%=@user.email %> </h4>
     <h4>Total Karma <%= user_karma_tally(@user) %> </h4>
     <%= user_praise_tally(@user) %> <small>praises</small>
     <br>
     <%= user_shame_tally(@user) %> <small>shames</small>
+    <br>
+    <%= @user.total_deeds %> <small>total deeds</small>
   </div>
   <hr/>
   <div>
@@ -28,6 +31,7 @@
     <h3><i> Previous Deeds </i></h3>
     <br>
   </div>
-    <img src="/img/loader.gif" class="loading center-block hidden" id="user-loader-gif"/>
-  <br><br><br><br>
+  <img src="/img/loader.gif" class="loading center-block hidden" id="user-loader-gif"/>
+  <br>
+  <div id="footer" class="jumbotron hidden"><i><h2 class="text-center">-no more deeds-</h2></i></div>
 </div>

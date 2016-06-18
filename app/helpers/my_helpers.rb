@@ -44,7 +44,7 @@ module MyHelpers
 
   # Gives the total karma for the specified user.
   def user_karma_tally(user)
-    user.deeds.joins(:votes).sum("votes.value")
+    user.deeds.joins(:votes).sum("votes.value") * 7
   end
 
   # Get a list of all users to login with the dropdown
@@ -110,19 +110,19 @@ module MyHelpers
   def state_return(num_votes, creation_stat)
     case creation_stat
     when 0
-      "#{num_votes},Cannot undo this action,red,not"
+      "#{num_votes},Cannot undo this action,not"
     when 1 
-      "#{num_votes},Success,green"
+      "#{num_votes},Success"
     when 2
-      "#{num_votes},Praise revoked,blue,remove"
+      "#{num_votes},Praise revoked,remove"
     when 3
-      "#{num_votes},Please Login,red,not"
+      "#{num_votes},Please Login,not"
     when 4
-      "#{num_votes},Deed already evaluated,red,not"
+      "#{num_votes},Deed already evaluated,not"
     when 5
-      "#{num_votes},Remove praise to put a shame on this deed,blue,not"
+      "#{num_votes},Remove praise to put a shame on this deed,not"
     when 6
-      "#{num_votes},Cannot evaluate your own deed,red,not"
+      "#{num_votes},Cannot evaluate your own deed,not"
     end
   end
 
