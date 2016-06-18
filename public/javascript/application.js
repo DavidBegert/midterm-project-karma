@@ -172,8 +172,6 @@ $(document).ready(function() {
     }); 
   }
 
-
-
   $("body").on("click", ".show-comments", function(event) {
     deed_id = this.dataset.deedId;
     comments_div = "#comments-"+String(deed_id)
@@ -192,4 +190,28 @@ $(document).ready(function() {
       event.preventDefault();
     });
 
+  $("#karma-alert-closer").click(function() {
+    shame()
+  })
+
+  function shame() {
+    $("#confession_summary").attr("placeholder", "SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME");
+    $('#main-content').find("*").each(function() {
+      var contents = $(this).contents();
+      if (contents.length > 0) {
+        if (contents.get(0).nodeType == Node.TEXT_NODE) {
+          $(this).html('<h1><strong>SHAME</strong></h1>').append(contents.slice(1));
+        }
+      }
+    });
+
+    $('#header-navbar').find("*").each(function() {
+      var contents = $(this).contents();
+      if (contents.length > 0) {
+        if (contents.get(0).nodeType == Node.TEXT_NODE) {
+          $(this).html('<h4><strong>SHAME</strong></h4>').append(contents.slice(1));
+        }
+      }
+    });
+  }
 });
