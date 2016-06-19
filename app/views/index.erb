@@ -13,7 +13,7 @@
 
 <div class="container" id="main-content">
   <div class="row">
-    <div id="unella-quote" class="col-md-8">
+    <div id="unella-quote" class="col-md-7">
       <% if current_user %>
         <% if user_karma_tally(current_user) < 0 %>
         "<%= DO_GOOD_UNELLA_QUOTES.sample %>" 
@@ -29,7 +29,9 @@
       <br/> <em> - Septa Unella </em>
     </div>
     <div class="col-md-3">
-      <img class="img-fluid" id="unella" src="/img/unella.jpg" />
+      <div class="text-right">
+        <img class="img-fluid" id="unella" src="/img/unella.jpg" />
+      </div>
     </div>
   </div>
   <br>
@@ -38,37 +40,44 @@
 
 
 <% if current_user && user_karma_tally(current_user) <= -10 %>
-<div class="alert alert-danger">
- <a href="#" id="karma-alert-closer" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <div class="row">
-    <div class="col-sm-12">
-      <h2 id="unella-quote" class="center-block text-center">Your karma seems awfully low, sinner. You my atone by donating to us in this convenient link.</h2>
+  <div class="alert alert-danger">
+   <a href="#" id="karma-alert-closer" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 id="unella-quote" class="center-block text-center">Your karma seems awfully low, sinner. You my atone by donating to us in this convenient link.</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-5 col-md-2">
+        <button class="btn-lg btn-primary" onclick="location.href='/donate';">ATONE</button>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-offset-5 col-md-2">
-      <button class="btn-lg btn-primary" onclick="location.href='/donate';">ATONE</button>
-    </div>
-  </div>
-</div>
-<% end %>
+  <% end %>
 
   <div class="row">
-    <div class="col-sm-1">
-      <button id="confession_submit" class="btn-sm btn-primary">Confess</button>  
-    </div>
-    <div class="col-sm-9">
+    <div class="col-sm-10">
       <form class="form-horizontal" id="confession_form">
-        <input type="text" id="confession_summary" name="summary" class="form-control" rows="4" placeholder="What have you done, child?"/>
+        <textarea rows="3" col="20" type="text" id="confession_summary" name="summary" class="form-control noresize" placeholder="What have you done, child?"></textarea>
         <span id="confession_error">Your confession cannot be blank</span>
-      </form> <br>
-      <img src="/img/loader.gif" class="loading center-block hidden" id="loader-gif-confession"/>
+      </form>
     </div>
   </div>
+  <br>
   <div class="row">
-    <div class="col-md-2 col-md-offset-4">
+    <div class="col-sm-10">
+      <div class="text-center">
+        <button id="confession_submit" class="btn-md btn-primary">Confess</button>  
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-10">
       <br>
-      <img src="/img/loader.gif" class="loading center-block hidden" id="loader-gif-confession"/>
+      <div class="text-center">
+        <img src="/img/loader.gif" class="loading center-block hidden" id="loader-gif-confession"/>
+      </div>
     </div>
   </div>
 

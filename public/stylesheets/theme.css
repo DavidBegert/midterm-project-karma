@@ -268,3 +268,7 @@
 #email-profile {
   text-align: center;
 }
+
+.noresize{
+  resize: none;
+}
