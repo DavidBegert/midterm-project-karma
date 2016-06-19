@@ -322,7 +322,7 @@ $(document).ready(function() {
   })
 
   function shame() {
-    $("#confession_summary").attr("placeholder", "SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME");
+    $("#confession_summary").attr("placeholder", "SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME SHAME");
     $('#main-content').find("*").each(function() {
       var contents = $(this).contents();
       if (contents.length > 0) {
