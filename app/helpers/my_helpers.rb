@@ -116,7 +116,7 @@ module MyHelpers
     when 2
       "#{num_votes},Praise revoked,remove"
     when 3
-      "#{num_votes},Please Login,not"
+      "#{num_votes},Error,not"
     when 4
       "#{num_votes},Deed already evaluated,not"
     when 5
@@ -188,9 +188,6 @@ module MyHelpers
       @vote = create_vote(-1) 
       num_shame = deed_shame_tally(deed)
       @vote.errors.count == 0 ? state_return(num_shame, 5, num_praise) : state_return(num_shame, 0)
-    elsif !current_user
-      num_votes = deed_shame_tally(deed)
-      state_return(num_votes, 3) 
     else
       @vote = create_vote(-1) 
       num_votes = deed_shame_tally(deed)
