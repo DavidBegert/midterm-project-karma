@@ -60,6 +60,7 @@ $(document).ready(function() {
           var warningBox = $('#vote-error');
           if (data[2] == "remove") { 
             praisebtn.removeClass("praisebtn-color");
+            praisebtn.siblings(".praisebadge").text(numPraises);
             return;
           }
           showFlashMessage(warning);
