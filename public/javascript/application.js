@@ -54,6 +54,22 @@ $(document).ready(function() {
     return false;
   }
 
+  function checkPraiseFromShame(votebtn) {
+
+  }
+
+  function checkPraiseFromPraise(votebtn) {
+
+  }
+
+  function checkShameFromPraise(votebtn) {
+
+  }
+
+  function checkShameFromShame(votebtn) {
+
+  }
+
   // Create a vote (praise)
   $('#deeds_container').on("click", ".praisebtn", function () {
       if (!isLogged()) return;
