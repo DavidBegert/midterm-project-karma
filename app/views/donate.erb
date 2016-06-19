@@ -18,7 +18,7 @@
                 </div>                    
             </div>
             <div class="panel-body">
-                <form role="form" id="payment-form" method="POST" action="/donate">
+                <form role="form" id="payment-form" action=""   >
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group">
@@ -75,13 +75,13 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-4">
-                            <button id="donation-button" class="subscribe btn btn-success btn-md width100" name="donation" value="5" type="submit">$5<br>(+5)</button>
+                            <button class="donation-button subscribe btn btn-success btn-md width100" name="donation" value="5" type="button">$5<br>(+5)</button>
                         </div>
                         <div class="col-xs-4">
-                            <button id="donation-button" class="subscribe btn btn-success btn-md width100" name="donation" value="15" type="submit">$15<br>(+20)</button>
+                            <button class="donation-button subscribe btn btn-success btn-md width100" name="donation" value="15" type="button">$15<br>(+20)</button>
                         </div>
                         <div class="col-xs-4">
-                            <button id="donation-button" class="subscribe btn btn-success btn-md width100" name="donation" value="40" type="submit">$25<br>(+40)</button>
+                            <button class="donation-button subscribe btn btn-success btn-md width100" name="donation" value="40" type="button">$25<br>(+40)</button>
                         </div>
                     </div>
                     <div class="row" style="display:none;">
@@ -96,3 +96,4 @@
     </div>
 </div>
 <br><br><br>
+<%= erb :'modal' %>

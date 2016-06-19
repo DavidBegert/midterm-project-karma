@@ -32,7 +32,6 @@ $(document).ready(function() {
   function showFlashMessage(message) {
     var messageBox = $("#vote-modal");
     messageBox.append("<p class=\"vote-message-log\">" + message + "</p>");
-    console.log(messageBox.parents(".modal"));
     messageBox.parents(".modal").modal("show");
   }
 
@@ -308,4 +307,23 @@ $(document).ready(function() {
       }
     });
   }
+
+  function donationFormValidate() {
+    
+  }
+
+  $(".donation-button").click(function() {
+    if (donationFormValidate()) {
+      showFlashMessage("Thank you for your donation")
+      var btn = $(this)
+
+      $('#flash-modal-close').click(function() {
+        var form_data = $("#payment-form").serialize()
+        form_data += "&donation=" + btn.val()
+        $.post("/donate", form_data, function(data) {
+          window.location.replace("http://localhost:3000");
+        });
+      })
+    }
+  })
 });
