@@ -1,0 +1,4 @@
+<% comment = locals[:comment] %>
+<strong><%=comment.content%></strong>
+<br>
+<small><i><%= datetime_to_modern(comment.created_at) %></i> by <a href="/users/<%= comment.user.id %>"><%= comment.user.username  %></a></small>

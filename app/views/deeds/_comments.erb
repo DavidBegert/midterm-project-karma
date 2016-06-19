@@ -1,5 +1,4 @@
-
 <% @comments.each do |comment|%>
+  <%= erb :'./comments/_show', locals: {comment: comment} %>
   <hr>
-  <p> <%= comment.user.username %>: <%=comment.content%>  </p>
 <% end %>
