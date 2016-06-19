@@ -109,14 +109,6 @@ deed = matt.deeds.create!(summary: "I set up a wifi hotspot next to a Starbucks 
   deed.votes.create!(value: 1, user: james)
   deed.votes.create!(value: 1, user: monica)
   deed.votes.create!(value: 1, user: dv)
-  deed.votes.create!(value: -1, user: don)
-
-  
-
-
-
-# Add comments 
-# matt_deed_1.comments.create!(content: "Really special post, Matt", user_id: david.id)
-# matt_deed_1.comments.create!(content: "Super good bro", user_id: ju.id)
-# matt_deed_1.comments.create!(content: "You suck, reply to me", user_id: david.id)
-# matt_deed_2.comments.create!(content: "EWWWWWWW matt come on", user_id: ju.id)
+  deed.votes.create!(value: -1, user: don) 
+  deed.comments.create!(content: "hahahahaha", user: david)
+  deed.comments.create!(content: "That's hilarious", user: ju)
