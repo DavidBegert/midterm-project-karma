@@ -19,18 +19,8 @@ get '/donate' do
 end
 
 post '/donate' do
-  puts params.to_s
+  payment = Payment.create!(user: current_user, payment_amount: params[:donation])
 end
 
 require_relative './routes/deed_routes'
 require_relative './routes/user_routes'
-
-# User is signing in.
-# post '/users/signin' do
-#   if user = User.authenticate(params)
-#     sign_user_in(user)
-#   else
-#     sign_user_out
-#   end
-#   redirect '/'
-# end

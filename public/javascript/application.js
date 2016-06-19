@@ -309,7 +309,10 @@ $(document).ready(function() {
   }
 
   function donationFormValidate() {
-    
+    if ($("#cardCVC").val().length > 0 && $("#cardNumber").val().length > 0 && $("#cardExpiry").val().length > 0) {
+      return true
+    }
+    return false
   }
 
   $(".donation-button").click(function() {

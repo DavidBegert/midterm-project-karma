@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20160618232019) do
 
   create_table "payments", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "payment"
+    t.integer  "payment_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

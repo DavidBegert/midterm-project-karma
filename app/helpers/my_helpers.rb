@@ -1,4 +1,5 @@
 module MyHelpers
+  KARMA_MODIFIER = 7
 
   # Current user, returns nil if there is none. (can be used to see if user is logged in)
   def current_user
@@ -44,7 +45,11 @@ module MyHelpers
 
   # Gives the total karma for the specified user.
   def user_karma_tally(user)
-    user.deeds.joins(:votes).sum("votes.value") * 7
+    vote_karma = user.deeds.joins(:votes).sum("votes.value") * KARMA_MODIFIER
+    user.payments.each do |p|
+      vote_karma += p.karma
+    end
+    vote_karma
   end
 
   # Get a list of all users to login with the dropdown
