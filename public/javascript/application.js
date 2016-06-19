@@ -290,7 +290,7 @@ $(document).ready(function() {
     }
   });
 
-  //allow user to press enter to submit comment //TO DO... increase the comment # by 1 as soon as enter is pressed
+  //allow user to press enter to submit comment
   $('#deeds_container').on("keypress", ".form-control.comment", function (e) {     
     if (e.which == 13) {
       var deed_id = event.target.dataset.deedId;

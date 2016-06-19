@@ -40,7 +40,9 @@
           <input type="text" data-deed-id= <%=deed.id%> id="input-<%=deed.id%>" name="content" class="form-control comment" rows="4" placeholder="Post a comment..."/>
         </form>
         <span class="comment_error" id="comment_error-<%=deed.id%>">Your comment cannot be blank</span> <br>
-        <img src="/img/loader.gif" class="loading center-block hidden" id="loader-gif-<%=deed.id%>"/>
+        <% if deed.comments.count != 0%>
+          <img src="/img/loader.gif" class="loading center-block hidden" id="loader-gif-<%=deed.id%>"/>
+        <% end %>
         <div class="comment-holder" id="comments-<%=deed.id%>" ></div>  
         <br>
       </div>
