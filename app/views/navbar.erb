@@ -10,15 +10,15 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <button class="btn btn-link navbar-btn navbar-theme <%= ' navbar-active' if request.path_info == "/" %>" onclick="location.href='/';">Home</button>
+        <button class="btn btn-link navbar-btn navbar-theme <%= 'navbar-active' if request.path_info == "/" %>" onclick="location.href='/';">Home</button>
         <% if current_user %>
-          <button class="btn btn-link navbar-btn navbar-theme <%= ' navbar-active' if current_user && request.path_info == "/users/#{current_user.id}" %>" onclick="location.href='/users/<%= current_user.id %>';"><%= current_user.username %> (<%= user_karma_tally(current_user) %>)
+          <button id="logged" class="btn btn-link navbar-btn navbar-theme <%= ' navbar-active' if request.path_info == "/users/#{current_user.id}" %>" onclick="location.href='/users/<%= current_user.id %>';"><%= current_user.username %> (<%= user_karma_tally(current_user) %>)
           </button>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-          <button class="btn btn-link navbar-btn navbar-theme" id="logged" onclick="location.href='/users/logout';">Logout</button>
+          <button class="btn btn-link navbar-btn navbar-theme" onclick="location.href='/users/logout';">Logout</button>
         <% else %>
           <li>
             <div class="dropdown navbar-btn navbar-theme">
