@@ -65,19 +65,24 @@
   background-size: contain;
 }
 
-.praisebadge{
+.praisebadge {
   position:absolute;
   top:0;
   left:0;
 }
 
-.shamebadge{
+.shamebadge {
   position:absolute;
   bottom:0;
   left:0;
 }
 
-.vertical-align{
+.badge {
+  min-width: 25px;
+  font-size: 15px;
+}
+
+.vertical-align {
   position: absolute;
   top: 50%;
   left:50%;
