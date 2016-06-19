@@ -31,4 +31,8 @@ class User < ActiveRecord::Base
   def total_deeds
     deeds.count
   end
+
+  def total_donations
+    payments.sum(:payment_amount)
+  end
 end
