@@ -41,7 +41,7 @@ post '/deeds/:id/comments' do |id|
     content: params[:content]
     )
   if comment.save
-    erb :'../views/deeds/_new_comment', layout: false, locals: {comment: comment}
+    erb :'../views/comments/_show', layout: false, locals: {comment: comment}
   else
     redirect '/'
   end

@@ -30,24 +30,22 @@
       <% end %>
       <div class="col-md-9">
         <div class="deed-summary">
-          <%= deed.summary %>
+          <strong><%= deed.summary %></strong>
         </div>
-        <br><br>
+        <br>
         <i><%= datetime_to_modern(deed.created_at) %></i> by <a class="user-link" href="/users/<%= deed.user.id %>"><%= deed.user.username  %></a>
         <br><br>
-        <button type="button" class="btn-link" data-deed-id=<%= deed.id %> class="show-comments"> <span id="comment-tally-<%=deed.id%>"><%=num_comments%></span> Comments </button>
-        <button type="button" id="post-comment-<%= deed.id %>" data-deed-id=<%= deed.id %> class="btn-link"> Post a Comment </button>
+        <button type="button" class="btn-link" data-deed-id= <%=deed.id%> class="show-comments"> <span id="comment-tally-<%=deed.id%>"><%=num_comments%></span> Comments </button>
+        <form  class="comment-holder" id="form-comment-<%=deed.id%>">
+          <input type="text" data-deed-id= <%=deed.id%> id="input-<%=deed.id%>" name="content" class="form-control comment" rows="4" placeholder="Post a comment..."/>
+        </form>
+        <span class="comment_error" id="comment_error-<%=deed.id%>">Your comment cannot be blank</span> <br>
+        <img src="/img/loader.gif" class="loading center-block hidden" id="loader-gif-<%=deed.id%>"/>
+        <div class="comment-holder" id="comments-<%=deed.id%>" ></div>  
+        <br>
       </div>
     </div>
   </div>
 </div>
 
-<br>
-<form  class="comment-holder" id="form-comment-<%=deed.id%>">
-  <input type="text" data-deed-id= <%=deed.id%> id="input-<%=deed.id%>" name="content" class="form-control comment" rows="4" placeholder="Post a comment..."/>
-</form>
-<span class="comment_error" id="comment_error-<%=deed.id%>">Your comment cannot be blank</span> <br>
-<img src="/img/loader.gif" class="loading center-block hidden" id="loader-gif-<%=deed.id%>"/>
-<div class="comment-holder" id="comments-<%=deed.id%>" ></div>
-<hr>
 <br>
