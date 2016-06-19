@@ -18,7 +18,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-          <button class="btn btn-link navbar-btn navbar-theme" onclick="location.href='/users/logout';">Logout</button>
+          <button class="btn btn-link navbar-btn navbar-theme" id="logged" onclick="location.href='/users/logout';">Logout</button>
         <% else %>
           <li>
             <div class="dropdown navbar-btn navbar-theme">

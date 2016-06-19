@@ -32,12 +32,21 @@ $(document).ready(function() {
   function showFlashMessage(message) {
     var messageBox = $("#vote-modal");
     messageBox.append("<p class=\"vote-message-log\">" + message + "</p>");
-    console.log(messageBox.parents(".modal"));
     messageBox.parents(".modal").modal("show");
+  }
+
+  function isLogged() {
+    var logMark = document.getElementById("logged");
+    if (!logMark) {
+      showFlashMessage("You must log in to evaluate users");
+      return false;
+    }
+    return true;
   }
 
   // Create a vote (praise)
   $('#deeds_container').on("click", ".praisebtn", function () {
+      if (!isLogged()) return;
       var deedId = this.dataset.deedId;
       var praisebtn = $(this);
       $.post("/deeds/" + deedId + "/praise", function(data) {
@@ -49,7 +58,10 @@ $(document).ready(function() {
           praisebtn.addClass("praisebtn-color");
         } else {
           var warningBox = $('#vote-error');
-          if (data[2] == "remove") praisebtn.removeClass("praisebtn-color");
+          if (data[2] == "remove") { 
+            praisebtn.removeClass("praisebtn-color");
+            return;
+          }
           showFlashMessage(warning);
           praisebtn.siblings(".praisebadge").text(numPraises);
         }
@@ -58,6 +70,7 @@ $(document).ready(function() {
  
   // Create a vote (shame)
   $('#deeds_container').on("click", ".shamebtn", function () {
+      if (!isLogged()) return;
       var deedId = this.dataset.deedId;
       var shamebtn = $(this);
       $.post("/deeds/" + deedId + "/shame", function(data) {
