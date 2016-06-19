@@ -235,11 +235,10 @@ module MyHelpers
   DO_GOOD_UNELLA_QUOTES = ["SHAME.", "Only through confession and true repentance may your immortal soul be saved.", 
     "You're a horrible human beign.", 
     "If Hitler, Osama Bin Laden, and you were in the same room and I had two bullets, I'd shoot you twice.",
-    "I've strangled bigger men than you.", "Literally go fuck yourself, Amen.", "It is almost time for your walk of atonement"]
+    "Do better.", "It is almost time for your walk of atonement"]
 
-  DO_BAD_UNELLA_QUOTES = ["Nobody likes a try hard, why not go kick a puppy off a bridge?", 
+  DO_BAD_UNELLA_QUOTES = ["Nobody likes a try hard, why not go sin for once?",
     "Well aren't you a good boy, you could probably go rob a bank and still be loved by the gods", 
-    "Girls like me don't like good boys, go strangle a goose to death with a wrench then come talk to me.",
-    "You sure have been good lately, the gods would understand if you need to unwind at a Tijuana brothel with a couple prostitutes."]
+    "You sure have been good lately, the gods would understand if you need to unwind by doing some shady stuff"]
 
 end
