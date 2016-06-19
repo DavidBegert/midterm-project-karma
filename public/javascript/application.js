@@ -44,11 +44,22 @@ $(document).ready(function() {
     return true;
   }
 
+  function ownDeed(votebtn) {
+    var username = $(document.getElementById("logged")).text().split(" ")[0];
+    var deedOwner = votebtn.closest(".single-deed").find(".user-link").text(); 
+    if (username == deedOwner) {
+      showFlashMessage("Cannot evaluate your own deed");
+      return true;
+    }
+    return false;
+  }
+
   // Create a vote (praise)
   $('#deeds_container').on("click", ".praisebtn", function () {
       if (!isLogged()) return;
       var deedId = this.dataset.deedId;
       var praisebtn = $(this);
+      if (ownDeed(praisebtn)) return; 
       $.post("/deeds/" + deedId + "/praise", function(data) {
         data = data.split(",");
         var numPraises = data[0];
@@ -74,6 +85,7 @@ $(document).ready(function() {
       if (!isLogged()) return;
       var deedId = this.dataset.deedId;
       var shamebtn = $(this);
+      if (ownDeed(shamebtn)) return; 
       $.post("/deeds/" + deedId + "/shame", function(data) {
         data = data.split(",");
         var numShames = data[0];

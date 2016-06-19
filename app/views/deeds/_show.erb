@@ -2,19 +2,19 @@
 <% all_details = locals[:all_details] %>
 <% num_comments = deed_comments_tally(deed) %>
 <% vote_button_type = all_details ? "button" : "div" %>
-<div class="row">
+<div class="row single-deed">
   <div class="col-sm-12">
     <div class="col-xs-2 col-md-1">
     <!-- The buttons column -->
       <div class="row">
-        <<%= vote_button_type %> class="<%=praise_class(deed)%>" data-deed-id = "<%=deed.id%>">
+        <<%= vote_button_type %> class="<%=praise_class(deed)%>" data-deed-id="<%= deed.id %>">
         </<%= vote_button_type %>>
         <span class="badge praisebadge">
           <%= deed_praise_tally(deed) %>
         </span>
       </div>
       <div class="row">
-        <<%= vote_button_type %> class="<%=shame_class(deed)%>" data-deed-id = "<%=deed.id%>">
+        <<%= vote_button_type %> class="<%=shame_class(deed)%>" data-deed-id="<%= deed.id %>">
         </<%= vote_button_type %>>
         <span class="badge shamebadge">
           <%= deed_shame_tally(deed) %>
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="col-xs-10   col-md-8">
+    <div class="col-xs-10 col-md-8 info-row">
       <% if all_details %>
         <div class="col-md-3">
         <img src="<%= deed.user.image_url %>" class="profilePic"/>
@@ -33,10 +33,10 @@
           <%= deed.summary %>
         </div>
         <br><br>
-        <i><%= datetime_to_modern(deed.created_at) %></i> by <a href="/users/<%= deed.user.id %>"><%= deed.user.username  %></a>
+        <i><%= datetime_to_modern(deed.created_at) %></i> by <a class="user-link" href="/users/<%= deed.user.id %>"><%= deed.user.username  %></a>
         <br><br>
-        <button type="button" class="btn-link" data-deed-id= <%=deed.id%> class="show-comments"> <span id="comment-tally-<%=deed.id%>"><%=num_comments%></span> Comments </button>
-        <button type="button" id="post-comment-<%=deed.id%>" data-deed-id = <%=deed.id%> class="btn-link"> Post a Comment </button>
+        <button type="button" class="btn-link" data-deed-id=<%= deed.id %> class="show-comments"> <span id="comment-tally-<%=deed.id%>"><%=num_comments%></span> Comments </button>
+        <button type="button" id="post-comment-<%= deed.id %>" data-deed-id=<%= deed.id %> class="btn-link"> Post a Comment </button>
       </div>
     </div>
   </div>
