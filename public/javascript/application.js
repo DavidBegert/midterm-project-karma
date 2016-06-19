@@ -322,4 +322,26 @@ $(document).ready(function() {
       }
     });
   }
+
+  function donationFormValidate() {
+    if ($("#cardCVC").val().length > 0 && $("#cardNumber").val().length > 0 && $("#cardExpiry").val().length > 0) {
+      return true
+    }
+    return false
+  }
+
+  $(".donation-button").click(function() {
+    if (donationFormValidate()) {
+      showFlashMessage("Thank you for your donation")
+      var btn = $(this)
+
+      $('#flash-modal-close').click(function() {
+        var form_data = $("#payment-form").serialize()
+        form_data += "&donation=" + btn.val()
+        $.post("/donate", form_data, function(data) {
+          window.location.replace("http://localhost:3000");
+        });
+      })
+    }
+  })
 });

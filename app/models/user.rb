@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :deeds
   has_many :votes
   has_many :comments
+  has_many :payments
 
   validates :email, uniqueness: true, presence: true, format: { with: /\A.+@.+\Z/, message: "invalid email"}
   validates :username, uniqueness: true, presence: true
