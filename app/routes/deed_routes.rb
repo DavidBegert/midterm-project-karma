@@ -30,7 +30,7 @@ get '/deeds/next' do
 end
 
 get '/deeds/:id/comments' do |id|
-  @comments = Deed.find(id).comments
+  @comments = Deed.find(id).comments.order(id: :desc)
   erb :'../views/deeds/_comments', layout: false, locals: {deed_id: id}
 end
 
