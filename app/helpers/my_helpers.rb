@@ -110,26 +110,6 @@ module MyHelpers
   def deed_comments_tally(deed)
     deed.comments.count
   end
- 
-  # Check if errors and make a return to javascript
-  def state_return(num_votes, creation_stat, extra = 0)
-    case creation_stat
-    when 0
-      "#{num_votes},Cannot undo this action,not"
-    when 1 
-      "#{num_votes},Success"
-    when 2
-      "#{num_votes},Praise revoked,remove"
-    when 3
-      "#{num_votes},Error,not"
-    when 4
-      "#{num_votes},Deed already evaluated,not"
-    when 5
-      "#{num_votes},Remove praise,not,#{extra}"
-    when 6
-      "#{num_votes},Cannot evaluate your own deed,not"
-    end
-  end
 
   # Create a new vote, praise or shame, depending on value
   def create_vote(value_vote)
@@ -163,20 +143,12 @@ module MyHelpers
 
   # Add a praise vote for the deed assigning the authorship to the current user
   def create_praise
-    if my_deed?
-      num_votes = deed_praise_tally(Deed.find(params[:id]))
-      state_return(num_votes, 6)
-    elsif shamed? 
-      num_votes = deed_praise_tally(Deed.find(params[:id]))
-      state_return(num_votes, 4)
-    elsif praised?
+    if praised?
       get_praise.destroy
-      num_votes = deed_praise_tally(Deed.find(params[:id]))
-      state_return(num_votes, 2)
     else
       @vote = create_vote(1) 
       num_votes = deed_praise_tally(Deed.find(params[:id]))
-      @vote.errors.count == 0 ? state_return(num_votes, 1) : state_return(num_votes, 3)
+      "Error" unless @vote.errors.count === 0 
     end
   end
 
@@ -184,19 +156,13 @@ module MyHelpers
   # Add a shame vote for the deed assigning the authorship to the current user
   def create_shame
     deed = Deed.find(params[:id])
-    if my_deed?
-      num_votes = deed_shame_tally(deed)
-      state_return(num_votes, 6) 
-    elsif praised?
+    if praised?
       get_praise.destroy
-      num_praise = deed_praise_tally(deed)
       @vote = create_vote(-1) 
-      num_shame = deed_shame_tally(deed)
-      @vote.errors.count == 0 ? state_return(num_shame, 5, num_praise) : state_return(num_shame, 0)
+      "Error" unless @vote.errors.count == 0 
     else
       @vote = create_vote(-1) 
-      num_votes = deed_shame_tally(deed)
-      @vote.errors.count == 0 ? state_return(num_votes, 1) : state_return(num_votes, 0)
+      "Error" unless @vote.errors.count == 0 
     end
   end
 
