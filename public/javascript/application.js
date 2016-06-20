@@ -54,20 +54,31 @@ $(document).ready(function() {
     return false;
   }
 
-  function checkPraiseFromShame(votebtn) {
-
+  function checkPraiseFromShame(shameBtn) {
+    var praiseBtn = shameBtn.closest(".single-deed").find(".praisebtn");
+    return praiseBtn.is(".praisebtn-color");
   }
 
-  function checkPraiseFromPraise(votebtn) {
-
+  function checkPraiseFromPraise(praiseBtn) {
+    return praiseBtn.is(".praisebtn-color");
   }
 
-  function checkShameFromPraise(votebtn) {
-
+  function checkShameFromPraise(praiseBtn) {
+    var shameBtn = praiseBtn.closest(".single-deed").find(".shamebtn")
+    return shameBtn.is(".shamebtn-color");
   }
 
-  function checkShameFromShame(votebtn) {
+  function checkShameFromShame(shameBtn) {
+    return shameBtn.is(".shamebtn-color");
+  }
 
+  function numBadge(btn, type, operation) {
+    var badge = btn.siblings("." + type + "badge");
+    var num = parseInt(badge.text());
+    if (operation == "add") {
+      return badge.text(num + 1);
+    }
+    return badge.text(num - 1);
   }
 
   // Create a vote (praise)
@@ -76,24 +87,17 @@ $(document).ready(function() {
       var deedId = this.dataset.deedId;
       var praisebtn = $(this);
       if (ownDeed(praisebtn)) return; 
-      $.post("/deeds/" + deedId + "/praise", function(data) {
-        data = data.split(",");
-        var numPraises = data[0];
-        var warning = data[1];
-        if (warning == "Success") {
-          praisebtn.siblings(".praisebadge").text(numPraises);
-          praisebtn.addClass("praisebtn-color");
-        } else {
-          var warningBox = $('#vote-error');
-          if (data[2] == "remove") { 
-            praisebtn.removeClass("praisebtn-color");
-            praisebtn.siblings(".praisebadge").text(numPraises);
-            return;
-          }
-          showFlashMessage(warning);
-          praisebtn.siblings(".praisebadge").text(numPraises);
-        }
-      });
+      if (checkShameFromPraise(praisebtn)) {
+        showFlashMessage("Deed already evaluated");
+        return;
+      } else if (checkPraiseFromPraise(praisebtn)) {
+        praisebtn.removeClass("praisebtn-color");
+        numBadge(praisebtn, "praise", "sub");
+      } else {
+        praisebtn.addClass("praisebtn-color");
+        numBadge(praisebtn, "praise", "add");
+      }
+      $.post("/deeds/" + deedId + "/praise", function(data) {});
   }); 
  
   // Create a vote (shame)
@@ -102,25 +106,19 @@ $(document).ready(function() {
       var deedId = this.dataset.deedId;
       var shamebtn = $(this);
       if (ownDeed(shamebtn)) return; 
-      $.post("/deeds/" + deedId + "/shame", function(data) {
-        data = data.split(",");
-        var numShames = data[0];
-        var warning = data[1];
-        if (warning == "Success") {
-          shamebtn.siblings(".shamebadge").text(numShames);
-          shamebtn.addClass("shamebtn-color");
-        } else {
-          if (warning == "Remove praise") {
-          var praisebtn = $('.praisebtn[data-deed-id="' + deedId + '"]');
-          praisebtn.removeClass("praisebtn-color");
-          praisebtn.siblings(".praisebadge").text(data[3]);
-          shamebtn.siblings(".shamebadge").text(numShames);
-          shamebtn.addClass("shamebtn-color");
-          } else {
-          showFlashMessage(warning);
-          }
-        }
-      });
+      if (checkPraiseFromShame(shamebtn)) {
+        var praisebtn = $('.praisebtn[data-deed-id="' + deedId + '"]');
+        praisebtn.removeClass("praisebtn-color");
+        numBadge(praisebtn, "praise", "sub");
+        shamebtn.addClass("shamebtn-color");
+        numBadge(shamebtn, "shame", "add");
+      } else if (checkShameFromShame(shamebtn)) {
+        showFlashMessage("Cannot undo this action");
+      } else {
+        shamebtn.addClass("shamebtn-color");
+        numBadge(shamebtn, "shame", "add");
+      }
+      $.post("/deeds/" + deedId + "/shame", function(data) {});
   }); 
 
   // Hide warning block after clicking in the close button
