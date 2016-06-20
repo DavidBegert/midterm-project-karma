@@ -3,7 +3,7 @@ $(document).ready(function() {
   var pagination_ready = true;
   var pagination_load_more = true;
   var lastScrollTop = $(this).scrollTop();
-  var navBarScrollDelta = 20
+  var navBarScrollDelta = 15
 
   // Only after the user has asked for posts does pagination work
   var user_pagination_ready = false;
