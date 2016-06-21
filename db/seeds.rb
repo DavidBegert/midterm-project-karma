@@ -52,12 +52,6 @@ deed = david.deeds.create!(summary: "I leave the toilet seat down when I pee.", 
 deed = ju.deeds.create!(summary: "I saw a cat stuck in a tree and so I climbed up and saved it.", created_at: (DateTime.now - 2.days))
   deed.votes.create!(value: 1, user: monica)
 
-deed = dv.deeds.create!(summary: "I baked a pie in the kitchen and did not clean up the dishes.", created_at: (DateTime.now - 1.days))
-  deed.votes.create!(value: -1, user: matt)
-  deed.votes.create!(value: -1, user: monica)
-  deed.votes.create!(value: -1, user: david)
-  deed.votes.create!(value: -1, user: don)
-
 deed = don.deeds.create!(summary: "I promise free beer on Fridays but never actually deliver.", created_at: (DateTime.now - 1.days))
   deed.votes.create!(value: -1, user: matt)
   deed.votes.create!(value: -1, user: monica)
