@@ -49,22 +49,24 @@
     </div>
   <% end %>
 
-  <div class="row">
-    <div class="col-sm-10">
-      <form class="form-horizontal" id="confession_form">
-        <textarea rows="3" col="20" type="text" id="confession_summary" name="summary" class="form-control noresize" placeholder="What have you done, child?"></textarea>
-        <span id="confession_error">Your confession cannot be blank</span>
-      </form>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-sm-10">
-      <div class="text-center">
-        <button id="confession_submit" class="btn-md btn-primary">Confess</button>  
+  <% if current_user %>
+    <div class="row">
+      <div class="col-sm-10">
+        <form class="form-horizontal" id="confession_form">
+          <textarea rows="3" col="20" type="text" id="confession_summary" name="summary" class="form-control noresize" placeholder="What have you done, child?"></textarea>
+          <span id="confession_error">Your confession cannot be blank</span>
+        </form>
       </div>
     </div>
-  </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-10">
+        <div class="text-center">
+          <button id="confession_submit" class="btn-md btn-primary">Confess</button>  
+        </div>
+      </div>
+    </div>
+  <% end %>
 
   <div class="row">
     <div class="col-sm-10">
