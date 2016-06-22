@@ -12,6 +12,9 @@
   color: red;
   display: none;
 }
+.error {
+  color: red;
+}
 
 .width100 {
   width: 100%;

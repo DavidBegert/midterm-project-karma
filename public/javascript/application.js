@@ -365,7 +365,7 @@ $(document).ready(function() {
         var form_data = $("#payment-form").serialize()
         form_data += "&donation=" + btn.val()
         $.post("/donate", form_data, function(data) {
-          window.location.replace("http://localhost:3000");
+          window.location.replace("http://localhost:3001");
         });
       })
     }

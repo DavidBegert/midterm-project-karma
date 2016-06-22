@@ -3,7 +3,7 @@
 <header>
   <%= erb :'navbar' %>
 </header>
-
+<br><br><br>
 <% if @user && @user.errors.any? %>
   <div class="container">
     <strong>Some issues with your message, please fix them:</strong>
@@ -14,7 +14,7 @@
     </ul>
   </div>
 <% end %>
-<br><br><br><br>
+<br><br><br>
 <h2 class="form-signup-heading"> Sign Up and be Ashamed of Yourself </h2>
 <div class="container">
       <div class="row">
@@ -45,7 +45,7 @@
                     <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
                   </div>
                   <div class="form-group">
-                    <input type="text" name="image_address" id="image-address" tabindex="2" class="form-control" placeholder="Image Adress">
+                    <input type="text" name="image_url" id="image_url" tabindex="2" class="form-control" placeholder="Image Url">
                   </div>
                   <div class="form-group">
                     <div class="row">

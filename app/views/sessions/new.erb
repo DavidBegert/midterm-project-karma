@@ -4,7 +4,7 @@
 <header>
   <%= erb :'navbar' %>
 </header>
-
+<br><br><br>
 <% if @user && @user.errors.any? %>
   <div class="container">
     <strong>Some issues with your message, please fix them:</strong>
@@ -14,6 +14,9 @@
       <% end %>
     </ul>
   </div>
+<% end %>
+<% if @user == false %>
+  <p class="error"> Invalid username/password </p>
 <% end %>
 <br><br><br><br>
 <h2 class="form-signup-heading"> Log in and Shame </h2>
@@ -35,7 +38,7 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12">
-                <form id="login-form" action="/login" method="post" role="form" style="display: block;">
+                <form id="login-form" action="/login" method="post" role="form">
                   <div class="form-group">
                     <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
                   </div>

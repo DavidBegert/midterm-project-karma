@@ -20,7 +20,7 @@
         <% if current_user %>
           <button class="btn btn-link navbar-btn navbar-theme" onclick="location.href='/users/logout';">Logout</button>
         <% else %>
-          <li>
+          <!-- <li>  # for if they are an admin #
             <div class="dropdown navbar-btn navbar-theme">
               <button class="btn btn-link dropdown-toggle navbar-theme" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Login
@@ -30,7 +30,8 @@
                 <%= get_login_dropdown_user_list %>
               </ul>
             </div>
-          </li>
+          </li> -->
+          <button class="btn btn-link navbar-btn navbar-theme <%= ' navbar-active' if request.path_info == "/login" %>" onclick="location.href='/login';">Log In</button>
           <button class="btn btn-link navbar-btn navbar-theme <%= ' navbar-active' if request.path_info == "/users/new" %>" onclick="location.href='/users/new';">Sign Up</button>
         <% end %>
       </ul>

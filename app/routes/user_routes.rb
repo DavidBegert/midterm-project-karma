@@ -32,15 +32,15 @@ get '/users/:id' do |id|
   end
 end
 
-post '/users/signin' do 
+post '/login' do 
   # User is signing in.
-  #if user = User.authenticate(params)
-  @user = user_signin(User.find_by(username: params[:username]))
-
-  #else
-    #user_signout
-  #end
-  redirect '/' 
+  @user = User.authenticate(params)
+  if @user
+    user_signin(@user)
+    redirect '/'
+  else
+    erb :'sessions/new'
+  end
 end
 
 get '/users/:id' do |id|
